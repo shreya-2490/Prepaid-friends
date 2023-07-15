@@ -2,29 +2,27 @@ import React, { useState } from "react"
 import "./App.css"
 import {
   BrowserRouter as Router,
-  Switch,
   Routes,
   Route,
-  Link,
-  Redirect,
 } from "react-router-dom"
-import Home from "./Home"
-import About from "./AboutUsdt"
-import BulkCard from "./BulkCard"
-import Offers from "./Offers"
-import Choose from "./WhyChooseUs"
-import Faq from "./Faq"
-import Explore from "./exploreprepaid"
-import Ticker from "./ticker"
-import Footer from "./Footer"
-import NavbarCart from "./NavbarCart"
+import Home from "./components/Home"
+// import About from "./components/AboutUsdt"
+// import BulkCard from "./components/BulkCard"
+// import Offers from "./components/Offers"
+// import Choose from "./components/WhyChooseUs"
+// import Faq from "./components/Faq"
+// import Explore from "./components/exploreprepaid"
+// import Ticker from "./components/ticker"
+// import Footer from "./components/Footer"
+import NavbarCart from "./components/NavbarCart"
 import Checkout from "./components/Checkout"
 import Login from "./components/Login"
-import Cart from "./CartPage"
-import BulkOrder from "./BulkOrder"
+import Cart from "./components/CartPage"
+import BulkOrder from "./components/BulkOrder"
 import ContactUs from "./components/ContactUs"
 import Payment from "./components/payment"
-import { CartProvider } from "./CartContext"
+import { CartProvider } from "./components/CartContext"
+import Dashboard from "./components/Dashboard"
 
 function App() {
   const [cartItems, setCartItems] = useState([])
@@ -83,7 +81,7 @@ function App() {
             <Route path="/payment" element={<Payment />} />
           </Routes>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Dashboard />} />
           </Routes>
           <Routes>
             <Route path="/bulkorder" element={<BulkOrder />} />

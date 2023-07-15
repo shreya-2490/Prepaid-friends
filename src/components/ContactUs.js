@@ -1,11 +1,11 @@
 import React from "react"
 import { Form, Input, Button } from "antd"
 import { UserOutlined, MailOutlined } from "@ant-design/icons"
-import "./ContactUs.css"
-import NavbarCart from "../NavbarCart"
+import "../styles/ContactUs.css"
+import NavbarCart from "./NavbarCart"
 import  phone from "../assets/phone-call.png"
 import email from "../assets/email.png"
-import Footer from "../Footer"
+import Footer from "./Footer"
 
 const ContactUs = () => {
   const layout = {

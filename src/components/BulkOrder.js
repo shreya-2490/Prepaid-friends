@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react"
 import NavbarCart from "./NavbarCart"
-import Ticker from "./ticker"
-import bulkcard from "./assets/bulkcard.png"
-import "./BulkOrder.css"
-import success from "./assets/Success Icon.png"
-import tick from "./assets/tick-circle.png"
-import cards from "./assets/Bank Cards.png"
-import ellipse from "./assets/Ellipse.png"
+import "../styles/BulkOrder.css"
+import success from "../assets/Success Icon.png"
+import tick from "../assets/tick-circle.png"
+import cards from "../assets/Bank Cards.png"
+import ellipse from "../assets/Ellipse.png"
 
 import {
   Button,

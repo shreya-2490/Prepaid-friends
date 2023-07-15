@@ -1,8 +1,6 @@
 import React from "react";
-import "./footer.css";
-import prepaidlogo from "./assets/logo.png"
-import { Link } from 'react-router-dom';
-import { UpCircleOutlined } from '@ant-design/icons';
+import "../styles/footer.css";
+
 
 function Footer() {
 

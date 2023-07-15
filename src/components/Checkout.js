@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Card, Button, Tooltip, Select, Checkbox } from "antd"
 import { InfoCircleOutlined, DeleteOutlined } from "@ant-design/icons"
-import Navbarlogo from "../Navbarlogo"
-import "./checkout.css"
+import Navbarlogo from "./Navbarlogo"
+import "../styles/checkout.css"
 import Payment from "./payment"
 import validator from "validator"
 import visa from "../assets/Visacart.png"
 import mastercard from "../assets/Mastercardcart.png"
 import { useLocation, useNavigate } from "react-router-dom"
-import { CartContext } from "../CartContext"
+import { CartContext } from "./CartContext"
 
 const Checkout = () => {
   const [isChecked1, setIsChecked1] = useState(false)

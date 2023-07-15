@@ -1,13 +1,13 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import "./payment.css"
+import "../styles/payment.css"
 import { Card, Button, Tooltip, Select, Space, Divider, Checkbox } from "antd"
 import { InfoCircleOutlined, DeleteOutlined } from "@ant-design/icons"
 import Scanner from "../assets/scanner.jpg"
 import visa from "../assets/Visa.png"
 import mastercard from "../assets/Mastercardcart.png"
 import { useLocation } from "react-router-dom"
-import Navbarlogo from "../Navbarlogo"
+import Navbarlogo from "./Navbarlogo"
 import axios from "axios"
 
 function generateInvoiceId(length) {

@@ -7,11 +7,11 @@ import {
 } from "@ant-design/icons"
 import { Badge, Modal, Button, Divider } from "antd"
 import { CartContext } from "./CartContext"
-import visa from "./assets/Visacart.png"
-import mastercard from "./assets/Mastercardcart.png"
-import "./navbar.css"
-import logo from "./assets/logo.png"
-import ham from "./assets/ham.png"
+import visa from "../assets/Visacart.png"
+import mastercard from "../assets/Mastercardcart.png"
+import "../styles/navbar.css"
+import logo from "../assets/logo.png"
+import ham from "../assets/ham.png"
 
 function NavbarCart() {
   const location = useLocation()

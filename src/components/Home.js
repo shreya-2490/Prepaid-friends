@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { Select, Card, Image, Alert } from "antd"
 import { Link } from "react-router-dom"
-import visa from "./assets/Visa.png"
-import mastercard from "./assets/Mastercard.png"
+import visa from "../assets/Visa.png"
+import mastercard from "../assets/Mastercard.png"
 import ReactTypingEffect from "react-typing-effect"
-import "./home.css"
+import "../styles/home.css"
 import axios from "axios"
 import Footer from "./Footer"
 

@@ -7,10 +7,9 @@ import { CartContext } from "./CartContext"
 import {AiOutlineSafety} from "react-icons/ai"
 
 import NavbarCart from "./NavbarCart"
-import mastercard from "./assets/Mastercardcartpage.png"
-import visacard from "./assets/Visacartpage.png"
-import "./CartPage.css"
-import Ticker from "./ticker"
+import mastercard from "../assets/Mastercardcartpage.png"
+import visacard from "../assets/Visacartpage.png"
+import "../styles/CartPage.css"
 
 const Cart = ({ handleAddToCart }) => {
   const location = useLocation()
@@ -122,6 +121,7 @@ const Cart = ({ handleAddToCart }) => {
                       type="number"
                       value={usdValue}
                       onChange={handleUSDChange}
+                      readOnly
                       className={btcValue.length > 10 ? "long-value" : ""}
                     />
                   </div>
