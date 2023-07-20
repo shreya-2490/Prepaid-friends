@@ -5,45 +5,45 @@
 }
 .bulkcard-card1 {
   box-sizing: border-box;
-  padding: 20px;
+  padding: 1.25rem;
   margin-left: 30px;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 2.5rem;
 }
 .bulk-card-desc {
-  font-size: 14px;
-  line-height: 21px;
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
   /* margin: 16px auto 0; */
   position: relative;
   text-align: left;
   box-sizing: border-box;
   /* padding-left: 12px; */
-  padding-right: 12px;
+  padding-right: 0.75rem;
   width: 48.33333333%;
 }
 .bulk-desc {
   line-height: 1.5;
   margin: auto;
-  min-height: 394px;
+  min-height: 24.625rem;
   position: relative;
   vertical-align: top;
 }
 .bulkcard-img img {
-  width: 500px;
+  width: 31.25rem;
   /* height: 500px; */
-  margin-right: 50px;
-  margin-bottom: 40px;
+  margin-right: 3.125rem;
+  margin-bottom: 2.5rem;
 }
 .bulk-content {
   text-align: justify;
   line-height: 2.1;
-  word-spacing: 5px;
-  width: 583px;
-  margin-top: 30px;
-  font-size: 15px;
+  word-spacing: 0.3125rem;
+  width: 36.4375rem;
+  margin-top: 1.875rem;
+  font-size: 0.9375rem;
 }
 .heading {
-  font-size: 36px;
+  font-size: 2.25rem;
 }
 
 @media (max-width: 768px) {
@@ -59,13 +59,13 @@
     width: 68%;
   }
   .bulkcard-img img {
-    margin-right: 0px;
+    margin-right: 0rem;
   }
   .heading{
     text-align: center;
   }
   .bulk-desc {
-    min-height: 300px;
+    min-height: 18.75rem;
   }
   .bulk-card-desc {
     width: 69.33333333%

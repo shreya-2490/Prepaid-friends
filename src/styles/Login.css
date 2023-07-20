@@ -1,11 +1,39 @@
 .wrapper{
     height: 100vh;
+    background-color:#F5F2EA;
+}
+.login-heading{
+font-size: 1.4rem;
+text-align: center;
+margin-bottom: 1.5rem;
 }
 .login{
-    width: 340px;
-    padding: 20px;
+    width: 21.25rem;
+    padding: 1.25rem;
+    border: none;
     height: min-content;
-    border-radius: 5px;
+    border-radius: 0.8125rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     color: black;
-    background-color:rgb(238,241,243);
+    background-color: white;
 }
+.form-control{
+border: none;
+}
+.btn{
+    background-color: #fdc886;
+    color: #1b1b1b;
+    border: none;
+}
+.btn:hover{
+    background-color: #f3d8b7;
+    color: #1b1b1b;
+}
+/* .btn::selection{
+    background-color: #fdc886;
+    color: #1b1b1b; 
+} */
+.btn:active {
+    background-color: #f3d8b7;
+    color: #1b1b1b;
+  }

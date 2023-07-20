@@ -1,89 +1,69 @@
-import React, { useState, useEffect, useContext } from "react"
-import { Card, Button, Tooltip, Select, Checkbox } from "antd"
-import { InfoCircleOutlined, DeleteOutlined } from "@ant-design/icons"
-import Navbarlogo from "./Navbarlogo"
-import "../styles/checkout.css"
-import Payment from "./payment"
-import validator from "validator"
-import visa from "../assets/Visacart.png"
-import mastercard from "../assets/Mastercardcart.png"
-import { useLocation, useNavigate } from "react-router-dom"
-import { CartContext } from "./CartContext"
+import React, { useState, useEffect, useContext } from "react";
+import { Card, Button, Tooltip, Select, Checkbox } from "antd";
+import { InfoCircleOutlined, DeleteOutlined } from "@ant-design/icons";
+import Navbarlogo from "./Navbarlogo";
+import "../styles/checkout.css";
+import Payment from "./payment";
+import validator from "validator";
+import visa from "../assets/Visacart.png";
+import mastercard from "../assets/Mastercardcart.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "./CartContext";
 
 const Checkout = () => {
-  const [isChecked1, setIsChecked1] = useState(false)
-  const [isChecked2, setIsChecked2] = useState(false)
-  const [paymentStatus, setPaymentstatus] = useState(false)
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const valuesCount = queryParams.getAll("usdValue").length
-  const [values, setValues] = useState([])
-  const input3 = queryParams.get("selectedButton")
-  const input1 = queryParams.get("usdValue")
-  const input2 = queryParams.get("btcValue")
-  const [selectedButton, setSelectedButton] = useState(input3 || "1")
-  const [usdValue, setUSDValue] = useState(input1 || "")
-  const [btcValue, setBtcValue] = useState(parseFloat(input2) || 0)
-  const [email, setEmail] = useState("")
-  const [cardType, setCardType] = useState("")
-  const [displaySelectedButton, setDisplaySelectedButton] = useState(false)
-  const navigate = useNavigate()
-  const { addToCart } = useContext(CartContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { removeFromCart } = useContext(CartContext);
+  const queryParams = new URLSearchParams(location.search);
+  const input3 = queryParams.get("selectedButton");
+  const input1 = queryParams.get("usdValue");
+  const input2 = queryParams.get("btcValue");
+  const valuesCount = queryParams.getAll("usdValue").length;
+
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [paymentStatus, setPaymentstatus] = useState(false);
+  const [values, setValues] = useState([]);
+  const [selectedButton, setSelectedButton] = useState(input3 || "1");
+  const [usdValue, setUSDValue] = useState(input1 || "");
+  const [btcValue, setBtcValue] = useState(parseFloat(input2) || 0);
+  const [email, setEmail] = useState("");
+  const [cardType, setCardType] = useState("");
+  const [displaySelectedButton, setDisplaySelectedButton] = useState(false);
 
   useEffect(() => {
-    const newValues = []
+    const newValues = [];
     for (let i = 0; i < valuesCount; i++) {
-      const usdValue = queryParams.getAll("usdValue")[i]
-      const btcValue = parseFloat(queryParams.getAll("btcValue")[i])
-      const selectedButton = queryParams.getAll("selectedButton")[i]
-      newValues.push({ usdValue, btcValue, selectedButton })
+      const usdValue = queryParams.getAll("usdValue")[i];
+      const btcValue = parseFloat(queryParams.getAll("btcValue")[i]);
+      const selectedButton = queryParams.getAll("selectedButton")[i];
+      const id = queryParams.getAll("id")[i];
+      newValues.push({ usdValue, btcValue, selectedButton, id });
     }
-    setValues(newValues)
-    setUSDValue(input1)
-    setBtcValue(parseFloat(input2))
-    setSelectedButton(input3)
-    setCardType(queryParams.get("cardType") || "")
-    setDisplaySelectedButton(queryParams.has("selectedButton"))
-  }, [location])
+    setValues(newValues);
+    setUSDValue(input1);
+    setBtcValue(parseFloat(input2));
+    setSelectedButton(input3);
+    setCardType(queryParams.get("cardType") || "");
+    setDisplaySelectedButton(queryParams.has("selectedButton"));
+  }, [location]);
 
-  const addItemToCart = (item) => {
-    addToCart(item);
-    // Other logic for handling the item in the checkout page
+  const handleDelete = (item) => {
+    const updatedValues = values.filter((value) => value.id !== item?.id);
+    setValues(updatedValues);
+    removeFromCart(item?.id);
   };
 
-  const handleDelete = (usdValue, selectedButton) => {
-    const updatedValues = values.filter(
-      (value) =>
-        value.usdValue !== usdValue || value.selectedButton !== selectedButton
-    )
-    setValues(updatedValues)
-  }
-
-  const getDuplicateItemCount = (usdValue) => {
-    let itemCount = 0
-    values.forEach((value) => {
-      if (value.usdValue === usdValue) {
-        itemCount++
-      }
-    })
-    return itemCount
-  }
-
-  const displayDuplicateItemCount = (usdValue) => {
-    const duplicateItemCount = getDuplicateItemCount(usdValue)
-    return duplicateItemCount > 1 ? `x${duplicateItemCount}` : ""
-  }
-
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handleSubmit = () => {
-    setPaymentstatus(true)
+    setPaymentstatus(true);
     if (validator.isEmail(email)) {
-      setEmail(email)
+      setEmail(email);
     } else {
-      alert("Invalid email format. Please enter a correct email address.")
+      alert("Invalid email format. Please enter a correct email address.");
     }
 
     const queryParams = new URLSearchParams({
@@ -94,169 +74,116 @@ const Checkout = () => {
       selectedButton: selectedButton,
       totalAmount: totalAmount,
       totalBTC: totalBTC,
-    })
+    });
 
-    navigate(`/payment?${queryParams}`)
-    console.log("clicked")
-  }
+    navigate(`/payment?${queryParams}`);
+  };
 
   const handleCheckboxChange1 = () => {
-    setIsChecked1(!isChecked1)
-  }
+    setIsChecked1(!isChecked1);
+  };
 
   const handleCheckboxChange2 = () => {
-    setIsChecked2(!isChecked2)
-  }
+    setIsChecked2(!isChecked2);
+  };
 
-  const tooltipText = "This is the text that will be displayed on hover."
+  const tooltipText = "This is the text that will be displayed on hover.";
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`)
-  }
+  const handleChange = (items, quantity) => {
+    const newState = values?.map((value) => {
+      const matchedItem = items?.find((item) => item?.id === value?.id);
+      if (matchedItem) {
+        return { ...matchedItem, quantity };
+      }
+      return value;
+    });
 
-  const displayCardQuantity = queryParams.get("cardQuantity")
-  const displayLoadAmount = queryParams.get("loadAmount")
-  const displaySubtotal = queryParams.get("subtotal")
-  const displayMultipleTransaction = queryParams.get("multipletransaction")
-  const displayInternationalTransaction = queryParams.get(
-    "internationaltransaction"
-  )
+    setValues(newState);
+  };
 
-  const exchangeRate = 0.000038 // Example exchange rate, replace with the actual rate
-  // const getMultipliedValue = (usdValue) => {
-  //   const filteredValues = values.filter((value) => value.usdValue === usdValue)
-  //   const duplicateItemCount = getDuplicateItemCount(usdValue)
+  const displayCardQuantity = queryParams.get("cardQuantity");
+  const displayLoadAmount = queryParams.get("loadAmount");
 
-  //   if (duplicateItemCount === 1) {
-  //     return {
-  //       multipliedValue: usdValue,
-  //       btcValue: filteredValues[0].btcValue,
-  //     }
-  //   } else {
-  //     const multipliedValue = usdValue * duplicateItemCount
-  //     const btcValue = filteredValues[0].btcValue * duplicateItemCount
-
-  //     return {
-  //       multipliedValue,
-  //       btcValue,
-  //     }
-  //   }
-  // }
+  const exchangeRate = 0.000038; // Example exchange rate, replace with the actual rate
   const getMultipliedValue = (usdValue, selectedButton) => {
     const filteredValues = values.filter(
       (value) =>
         value.usdValue === usdValue && value.selectedButton === selectedButton
-    )
-    const duplicateItemCount = filteredValues.length
+    );
+    const duplicateItemCount = filteredValues.length;
 
     if (duplicateItemCount === 1) {
       return {
         multipliedValue: usdValue,
         btcValue: filteredValues[0].btcValue,
-      }
+      };
     } else {
-      const multipliedValue = usdValue * duplicateItemCount
-      const btcValue = filteredValues[0].btcValue * duplicateItemCount
+      const multipliedValue = usdValue * duplicateItemCount;
+      const btcValue = filteredValues[0].btcValue * duplicateItemCount;
 
       return {
         multipliedValue,
         btcValue,
-      }
+      };
     }
-  }
-
-  // const getTotalAmount = () => {
-  //   let totalAmount = 0
-  //   let totalBTC = 0
-
-  //   const uniqueValues = Array.from(
-  //     new Set(values.map((value) => value.usdValue))
-  //   )
-
-  //   uniqueValues.forEach((usdValue) => {
-  //     const duplicateItemCount = getDuplicateItemCount(usdValue)
-  //     const { multipliedValue, btcValue } = getMultipliedValue(usdValue, selectedButton);
-
-  //     totalAmount += parseFloat(multipliedValue)
-  //     totalBTC += btcValue
-  //   })
-
-  //   return { totalAmount, totalBTC: totalBTC.toFixed(5) }
-  // }
-  // const getTotalAmount = () => {
-  //   let totalAmount = 0;
-  //   let totalBTC = 0;
-
-  //   const uniqueValues = Array.from(new Set(values.map((value) => value.usdValue)));
-
-  //   uniqueValues.forEach((usdValue) => {
-  //     const duplicateItemCount = getDuplicateItemCount(usdValue);
-
-  //     values.forEach((value) => {
-  //       if (value.usdValue === usdValue) {
-  //         const { multipliedValue, btcValue } = getMultipliedValue(usdValue, value.selectedButton);
-  //         totalAmount += parseFloat(multipliedValue);
-  //         totalBTC += btcValue;
-  //       }
-  //     });
-  //   });
-
-  //   return { totalAmount, totalBTC: totalBTC.toFixed(5) };
-  // };
+  };
 
   const getTotalAmount = () => {
-    let totalAmount = 0
-    let totalBTC = 0
+    let totalAmount = 0;
+    let totalBTC = 0;
+
+    const totalUsdSum = values.reduce((accumulator, object) => {
+      return accumulator + object.usdValue * (object?.quantity || 1);
+    }, 0);
+
     const uniqueValues = Array.from(
       new Set(values.map((value) => value.usdValue))
-    )
-
+    );
     uniqueValues.forEach((usdValue) => {
       const filteredValues = values.filter(
         (value) => value.usdValue === usdValue
-      )
+      );
       const cardTypes = new Set(
         filteredValues.map((value) => value.selectedButton)
-      )
+      );
 
       cardTypes.forEach((cardType) => {
         const filteredValuesForCard = filteredValues.filter(
           (value) => value.selectedButton === cardType
-        )
-        const duplicateItemCount = filteredValuesForCard.length
+        );
+        const duplicateItemCount = filteredValuesForCard.length;
 
         if (duplicateItemCount === 1) {
           const { multipliedValue, btcValue } = getMultipliedValue(
             usdValue,
             cardType
-          )
-          totalAmount += parseFloat(multipliedValue)
-          totalBTC += btcValue
+          );
+          totalAmount += parseFloat(multipliedValue);
+          totalBTC += btcValue;
         } else {
-          const multipliedValue = usdValue * duplicateItemCount
+          const multipliedValue = usdValue * duplicateItemCount;
           const btcValue =
-            filteredValuesForCard[0].btcValue * duplicateItemCount
-          totalAmount += parseFloat(multipliedValue)
-          totalBTC += btcValue
+            filteredValuesForCard[0].btcValue * duplicateItemCount;
+          totalAmount += parseFloat(multipliedValue);
+          totalBTC += btcValue;
         }
-      })
-    })
+      });
+    });
 
-    return { totalAmount, totalBTC: totalBTC.toFixed(5) }
-  }
+    return { totalAmount: totalUsdSum, totalBTC: totalBTC.toFixed(5) };
+  };
 
-  const { totalAmount, totalBTC } = getTotalAmount()
+  const { totalAmount, totalBTC } = getTotalAmount();
 
-  const subtotalBTC = usdValue * exchangeRate
-  const bulktotal = displayLoadAmount * displayCardQuantity * exchangeRate
-  const totalbulkamt = displayLoadAmount * displayCardQuantity
+  const bulktotal = displayLoadAmount * displayCardQuantity * exchangeRate;
+  const totalbulkamt = displayLoadAmount * displayCardQuantity;
 
   return (
     <>
       <Navbarlogo />
       <div className="checkout-main">
         {!paymentStatus ? (
-          <div className="twocards" style={{ overflowX: "hidden" }}>
+          <div className="twocards1" style={{ overflowX: "hidden" }}>
             <div className="card1">
               <Card
                 className="custom-card"
@@ -271,22 +198,22 @@ const Checkout = () => {
                   ).map((usdValue) => {
                     const filteredValues = values.filter(
                       (value) => value.usdValue === usdValue
-                    )
+                    );
                     const uniqueSelectedButtons = Array.from(
                       new Set(
                         filteredValues.map((value) => value.selectedButton)
                       )
-                    )
+                    );
 
                     return (
                       <div key={usdValue} className="custom-upper-para-item">
                         {uniqueSelectedButtons.map((selectedButton) => {
                           const filteredItems = filteredValues.filter(
                             (value) => value.selectedButton === selectedButton
-                          )
-                          const duplicateItemCount = filteredItems.length
+                          );
+                          const duplicateItemCount = filteredItems.length;
                           const { multipliedValue, btcValue } =
-                            getMultipliedValue(usdValue, selectedButton)
+                            getMultipliedValue(usdValue, selectedButton);
 
                           return (
                             <div
@@ -318,7 +245,7 @@ const Checkout = () => {
                                 <p className="value">
                                   {usdValue}{" "}
                                   {duplicateItemCount > 1
-                                    ? `x${duplicateItemCount}`
+                                    ? `x ${duplicateItemCount}`
                                     : ""}{" "}
                                   = ${multipliedValue}
                                 </p>
@@ -328,26 +255,25 @@ const Checkout = () => {
                                       className="select"
                                       defaultValue="1"
                                       style={{ width: 54 }}
-                                      onChange={handleChange}
+                                      onChange={(value) =>
+                                        handleChange(filteredItems, value)
+                                      }
                                       options={[
-                                        { value: "1", label: "1" },
-                                        { value: "2", label: "2" },
-                                        { value: "3", label: "3" },
-                                        { value: "4", label: "4" },
-                                        { value: "5", label: "5" },
-                                        { value: "6", label: "6" },
-                                        { value: "7", label: "7" },
-                                        { value: "8", label: "8" },
+                                        { value: 1, label: "1" },
+                                        { value: 2, label: "2" },
+                                        { value: 3, label: "3" },
+                                        { value: 4, label: "4" },
+                                        { value: 5, label: "5" },
+                                        { value: 6, label: "6" },
+                                        { value: 7, label: "7" },
+                                        { value: 8, label: "8" },
                                       ]}
                                     />
                                     <DeleteOutlined
                                       className="divider"
-                                      onClick={() =>
-                                        handleDelete(
-                                          usdValue,
-                                          filteredValues[0].selectedButton
-                                        )
-                                      }
+                                      onClick={() => {
+                                        handleDelete(filteredItems[0]);
+                                      }}
                                     />
                                     {queryParams.has("loadAmount") ? (
                                       ""
@@ -360,10 +286,10 @@ const Checkout = () => {
                                 )}
                               </div>
                             </div>
-                          )
+                          );
                         })}
                       </div>
-                    )
+                    );
                   })}
                 </div>
 
@@ -460,7 +386,7 @@ const Checkout = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;

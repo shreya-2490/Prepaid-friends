@@ -1,13 +1,20 @@
+.twocards {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(min-content, 30rem) 1fr;
+  grid-gap: 1.25rem;
+  width: 100%;
+}
 .ant-card-head-title {
-  font-size: 30px;
+  font-size: 1.875rem;
   color: black;
 }
 .order-details {
-  margin: 7px 20px;
+  margin: 0.4375rem 1.25rem;
 }
 .emailad {
-  margin-top: -13px;
-  margin-bottom: 93px;
+  margin-top: -0.8125rem;
+  margin-bottom: 5.8125rem;
 }
 .email-div {
   display: flex;
@@ -16,24 +23,24 @@
 .change {
   color: black;
   text-decoration: underline;
-  margin-top: -11px;
+  margin-top: -0.6875rem;
   border: none;
 }
 .change:hover {
   color: black;
 }
 .payment-details {
-  margin: -70px 20px;
+  margin: -4.375rem 1.25rem;
 }
 .custom-divider {
-  margin-top: -70px;
-  margin-bottom: 50px;
+  margin-top: -4.375rem;
+  margin-bottom: 3.125rem;
 }
 .custom-divider2 {
-  margin-top: -10px;
+  margin-top: -0.625rem;
 }
 .pay-para {
-  margin-top: -23px;
+  margin-top: -1.4375rem;
 }
 .payment-card1 .ant-card-body {
   height: 50%;
@@ -43,72 +50,72 @@
 }
 .scanner-pic img {
   margin: auto;
-  width: 300px;
+  width: 18.75rem;
 }
 .pay-h {
-  margin-bottom: 25px;
+  margin-bottom: 1.5625rem;
   font-weight: 600;
 }
 .pay-h1 {
   color: #99a29e;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 .pay-h2 {
-  margin-top: -16px;
-  font-size: 15px;
+  margin-top: -1rem;
+  font-size: 0.9375rem;
 }
 .pay-h3 {
-  font-size: 15px;
-  margin-top: -5px;
+  font-size: 0.9375rem;
+  margin-top: -0.3125rem;
 }
 .pay-h4,
 .pay-h5 {
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .pay-h5 {
-  margin-top: -8px;
+  margin-top: -0.5rem;
 }
 .pay-h6 {
   font-weight: 600;
-  margin-top: 30px;
-  font-size: 15px;
+  margin-top: 1.875rem;
+  font-size: 0.9375rem;
 }
 .pay-adv {
   text-decoration: underline;
   color: black;
   margin: auto;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .pay-adv:hover {
   color: black;
 }
 .adv {
   display: flex;
-  margin-top: 65px;
+  margin-top: 4.0625rem;
 }
 .custom-upper-para-pay {
-  margin: -30px 20px 10px 20px;
+  margin: -1.875rem 1.25rem 0.625rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .subtotal {
-  margin-left: 20px;
-  font-size: 15px;
+  margin-left: 1.25rem;
+  font-size: 0.9375rem;
   font-weight: 600;
 }
 .BTC-payment {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
-  margin-top: -35px;
-  margin-left: -111px;
+  margin-top: -2.1875rem;
+  margin-left: -6.9375rem;
 }
 .fee-footer {
-  margin-left: 20px;
+  margin-left: 1.25rem;
 }
 .BTC-simplecard{
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
-  margin-top: -46px;
-  margin-left: -94px;
+  margin-top: -2.875rem;
+  margin-left: -5.875rem;
 }

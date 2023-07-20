@@ -1,41 +1,41 @@
 .checkout-main {
-  padding-bottom: 30px;
+  padding-bottom: 1.875rem;
   background-color: #F5F2EA;
-  min-height: calc(100vh - 47px);
+  min-height: calc(100vh - 2.9375rem);
   isolation: isolate;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 }
 
-.twocards {
+.twocards1 {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(min-content, 480px) 1fr;
-  grid-gap: 20px;
+  grid-template-columns: minmax(min-content, 30rem) 1fr;
+  grid-gap: 1.25rem;
   width: 100%;
 }
 .card1{
-  margin-left: 40px;
+  margin-left: 2.5rem;
 }
 .custom-card .ant-card-head-title {
-  font-size: 17px;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.25;
-  margin-left: -5px;
+  margin-left: -0.3125rem;
 }
 .custom-link {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: black;
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
-  margin: 15px;
+  margin: 0.9375rem;
 }
 .custom-link:hover {
   color: black;
 }
 .custom-para {
-  font-size: 17px;
-  padding: 5px 10px 10px 0px;
+  font-size: 1.0625rem;
+  padding: 0.3125rem 0.625rem 0.625rem 0rem;
 }
 .custom-tooltip {
   display: flex;
@@ -45,16 +45,16 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin: 7px 20px;
+  margin: 0.4375rem 1.25rem;
 }
 .BTC {
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.5;
-  margin-top: 10px;
-  margin-left: -3px;
+  margin-top: 0.625rem;
+  margin-left: -0.1875rem;
 }
 .custom-upper-para {
-  margin: 7px 20px 10px 10px;
+  margin: 0.4375rem 1.25rem 0.625rem 0.625rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,19 +65,19 @@
   text-align: center;
   justify-content: space-between;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   width: 90%;
-  border-bottom: 2px solid rgb(0 0 0 / 3%);
+  border-bottom: 0.125rem solid rgb(0 0 0 / 3%);
 }
 
 .custom-upper-para-item img {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
+  width: 1.875rem;
+  height: 1.875rem;
+  margin-right: 0.625rem;
 }
 
 .custom-upper-para-item .value {
-  margin-right: 10px;
+  margin-right: 0.625rem;
 }
 .item-container{
   display: contents;
@@ -87,71 +87,71 @@
   justify-content: space-between;
 }
 .custom-upper-para-item .BTC {
-  margin-right: 10px;
+  margin-right: 0.625rem;
 }
 
 .custom-upper-para-item .divider {
-  margin-right: 10px;
+  margin-right: 0.625rem;
 }
 
 
 .swiggy {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  margin: 2px 0px 0px 0px;
+  margin: 0.125rem 0rem 0rem 0rem;
 }
 .value {
   font-weight: 400;
-  margin-top: 3px;
+  margin-top: 0.1875rem;
 }
 .select-box {
   display: flex;
   align-items: center;
 }
 .select {
-  margin: 0px 22px 0px 0px;
+  margin: 0rem 1.375rem 0rem 0rem;
 }
 .se-box {
   display: flex;
   flex-direction: column;
 }
 .Contact-title .ant-card-head-title {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
-  padding: 25px 30px 1px 0px;
+  padding: 1.5625rem 1.875rem 0.0625rem 0rem;
 }
 .Contact-title {
-  padding: 0px 20px 0px 20px;
+  padding: 0rem 1.25rem 0rem 1.25rem;
 }
 .checkbox {
   display: flex;
   align-items: baseline;
   color: #6a716e;
-  margin: 3px 20px;
+  margin: 0.1875rem 1.25rem;
 }
 .email-box {
-  border: 1px solid rgb(159, 159, 159);
-  border-radius: 5px;
-  width: 470px;
-  font-size: 15px;
-  margin: 3px 0px 3px 20px;
+  border: 0.0625rem solid rgb(159, 159, 159);
+  border-radius: 0.3125rem;
+  width: 29.375rem;
+  font-size: 0.9375rem;
+  margin: 0.1875rem 0rem 0.1875rem 1.25rem;
   color: black;
 }
 .email {
-  font-size: 15px;
-  margin: 10px 0px 3px 20px;
+  font-size: 0.9375rem;
+  margin: 0.625rem 0rem 0.1875rem 1.25rem;
   color: #6a716e;
 }
 
 .payment-btn {
-  padding: 0 84px;
-  border-radius: 9999px;
+  padding: 0 5.25rem;
+  border-radius: 624.9375rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 20px;
-  min-height: 46px;
-  font-size: 14px;
+  margin: 0.625rem 1.25rem;
+  min-height: 2.875rem;
+  font-size: 0.875rem;
 }
 .payment button {
   color: #1b1b1b;
@@ -159,10 +159,10 @@
 }
 .payment {
   display: block;
-  width: 24px;
-  min-width: 24px;
-  height: 24px;
-  min-height: 24px;
+  width: 1.5rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  min-height: 1.5rem;
   text-align: left;
 }
 .payment-btn:hover {
@@ -171,17 +171,17 @@
 }
 .terms {
   color: black;
-  margin: 2px;
+  margin: 0.125rem;
   text-decoration: underline;
 }
 .custom-upper-cardvalue{
-  margin: -50px 20px 10px 20px;
+  margin: -3.125rem 1.25rem 0.625rem 1.25rem;
   display:flex;
   align-items: baseline;
   justify-content: space-between;
 }
 .custom-upper-cardvalue1{
-  margin: -18px 20px 10px 20px;
+  margin: -1.125rem 1.25rem 0.625rem 1.25rem;
   display:flex;
   flex-direction: column;
 }
@@ -190,21 +190,21 @@
   flex-direction: column;
 }
   .bottom-para-total{
-    margin: 2px 20px;
+    margin: 0.125rem 1.25rem;
   }
   .BTC-total{
-    font-size: 17px;
+    font-size: 1.0625rem;
     line-height: 1.5;
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   .cardtype-img{
     width:25%;
     height: 2%;
-    margin-bottom: 3px;
-    margin-right: 10px;
+    margin-bottom: 0.1875rem;
+    margin-right: 0.625rem;
   }
   .visacardtype-img{
     width: 23%;
     height: 0%;
-    margin-right: 10px;
+    margin-right: 0.625rem;
   }

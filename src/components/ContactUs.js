@@ -3,10 +3,10 @@ import { Form, Input, Button } from "antd"
 import { UserOutlined, MailOutlined } from "@ant-design/icons"
 import "../styles/ContactUs.css"
 import NavbarCart from "./NavbarCart"
-import  phone from "../assets/phone-call.png"
-import email from "../assets/email.png"
+import  phone from "../assets/Phone-img.png"
+import email from "../assets/Mail.png"
 import Footer from "./Footer"
-
+import globe from "../assets/globe 1.png"
 const ContactUs = () => {
   const layout = {
     labelCol: {
@@ -31,9 +31,9 @@ const ContactUs = () => {
   return (
     <>
       <NavbarCart />
-      <div style={{height:"94vh"}}>
+      <div className="contactus">
         <div className="contactus-container">
-   
+        <img src={globe} className="globe-img"></img>
         </div>
         <div className="bottom-contact-container">
           <div className="form-container">
@@ -87,8 +87,8 @@ const ContactUs = () => {
             </Form>
           </div>
           <div  className="images-sideform">
-            <div className="phone-image"><img src={phone}></img><p>+2347026290389</p><p>You can call us at anytime</p></div>
-            <div className="phone-image"><img src={email}></img><p>contact@prepaidfriends.com</p><p>Send us a detailed message</p></div>
+            <div className="phone-image"><img src={phone}></img><p className="bold">+2347026290389</p><p>You can call us at anytime</p></div>
+            <div className="email-image"><img src={email}></img><p className="bold">contact@prepaidfriends.com</p><p>Send us a detailed message</p></div>
           </div>
         </div>
       </div>

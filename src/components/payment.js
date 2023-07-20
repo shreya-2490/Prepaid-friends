@@ -82,7 +82,7 @@ const Payment = ({ email }) => {
               className="custom-card"
               title="Order Details"
               bordered={false}
-              style={{ width: 500, margin: "90px 0px 0px 30px" }}
+              style={{ width: 500, margin: "90px 0px 0px 70px" }}
               headStyle={{ borderBottom: "none" }}
             >
               <div className="order-details">

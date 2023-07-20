@@ -1,123 +1,441 @@
-.bulk-division {
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border-radius: 20px;
-  display: flex;
-  position: absolute;
-  left: 9%;
-  top: 69px;
- width: 82%;
-}
-.bulk-main{
-  background-color: #F5F2EA;
-  width: 100%;
-  padding-top: 5px;
-  height: 120vh !important;
-  top: 0;
-  position: absolute;
-}
-.bulk-div-1 {
-  width: 44%;
-  margin-top: 2px;
-}
-.bulk-div-2{
-  width: 60%;
+/* =====================Desktop Veiw=========================== */
 
-}
-.subtitle-bulk {
-  color: #1b1b1b;
-}
-.subtitle-bulk-2 {
-  color: #1b1b1b;
-  margin-top: -10px;
-}
-.bulk-inner-div-1 {
-  background-color: #fdc886;
-  height: 400px;
-  width: 50%;
-}
-.bulk-inner-div-2 {
-  background-color: #f5f2ea;
-  height: 400px;
-  width: 50%;
+@media (min-width: 1024px) {
+  .bulk-main {
+    background-color: #f5f2ea;
+    width: 100%;
+    /* padding-top: 0.3125rem; */
+    /* top: 0; */
+    /* position: absolute; */
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 0rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bulk-division {
+    width: 90%;
+    background-color: #fff;
+    border-radius: 1.25rem;
+    padding: 1rem 1.9rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: absolute; */
+    /* left: 9%; */
+    /* top: 4.3125rem; */
+  }
+
+  .bulk-div-1 {
+    width: 48%;
+    text-align: center;
+  }
+
+  .bulk-div-2 {
+    width: 52%;
+  }
+
+  .subtitle-bulk {
+    color: #1b1b1b;
+  }
+
+  .subtitle-bulk-2 {
+    color: #1b1b1b;
+    /* margin-top: -0.625rem; */
+  }
+
+  .bulkorder-content {
+    /* margin: auto; */
+    /* padding-top: 0.3125rem; */
+    color: white;
+    width: 100%;
+    background-color: #fdc886;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+  }
+
+  .benefits-card {
+    width: 18rem;
+    height: 3.8rem;
+    background-color: white;
+    position: absolute;
+    top: 45%;
+    left: 25%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .benefits-card-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .benefits-card-img {
+    width: 2.9rem;
+    position: absolute;
+    bottom: 0.4rem;
+    left: 21%;
+    transform: translateX(-90%);
+  }
+
+  .benefits-card-badge {
+    position: absolute;
+    bottom: 0.9rem;
+    width: 1.7rem;
+    left: 19%;
+    transform: translateX(-90%);
+  }
+
+  .benefits-card-title {
+    color: #fdc886;
+  }
+
+  .bulkorder-content-2 {
+    /* margin: auto; */
+    /* padding-top: 0px; */
+    color: white;
+    width: 100%;
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    background-color: #f5f2ea;
+  }
+
+  .bulk-content-list {
+    text-align: center;
+  }
+
+  .bulk-content-list ul {
+    list-style: none;
+    margin: 2.5rem 0rem;
+  }
+
+  .bulk-content-list ul li {
+    margin-right: 3.75rem;
+  }
+
+  .bulk-content-list ul li:before {
+    content: "✓";
+    margin-right: 0.3125rem;
+    margin-top: 0.3125rem;
+  }
+
+  .listing {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    color: #1b1b1b;
+    margin: 0rem 1.875rem 0.125rem 6.25rem;
+  }
+
+  .listing-div {
+    padding: 3rem 0;
+  }
+
+  .footer-card2 {
+    color: #a1a19f;
+    font-size: 0.625rem;
+    text-align: left;
+    padding: 0.625rem;
+    margin: -0.6875rem 1.25rem;
+  }
+
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-input input:hover,
+  .ant-select-selector:hover,
+  .ant-select-focused .ant-select-selection,
+  .ant-select-selector:focus
+    .ant-form-item-control-input
+    .ant-input-number:focus,
+  .ant-form-item-control-input .ant-input-number:hover,
+  .ant-form-item-control-input input[type="number"]:focus,
+  .ant-form-item-control-input input[type="number"]:hover,
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox-wrapper::selection,
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-select
+    .ant-select-selector:focus
+    .ant-checkbox-wrapper:focus
+    .ant-checkbox-inner {
+    border-color: #fdc886 !important;
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: #000000 !important;
+    color: #1b1b1b !important;
+    background-color: #fdc886;
+    /* Change this to your desired color */
+    /* Optional: Add a box shadow */
+  }
+
+  .ant-select-item-option[aria-selected="true"] {
+    border-color: #fdc886 !important;
+  }
+  .buyNowBtn {
+    border-radius: 1rem;
+    text-align: center;
+    background-color: #fdc886;
+    width: 70%;
+    margin: 0 15%;
+  }
 }
 
-.bulkorder-content {
-  text-align: center;
-  margin: auto;
-  padding-top: 5px;
-  color: white;
-  
-}
-.bulkorder-content-2 {
-  text-align: center;
-  margin: auto;
-  padding-top: 0px;
-  color: white;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-.bulk-content-list {
-  text-align: center;
-}
-.bulk-content-list ul {
-  list-style: none;
-  margin: 40px 0px;
-}
-.bulk-content-list ul li {
-  margin-right: 60px;
+/* =====================Tablet Veiw=========================== */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .bulk-main {
+    background-color: #f5f2ea;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 0rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bulk-division {
+    width: 90%;
+    background-color: #fff;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bulk-div-1 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .bulk-div-2 {
+    width: 100%;
+  }
+
+  .subtitle-bulk {
+    color: #1b1b1b;
+  }
+
+  .subtitle-bulk-2 {
+    color: #1b1b1b;
+  }
+
+  .bulkorder-content {
+    color: white;
+    width: 100%;
+    background-color: #fdc886;
+    padding: 1rem 0;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+  }
+
+  .benefits-card {
+    width: 18rem;
+    height: 3.5rem;
+    background-color: white;
+    position: absolute;
+    top: 22.5%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .benefits-card-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .benefits-card-img {
+    width: 2.3rem;
+    position: absolute;
+    /* bottom: 0.4rem; */
+    left: 15%;
+    transform: translateX(-90%);
+  }
+
+  .benefits-card-badge {
+    position: absolute;
+    /* bottom: 0.9rem; */
+    width: 1.2rem;
+    left: 13%;
+    transform: translateX(-90%);
+  }
+
+  .benefits-card-title {
+    color: #fdc886;
+  }
+
+  .bulkorder-content-2 {
+    color: white;
+    width: 100%;
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    background-color: #f5f2ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0 2rem 0;
+  }
+
+  .listing {
+    display: flex;
+    align-items: flex-start;
+    justify-content: left;
+    color: #1b1b1b;
+  }
+
+  .listing-div {
+    text-align: center;
+    width: 30%;
+  }
+
+  .footer-card2 {
+    width: 60%;
+    color: #a1a19f;
+    font-size: 1rem;
+    text-align: justify;
+  }
+
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-input input:hover,
+  .ant-select-selector:hover,
+  .ant-select-focused .ant-select-selection,
+  .ant-select-selector:focus
+    .ant-form-item-control-input
+    .ant-input-number:focus,
+  .ant-form-item-control-input .ant-input-number:hover,
+  .ant-form-item-control-input input[type="number"]:focus,
+  .ant-form-item-control-input input[type="number"]:hover,
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox-wrapper::selection,
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-select
+    .ant-select-selector:focus
+    .ant-checkbox-wrapper:focus
+    .ant-checkbox-inner {
+    border-color: #fdc886 !important;
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: #000000 !important;
+    color: #1b1b1b !important;
+    background-color: #fdc886;
+  }
+
+  .ant-select-item-option[aria-selected="true"] {
+    border-color: #fdc886 !important;
+  }
+  .buyNowBtn {
+    border-radius: 1rem;
+    text-align: center;
+    background-color: #fdc886;
+    width: 70%;
+    margin: 0 15%;
+  }
 }
 
-.bulk-content-list ul li:before {
-  content: "✓";
-  margin-right: 5px;
-  margin-top: 5px;
-}
-.listing{
-  display: flex;
-  align-items: flex-start;
-  justify-content: left;
-  color: #1b1b1b;
-  margin: 0px 30px 2px 100px;
-  
-}
-.listing-div{
+/* =====================Mobile Veiw=========================== */
+@media (min-width: 10px) and (max-width: 640px) {
+  .bulk-main {
+    background-color: #f5f2ea;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 0rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-  margin-top: 30px;
-}
-.footer-card2{
-  color: #A1A19F;
-  font-size: 10px;
-  text-align: left;
-  padding: 10px;
-  margin: -11px 20px;
-  
-}
+  .bulk-division {
+    width: 90%;
+    background-color: #fff;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-.ant-form-item-control-input input:focus,
-.ant-form-item-control-input input:hover,
-.ant-select-selector:hover,
-.ant-select-focused .ant-select-selection,
-.ant-select-selector:focus
-.ant-form-item-control-input .ant-input-number:focus,
-.ant-form-item-control-input .ant-input-number:hover,
-.ant-form-item-control-input input[type="number"]:focus,
-.ant-form-item-control-input input[type="number"]:hover,
-.ant-checkbox-wrapper:hover .ant-checkbox-inner,
-.ant-checkbox-wrapper::selection, 
-.ant-form-item-control-input input:focus,
-.ant-form-item-control-select .ant-select-selector:focus
-.ant-checkbox-wrapper:focus .ant-checkbox-inner {
-  border-color: #fdc886 !important; 
-}
-.ant-btn:hover,
-.ant-btn:focus {
-  border-color: #000000 !important; 
-  color: #1b1b1b !important;
-  background-color: #fdc886;/* Change this to your desired color */
-   /* Optional: Add a box shadow */
-}
-.ant-select-item-option[aria-selected="true"]{
-  border-color: #fdc886 !important;
+  .bulk-div-1 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .bulk-div-2 {
+    width: 100%;
+  }
+
+  .subtitle-bulk {
+    color: #1b1b1b;
+  }
+
+  .subtitle-bulk-2 {
+    color: #1b1b1b;
+  }
+
+  .bulkorder-content {
+    color: white;
+    width: 100%;
+    background-color: #fdc886;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+  }
+
+  .benefits-card {
+    display: none;
+  }
+
+  .bulkorder-content-2 {
+    display: none;
+  }
+
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-input input:hover,
+  .ant-select-selector:hover,
+  .ant-select-focused .ant-select-selection,
+  .ant-select-selector:focus
+    .ant-form-item-control-input
+    .ant-input-number:focus,
+  .ant-form-item-control-input .ant-input-number:hover,
+  .ant-form-item-control-input input[type="number"]:focus,
+  .ant-form-item-control-input input[type="number"]:hover,
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  .ant-checkbox-wrapper::selection,
+  .ant-form-item-control-input input:focus,
+  .ant-form-item-control-select
+    .ant-select-selector:focus
+    .ant-checkbox-wrapper:focus
+    .ant-checkbox-inner {
+    border-color: #fdc886 !important;
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: #000000 !important;
+    color: #1b1b1b !important;
+    background-color: #fdc886;
+  }
+
+  .ant-select-item-option[aria-selected="true"] {
+    border-color: #fdc886 !important;
+  }
+
+  .buyNowBtn {
+    border-radius: 1rem;
+    text-align: center;
+    margin: auto;
+    background-color: #fdc886;
+    width: 100%;
+  }
 }

@@ -1,73 +1,262 @@
+/*  =====================  Desktop Veiw ===========================  */
+
+@media (min-width: 1024px) {
+
 .cart-main {
-    padding-bottom: 30px;
+  background-color: #F5F2EA;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.twocards-cart {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  width: 100%;
+  align-items: center;
+}
+
+
+.custom-card-cart  {
+  border-radius: 0.7rem;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.Contact-title{
+  width: 95%;
+  margin: 0 auto;
+}
+
+.custom-card-cart img{
+  width: 100%;
+  padding: 2.7rem;
+}
+.custom-para2-cart{
+  text-align: justify;
+}
+
+.cart-input input[type="number"] {
+  background-color:white;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  border: 0.1rem solid #D9D9D9;
+  width: 30%;
+  border: 1px solid blue; 
+}
+
+.cart-input input:hover{
+  border-color: rgb(87, 180, 211);
+}
+
+.cart-btn button{
+  background-color: black;
+  color: white;
+  border-radius: 1.9rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 30%;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.long-value {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  
+}
+.btcvalue{
+ margin-bottom: 0.07rem; 
+}
+
+
+.expected-value{
+font-size: 0.9rem;
+
+}
+
+.icons{
+  display: flex;
+  margin: 1rem 0;
+}
+
+}
+
+/*  =====================Tablet Veiw=========================== */
+@media(min-width : 641px) and (max-width: 1023px) {
+  .cart-main {
     background-color: #F5F2EA;
-    min-height: calc(100vh - 64px);
-    isolation: isolate;
-    margin-top: 20px;
+    height: 130vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
   }
   
   .twocards-cart {
-    position: relative;
     display: grid;
-    grid-template-columns: minmax(min-content, 480px) 1fr;
-    grid-gap: 20px;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 3rem;
     width: 100%;
+    align-items: center;
   }
-  .card1-cart{
-    margin-left: 40px;
+  
+  
+  .custom-card-cart  {
+    border-radius: 0.7rem;
+    width: 60%;
+    margin: 0 auto;
   }
-  .custom-card-cart .ant-card-head-title {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.25;
+  
+  .Contact-title{
+    width: 85%;
+    margin: 0 auto;
   }
+  
   .custom-card-cart img{
-    width: 445px;
-    padding: 42px;
-
+    width: 100%;
+    padding: 2.7rem;
   }
   .custom-para2-cart{
-    margin: 10px 22px;
     text-align: justify;
   }
+  
   .cart-input input[type="number"] {
     background-color:white;
-    border-radius: 5px;
-    margin-top: -6px;
-    font-size: 16px;
-    border:1px solid #D9D9D9;
-    width: 172px;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    border: 0.1rem solid #D9D9D9;
+    width: 10.8rem;
   }
+  
   .cart-input input:hover{
     border-color: rgb(87, 180, 211);
   }
+  
   .cart-btn button{
     background-color: black;
     color: white;
-    border-radius: 30px;
+    border-radius: 1.9rem;
     border: none;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.9rem;
     width: 30%;
-    margin-left: 8px;
+   
     text-align: center;
-    padding: 8px;
+    padding: 0.5rem;
   }
-  .cart-btn{
-    margin-top: 25px;
-    margin-left: 21px;
-    /* text-align: center; */
-  }
+  
   .long-value {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-
+  
   }
-.btcvalue{
-  margin-bottom: 1px;
-}
-.expected-value{
-  font-size: 14px;
+  .btcvalue{
+  margin-bottom: 0.07rem;
+  }
+  
+  .expected-value{
+  font-size: 0.9rem;
+  }
 
+  .icons{
+    display: flex;
+    margin: 3rem 0;
+  }
+
+
+}
+
+ /* =====================Mobile Veiw===========================  */
+@media(min-width : 10px) and (max-width:640px) {
+ 
+
+
+  .cart-main {
+    background-color: #F5F2EA;
+    height: 160vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
+  
+  .twocards-cart {
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 3rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .custom-card-cart  {
+    border-radius: 0.7rem;
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .Contact-title{
+    width: 85%;
+    margin: 0 auto;
+  }
+  
+  .custom-card-cart img{
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .custom-para2-cart{
+    text-align: justify;
+  }
+  
+  .cart-input input[type="number"] {
+    background-color:white;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+    border: 0.1rem solid #D9D9D9;
+    width: 10.8rem;
+  }
+  
+  .cart-input input:hover{
+    border-color: rgb(87, 180, 211);
+  }
+  
+  .cart-btn button{
+    background-color: black;
+    color: white;
+    border-radius: 1.9rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 60%;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .long-value {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  
+  }
+  .btcvalue{
+  margin-bottom: 0.07rem;
+  }
+  
+  
+  .expected-value{
+  font-size: 0.9rem;
+  
+  }
+
+  .icons{
+    margin: 2rem 0;
+  }
 }

@@ -3,25 +3,25 @@
   background-color: #F5F2EA;
   display: flex;
   align-items: baseline;
-  font-size: 12px;
+  font-size: 0.75rem;
   position: fixed;
   Width: 100%;
   bottom: 0;
 
 }
 .prepaid-logo{
-  margin: 2px;
-  padding: 10px;
+  margin: 0.125rem;
+  padding: 0.625rem;
 }
 .prepaid-logo img{
   width:50%;
 }
 .arrowhead{
-  font-size: 40px;
+  font-size: 2.5rem;
   color: white;
   position: relative;
-  bottom: 12px;
-  margin: 10px;
+  bottom: 0.75rem;
+  margin: 0.625rem;
   border: none;
   background: none;
   
@@ -30,7 +30,7 @@
   margin-left: 5%;
 }
 .divider-bet{
-  margin: 10px;
+  margin: 0.625rem;
 }
 .privacy{
   margin-left: 1%;

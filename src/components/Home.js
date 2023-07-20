@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Select, Card, Image, Alert } from "antd"
+import { Select, Card, Image, Alert, Slider } from "antd"
 import { Link } from "react-router-dom"
 import visa from "../assets/Visa.png"
 import mastercard from "../assets/Mastercard.png"
@@ -16,8 +16,10 @@ const Home = () => {
   const [selectedCard, setSelectedCard] = useState(null)
   const [isValueValid, setIsValueValid] = useState(false)
   const [selectedButton, setSelectedButton] = useState(1)
-  const [button, setButton] = useState(2)
+  const [button, setButton] = useState(1)
   const [loadAmount, setLoadAmount] = useState("")
+  const [selectedProvider, setSelectedProvider] = useState("All");
+  const [selectedPrice, setSelectedPrice] = useState("low");
 
   const handleButtonClick = (event, buttonId) => {
     event.preventDefault()
@@ -39,6 +41,19 @@ const Home = () => {
     } else {
       setIsValueValid(false)
     }
+  }
+
+  const handleSliderChange = (value) => {
+    console.log("Selected Range:", value)
+    // You can work with the selected range value here.
+  }
+  const handleProviderChange = (event) => {
+    setSelectedProvider(event.target.value)
+  }
+
+  // Handler for the price filter
+  const handlePriceChange = (event) => {
+    setSelectedPrice(event.target.value)
   }
 
   useEffect(() => {
@@ -97,11 +112,11 @@ const Home = () => {
             card amount. Discover the many advantages of using cryptocurrency
             for your everyday transactions.
           </p>
-          <div className="learn-more-btn">
+          {/* <div className="learn-more-btn">
             <Link to="/">
               <button>How it Works</button>
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="sider">
           <div className="box">
@@ -132,164 +147,177 @@ const Home = () => {
               </div>
             </div>
             <div className="sider-content">
-              <div style={{ display: "block" }}></div>
-              <div className="forms">
-                <div style={{ marginBottom: "20px" }}>
-                  <form>
-                    <div className="card-selector-container">
-                      <p className="choose-card">Select Card</p>
-                      <div className="selection-cards-visamastercard">
-                        <button
-                          className={`button ${
-                            selectedButton === 1 ? "selected" : ""
-                          }`}
-                          onClick={(event) => handleButtonClick(event, 1)}
-                        >
-                          <img src={visa} className="homepage-cards"></img>
-                        </button>
-                        <button
-                          className={`mastercard-button ${
-                            selectedButton === 2 ? "selected" : ""
-                          }`}
-                          onClick={(event) => handleButtonClick(event, 2)}
-                        >
-                          <div className="mastercard-image">
-                            <img
-                              src={mastercard}
-                              className="homepage-cards"
-                            ></img>
-                          </div>
-                        </button>
-                      </div>
-                      {/* <Select
-                      value={selectedCard}
-                      onChange={handleCardSelect}
-                      className="card-selector"
-                    >
-                      <Option value="visa">
-                        <Card
-                          actions={[
-                            selectedCard === "visa" && (
-                              <span onClick={handleCardCancel}>Cancel</span>
-                            ),
-                          ]}
-                        >
-                          <Image src={visa} alt="Visa Card" />
-                        </Card>
-                      </Option>
-                      <Option value="mastercard">
-                        <Card
-                          actions={[
-                            selectedCard === "mastercard" && (
-                              <span onClick={handleCardCancel}>Cancel</span>
-                            ),
-                          ]}
-                        >
-                          <Image src={mastercard} alt="Mastercard" />
-                        </Card>
-                      </Option>
-                    </Select> */}
-
-                      {/* <Select
-                      className="card-selector"
-                      value={selectedCard}
-                      onChange={handleCardSelect}
-                      style={{ width: 180 }}
-                      dropdownMatchSelectWidth={false}
-                      dropdownStyle={{ minWidth: 200 }}
-                    >
-                      <Option
-                        value="visa"
-                        label={renderOption("Visa", "./assets/visa.svg")}
-                      >
-                        Visa
-                      </Option>
-                      <Option
-                        value="mastercard"
-                        label={renderOption(
-                          "Mastercard",
-                          "./assets/mastercard.svg"
-                        )}
-                      >
-                        Mastercard
-                      </Option>
-                    </Select> */}
-                    </div>
-                  </form>
-                </div>
-                <div>
-                  <form>
-                    <div className="both-gray">
-                      <div className="first-gray">
-                        <div className="first-gray-1">
-                          <label className="pay">Select Amount</label>
-                        </div>
-                        <div>
-                          <select
-                            value={loadAmount}
-                            onChange={(event) =>
-                              handleUSDSelect(event.target.value)
-                            }
-                            className="dropdown-amount"
+              {button === 1 && (
+                <div className="forms">
+                  <div style={{ marginBottom: "20px" }}>
+                    <form>
+                      <div className="card-selector-container">
+                        <p className="choose-card">Select Card</p>
+                        <div className="selection-cards-visamastercard">
+                          <button
+                            className={`button ${
+                              selectedButton === 1 ? "selected" : ""
+                            }`}
+                            onClick={(event) => handleButtonClick(event, 1)}
                           >
-                            <option value="" disabled hidden>
-                              --
-                            </option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            <option value="200">200</option>
-                            <option value="500">500</option>
+                            <img src={visa} className="homepage-cards"></img>
+                          </button>
+                          <button
+                            className={`mastercard-button ${
+                              selectedButton === 2 ? "selected" : ""
+                            }`}
+                            onClick={(event) => handleButtonClick(event, 2)}
+                          >
+                            <div className="mastercard-image">
+                              <img
+                                src={mastercard}
+                                className="homepage-cards"
+                              ></img>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div>
+                    <form>
+                      <div className="both-gray">
+                        <div className="first-gray">
+                          <div className="first-gray-1">
+                            <label className="pay">Select Amount</label>
+                          </div>
+                          <div>
+                            <select
+                              value={loadAmount}
+                              onChange={(event) =>
+                                handleUSDSelect(event.target.value)
+                              }
+                              className="dropdown-amount"
+                            >
+                              <option value="" disabled hidden>
+                                --
+                              </option>
+                              <option value="25">25</option>
+                              <option value="50">50</option>
+                              <option value="100">100</option>
+                              <option value="200">200</option>
+                              <option value="500">500</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div className="second-gray">
+                          <div className="items">
+                            {/* <picture className="usdt-pic">
+                          <img src={dollar}></img>
+                        </picture> */}
+                            <span className="dropdown-1">USD</span>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <p
+                      style={{
+                        color: "black",
+                        fontSize: "12px",
+                        fontWeight: "400",
+                        marginLeft: "2%",
+                        display: "inline",
+                      }}
+                    >
+                      {/* <picture className="bit-pic">
+                    <img src={bitcoin}></img>
+                  </picture> */}
+                      <span
+                        style={{
+                          margin: "0px",
+                          fontFamily: "Outfit, sans-serif",
+                        }}
+                      >
+                        ≈ {btcValue} BTC
+                      </span>
+                    </p>
+
+                    <div>
+                      {btcValue === "0.00000" && (
+                        <Alert
+                          style={{ marginTop: "15px", position: "relative" }}
+                          message="Please select a valid amount"
+                          type="warning"
+                          showIcon
+                          closable
+                        />
+                      )}
+
+                      {btcValue !== "0.00000" ? (
+                        <Link
+                          to={`/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`}
+                        >
+                          <button
+                            className="buy-usdt"
+                            type="button"
+                            onClick={handleBuyButtonClick}
+                          >
+                            Buy Now
+                          </button>
+                        </Link>
+                      ) : (
+                        <button
+                          className="buy-usdt disabled"
+                          type="button"
+                          disabled
+                        >
+                          Buy Now
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {button === 2 && (
+                <div className="forms">
+                  <div style={{ margin: "15px 0px" }}>
+                    <form>
+                      <div className="both-gray">
+                        <div className="first-gray">
+                          <div className="first-gray-1">
+                            <label className="pay">Select Provider</label>
+                          </div>
+                          <div>
+                            <select
+                              className="dropdown-amount"
+                              value={selectedProvider}
+                              onChange={handleProviderChange}
+                            >
+                              <option value="All">All</option>
+                              <option value="Visa">Visa</option>
+                              <option value="MasterCard">MasterCard</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div>
+                    <form>
+                      <div className="both-gray">
+                        <div className="first-gray">
+                          <div className="first-gray-1">
+                            <label className="pay">Price</label>
+                          </div>
+                          <select
+                            className="price-amount"
+                            value={selectedPrice}
+                            onChange={handlePriceChange}
+                          >
+                            <option value="low">Low to High </option>
+                            <option value="high">High to Low</option>
                           </select>
                         </div>
                       </div>
-                      <div className="second-gray">
-                        <div className="items">
-                          {/* <picture className="usdt-pic">
-                          <img src={dollar}></img>
-                        </picture> */}
-                          <span className="dropdown-1">USD</span>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                  <p
-                    style={{
-                      color: "black",
-                      fontSize: "12px",
-                      fontWeight: "400",
-                      marginLeft: "2%",
-                      display: "inline",
-                    }}
-                  >
-                    {/* <picture className="bit-pic">
-                    <img src={bitcoin}></img>
-                  </picture> */}
-                    <span
-                      style={{
-                        margin: "0px",
-                        fontFamily: "Outfit, sans-serif",
-                      }}
-                    >
-                      ≈ {btcValue} BTC
-                    </span>
-                  </p>
+                    </form>
 
-                  <div>
-                    {btcValue === "0.00000" && (
-                      <Alert
-                        style={{ marginTop: "15px", position: "relative" }}
-                        message="Please select a valid amount"
-                        type="warning"
-                        showIcon
-                        closable
-                      />
-                    )}
-
-                    {btcValue !== "0.00000" ? (
-                      <Link
-                        to={`/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`}
-                      >
+                    <div>
+                      <Link to="/preowned">
                         <button
                           className="buy-usdt"
                           type="button"
@@ -298,18 +326,10 @@ const Home = () => {
                           Buy Now
                         </button>
                       </Link>
-                    ) : (
-                      <button
-                        className="buy-usdt disabled"
-                        type="button"
-                        disabled
-                      >
-                        Buy Now
-                      </button>
-                    )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

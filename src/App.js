@@ -1,10 +1,6 @@
 import React, { useState } from "react"
 import "./App.css"
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./components/Home"
 // import About from "./components/AboutUsdt"
 // import BulkCard from "./components/BulkCard"
@@ -23,9 +19,12 @@ import ContactUs from "./components/ContactUs"
 import Payment from "./components/payment"
 import { CartProvider } from "./components/CartContext"
 import Dashboard from "./components/Dashboard"
+import Preowned from "./components/Preowned"
 
 function App() {
   const [cartItems, setCartItems] = useState([])
+  const [selectedProvider, setSelectedProvider] = useState("All")
+  const [selectedPrice, setSelectedPrice] = useState("low")
 
   const handleAddToCart = (item) => {
     setCartItems([...cartItems, item])
@@ -41,7 +40,15 @@ function App() {
             />
           </Routes>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  selectedProvider={selectedProvider}
+                  selectedPrice={selectedPrice}
+                />
+              }
+            />
           </Routes>
           {/* <Routes>
           <Route path="/" element={<About />} />
@@ -81,13 +88,24 @@ function App() {
             <Route path="/payment" element={<Payment />} />
           </Routes>
           <Routes>
-            <Route path="/login" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
           <Routes>
             <Route path="/bulkorder" element={<BulkOrder />} />
           </Routes>
           <Routes>
             <Route path="/contactus" element={<ContactUs />} />
+          </Routes>
+          <Routes>
+            <Route
+              path="/preowned"
+              element={
+                <Preowned
+                  selectedProvider={selectedProvider}
+                  selectedPrice={selectedPrice}
+                />
+              }
+            />
           </Routes>
         </Router>
       </CartProvider>

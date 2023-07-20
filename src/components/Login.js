@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 
 function Login() {
   return (
-    <div className="wrapper bg-dark d-flex align-items-center justify-content-center w-100">
+    <div className="wrapper d-flex align-items-center justify-content-center w-100">
       <div className="login">
-        <h2 className="mb-3">Login Form</h2>
+        <h2 className="mb-4 login-heading">Login to your Account</h2>
         <form className="needs-validation">
           <div className="form-group was-validated mb-2">
             <label htmlFor="email" className="form-label">
@@ -31,7 +31,7 @@ function Login() {
             </label>
           </div>
           <Link to="/">
-            <button type="submit" className="btn btn-success w-100 mt-2">
+            <button type="submit" className="btn  w-100 mt-2">
               SIGN IN
             </button>
           </Link>
