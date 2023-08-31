@@ -1,73 +1,40 @@
-import { useState, useEffect } from "react"
-import {
-  Alert,
-  Input,
-  Space,
-  Tag,
-  Checkbox,
-  Skeleton,
-  Modal,
-  Button,
-} from "antd"
-import { useNavigate } from "react-router-dom"
-import visawhite from "../assets/visahomewhite.png"
-import masterwhite from "../assets/masterhomewhite.png"
-import "../styles/home.css"
-import axios from "axios"
-import Footer from "./Footer"
-import { Helmet } from "react-helmet"
-import { usdToBTC } from "../utils/helper"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faDollarSign, faBitcoinSign } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react";
+import { Alert, Input, Space, Tag, Checkbox, Modal, Button } from "antd";
+import { useNavigate } from "react-router-dom";
+import "../styles/home.css";
+import axios from "axios";
+import Footer from "./Footer";
+import { Helmet } from "react-helmet";
+import { usdToBTC } from "../utils/helper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDollarSign, faBitcoinSign } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const [usdValue, setUSDValue] = useState("")
-  const [btcValue, setBTCValue] = useState("")
-  const [isValueValid, setIsValueValid] = useState(false)
-  const [selectedButton, setSelectedButton] = useState(1)
-  const [button, setButton] = useState(1)
-  const [loadAmount, setLoadAmount] = useState("")
-  const [selectedProvider, setSelectedProvider] = useState("All")
-  const [selectedPrice, setSelectedPrice] = useState("low")
-  const [alert, showAlert] = useState(false)
-  const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
-  const [isChecked, setIsChecked] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(null)
-  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [usdValue, setUSDValue] = useState("");
+  const [btcValue, setBTCValue] = useState("");
+  const [selectedButton, setSelectedButton] = useState(1);
+  const [button, setButton] = useState(1);
+  const [alert, showAlert] = useState(false);
+  const navigate = useNavigate();
+  const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
+    useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [emailValue, setEmailValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); 
-
-  const handleButtonClick = (event, buttonId) => {
-    event.preventDefault()
-    setSelectedButton(buttonId)
-    if (buttonId === 1) {
-      setSelectedImage(visawhite)
-    } else if (buttonId === 2) {
-      setSelectedImage(masterwhite)
-    }
-  }
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleMainButtonClick = (event, buttonId) => {
-    event.preventDefault()
-    setButton(buttonId)
-  }
-
-  const handleBuyButtonClick = () => {
-    navigate("/preowned", {
-      state: { selectedProvider, selectedPrice },
-    })
-  }
+    event.preventDefault();
+    setButton(buttonId);
+  };
 
   const handleBuyButtonClickMain = () => {
     if (btcValue === "0.00000") {
-      setIsValueValid(true);
     } else if (!isChecked) {
       setIsModalVisible(true);
     } else if (isChecked && !emailValue) {
       setErrorMessage("Please enter your email address.");
     } else {
-      setIsValueValid(false);
       usdValue
         ? navigate(
             `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
@@ -75,48 +42,50 @@ const Home = () => {
         : showAlert(true);
     }
   };
-  
 
   const handleProceed = () => {
     navigate(
       `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
-    )
-  }
+    );
+  };
   const handleModalCancel = () => {
-    setIsModalVisible(false)
-  }
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
+      setIsCalculatingBtcEquivalent(true);
       try {
-        const response = await axios.post("/api/rate-api")
-        const btcPrice = response.data.value
-        setBTCValue(usdToBTC(usdValue, btcPrice))
+        const response = await axios.post("/api/rate-api");
+        const btcPrice = response.data.value;
+        setBTCValue(usdToBTC(usdValue, btcPrice));
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error("Error fetching data:", error);
       } finally {
-        setIsLoading(false)
+        setIsCalculatingBtcEquivalent(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [usdValue, loadAmount])
+    if (usdValue) {
+      fetchData();
+    } else {
+      setBTCValue("");
+    }
+  }, [usdValue]);
 
   const handleUSDSelect = (selectedValue) => {
-    const value = parseFloat(selectedValue)
-    setUSDValue(value)
-    setIsValueValid(false)
-    setLoadAmount(selectedValue)
-    selectedValue ? showAlert(false) : showAlert(true)
-  }
-  const handleTagClick = (value) => {
-    setLoadAmount(value)
-  }
+    const value = parseFloat(selectedValue);
+    setUSDValue(value || "");
+    selectedValue ? showAlert(false) : showAlert(true);
+  };
 
-  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending"
+  const handleTagClick = (value) => {
+    handleUSDSelect(value);
+  };
+
+  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending";
   const pageDescription =
-    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!"
+    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!";
 
   return (
     <>
@@ -129,7 +98,6 @@ const Home = () => {
           <div>
             <h1 className="home-heading">
               Your Bitcoin Bridge to Global Spending
-              {/* <span style={{ color: "#FDC886", fontWeight: "400", fontFamily:"Typold Extended Black" }}>BTC</span> */}
             </h1>
             <h1 className="home-heading-1">
               Seamlessly Connect to a World of Possibilities with Dollar-Loaded
@@ -137,16 +105,7 @@ const Home = () => {
             </h1>
           </div>
 
-          <p className="subtitle">
-            {/* Unlock the power of digital currencies with our cryptocurrency
-            prepaid cards. Simplify your online purchases and enjoy a seamless
-            payment experience. Our user-friendly platform allows you to
-            effortlessly calculate the BTC equivalent of your desired prepaid
-            card amount. Discover the many advantages of using cryptocurrency
-            for your everyday transactions. */}
-            {/* Embark on a digital currency journey with our cryptocurrency prepaid
-            cards, transforming mundane transactions into seamless adventures. */}
-          </p>
+          <p className="subtitle"></p>
         </div>
         <div className="sider">
           <div className="box">
@@ -179,7 +138,7 @@ const Home = () => {
                             />
                           </div>
                           <Input
-                            value={loadAmount}
+                            value={usdValue}
                             onChange={(event) =>
                               handleUSDSelect(event.target.value)
                             }
@@ -202,7 +161,11 @@ const Home = () => {
                           </span>
 
                           <Input
-                            value={btcValue}
+                            value={
+                              isCalculatingBtcEquivalent
+                                ? "Calculating..."
+                                : btcValue
+                            }
                             placeholder="0.00"
                             className="placeholder-input"
                           />
@@ -229,7 +192,7 @@ const Home = () => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "space-between",
-                            fontWeight:"600"
+                            fontWeight: "600",
                           }}
                         >
                           <p>$104</p>
@@ -247,17 +210,20 @@ const Home = () => {
                           <div className="first-gray">
                             <div className="input-with-symbol">
                               {isChecked && (
-                               <Input
-                               type="email"
+                                <Input
+                                  type="email"
                                   placeholder="Enter your email"
                                   value={emailValue}
-                                  onChange={(e) => setEmailValue(e.target.value)}
-                               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-                               required
+                                  onChange={(e) =>
+                                    setEmailValue(e.target.value)
+                                  }
+                                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                                  required
                                 />
-                              
                               )}
-                                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                              {errorMessage && (
+                                <p className="error-message">{errorMessage}</p>
+                              )}
                             </div>
                           </div>
                         </form>
@@ -266,7 +232,7 @@ const Home = () => {
                   )}
                   <Modal
                     title="⚠️ Warning"
-                    visible={isModalVisible}
+                    open={isModalVisible}
                     onCancel={handleModalCancel}
                     footer={null}
                     className="email-alert-box"
@@ -334,6 +300,6 @@ const Home = () => {
       </div>
       <Footer />
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;
