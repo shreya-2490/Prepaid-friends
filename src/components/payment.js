@@ -153,12 +153,15 @@ const Payment = () => {
               title="Order Details"
               style={{ borderBottom: "none" }}
             >
-              <div className="order-details">
-                <p className="order-detail-para">Email Address</p>
-                <div className="email-div">
-                  <p className="emailad">{email}</p>
+              <img src={visa} width={"100%"} alt="card-info" />
+              {email && (
+                <div className="order-details">
+                  <p className="order-detail-para">Email Address</p>
+                  <div className="email-div">
+                    <p className="emailad">{email}</p>
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="payment-details">
                 <p className="order-detail-para">Payment Mode</p>
                 <div className="email-div">
@@ -190,9 +193,7 @@ const Payment = () => {
                             alt="Visa"
                           />
                           <div className="nayasa">
-                            <p className="order-detail-para">
-                              {cardType === "visa" ? "Visa" : "MasterCard"}
-                            </p>
+                            <p className="order-detail-para">Prepaid Card</p>
                             <p>
                               {quantity || 0} x ${amount || 0}
                             </p>
@@ -278,7 +279,9 @@ const Payment = () => {
                                 />
 
                                 <div className="nayasa">
-                                  <p className="order-detail-para">Visa</p>
+                                  <p className="order-detail-para">
+                                    Prepaid Card
+                                  </p>
                                   <p>{`${item?.quantity || 1} x $${
                                     item?.price
                                   }`}</p>
