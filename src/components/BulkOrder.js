@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react"
 import {
   getCountries,
   getCountryCallingCode,
-} from "react-phone-number-input/input";
-import en from "react-phone-number-input/locale/en.json";
-import "react-phone-number-input/style.css";
-import NavbarCart from "./NavbarCart";
-import "../styles/BulkOrder.css";
-import { v4 as uuidV4 } from "uuid";
+} from "react-phone-number-input/input"
+import en from "react-phone-number-input/locale/en.json"
+import "react-phone-number-input/style.css"
+import NavbarCart from "./NavbarCart"
+import "../styles/BulkOrder.css"
+import { v4 as uuidV4 } from "uuid"
 import {
   Button,
   Form,
@@ -20,58 +20,67 @@ import {
   Divider,
   Menu,
   Radio,
+  FormItemProps,
   Dropdown,
-} from "antd";
-import Footer from "./Footer";
-import { useNavigate } from "react-router-dom";
-import { CartContext } from "./CartContext";
-import { Helmet } from "react-helmet";
-import axios from "axios";
-import { DownOutlined } from "@ant-design/icons";
-import MultiSelect from "../shared-components/multi-select";
+} from "antd"
+import Footer from "./Footer"
+import { useNavigate } from "react-router-dom"
+import { CartContext } from "./CartContext"
+import { Helmet } from "react-helmet"
+import axios from "axios"
+import { DownOutlined } from "@ant-design/icons"
+import MultiSelect from "../shared-components/multi-select"
 
-const { Option } = Select;
+
+const { Option } = Select
 
 const BulkOrder = () => {
-  const nav = useNavigate();
-  const [form] = Form.useForm();
-  const { addToBulkCart } = useContext(CartContext);
-  const [onFocuseInput, setOnFocuseInput] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [country, setCountry] = useState("us");
-  const [calculatedCharges, setCalculatedCharges] = useState(null);
-  const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [checkedList, setCheckedList] = useState([]);
-  const [indeterminate, setIndeterminate] = useState(true);
-  const [checkAll, setCheckAll] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
-  const [selectedProviders, setSelectedProviders] = useState([]);
+  const nav = useNavigate()
+  const [form] = Form.useForm()
+  const { addToBulkCart } = useContext(CartContext)
+  const [onFocuseInput, setOnFocuseInput] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState()
+  const [country, setCountry] = useState("us")
+  const [calculatedCharges, setCalculatedCharges] = useState(null)
+  const [reCalculatingCharges, setReCalculatingCharges] = useState(null)
+  const [showDropdown, setShowDropdown] = useState(false)
+  const [checkedList, setCheckedList] = useState([])
+  const [indeterminate, setIndeterminate] = useState(true)
+  const [checkAll, setCheckAll] = useState(false)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("")
+  const [selectedProviders, setSelectedProviders] = useState([])
+  const [countryOptions, setCountryOptions] = useState([])
+
+  const formItemLayout: FormItemProps['style'] = {
+    display: 'inline-block',
+    width: 'calc(50% - 8px)',
+    marginLeft: '8px',
+  };
 
   const handleBrokerIdChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value
     if (["Knox", "Fionna", "Bobby"].includes(value)) {
-      setShowDropdown(true);
+      setShowDropdown(true)
     } else {
-      setShowDropdown(false);
+      setShowDropdown(false)
     }
-  };
+  }
 
   const onCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? visaNumbers : []);
-    setIndeterminate(false);
-    setCheckAll(e.target.checked);
-  };
+    setCheckedList(e.target.checked ? visaNumbers : [])
+    setIndeterminate(false)
+    setCheckAll(e.target.checked)
+  }
 
   const handleAddToInvoice = () => {
-    nav("/invoice");
-  };
+    nav("/invoice")
+  }
   const CountrySelect = ({ value, onChange, labels, ...rest }) => (
     <select
       {...rest}
       value={value}
       onChange={(event) => {
-        onChange(event.target.value || undefined);
+        onChange(event.target.value || undefined)
       }}
     >
       <option value="US">US +1</option>
@@ -81,11 +90,32 @@ const BulkOrder = () => {
         </option>
       ))}
     </select>
-  );
+  )
 
-  const pageTitle = "Bulk Order | Prepaid Friends";
+  const handleSearch = (inputValue) => {
+    const filteredOptions = countryOptions.filter((option) =>
+      option.label.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    return filteredOptions;
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://restcountries.com/v3.1/all")
+      .then((response) => {
+        const countries = response.data.map((country) => ({
+          value: country.cca2,
+          label: country.name.common,
+        }))
+        setCountryOptions(countries)
+      })
+      .catch((error) => {
+        console.error("Error fetching countries:", error)
+      })
+  }, [])
+  const pageTitle = "Bulk Order | Prepaid Friends"
   const pageDescription =
-    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service";
+    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service"
 
   const visaNumbers = [
     { value: "Visa 455636", label: "Visa 455636" },
@@ -114,7 +144,7 @@ const BulkOrder = () => {
     { value: "Mastercard 536116", label: "Mastercard 536116" },
     { value: "Mastercard 536165", label: "Mastercard 536165" },
     { value: "Mastercard 536208", label: "Mastercard 536208" },
-  ];
+  ]
 
   const menu = (
     <Menu triggerSubMenuAction="click">
@@ -134,7 +164,7 @@ const BulkOrder = () => {
         </Menu.Item>
       ))}
     </Menu>
-  );
+  )
 
   return (
     <>
@@ -152,15 +182,15 @@ const BulkOrder = () => {
               layout="vertical"
               autoComplete="off"
               onValuesChange={(changedValues) => {
-                console.log(changedValues);
-                const quantity = form.getFieldValue("card-quantity") || 0;
-                const loadAmount = form.getFieldValue("load-amount") || 0;
+                console.log(changedValues)
+                const quantity = form.getFieldValue("card-quantity") || 0
+                const loadAmount = form.getFieldValue("load-amount") || 0
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0;
+                  form.getFieldValue("additional-purchase-quantity") || 0
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                );
-                const cardType = form.getFieldValue("card-type");
+                )
+                const cardType = form.getFieldValue("card-type")
 
                 if (
                   changedValues["card-quantity"] ||
@@ -169,7 +199,7 @@ const BulkOrder = () => {
                   changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
-                  setReCalculatingCharges(true);
+                  setReCalculatingCharges(true)
                   axios
                     .post("/api/order-calculation-api", {
                       order_type: "bulk",
@@ -187,22 +217,22 @@ const BulkOrder = () => {
                     })
                     ?.then((res) => setCalculatedCharges(res?.data))
                     ?.catch((err) => console.error(err))
-                    ?.finally(() => setReCalculatingCharges(false));
+                    ?.finally(() => setReCalculatingCharges(false))
                 }
               }}
               style={{
                 margin: "75px 20px 0px 20px",
               }}
               onFinish={(value) => {
-                const quantity = form.getFieldValue("card-quantity") || 0;
-                const loadAmount = form.getFieldValue("load-amount") || 0;
-                const cardType = form.getFieldValue("card-type") || 0;
+                const quantity = form.getFieldValue("card-quantity") || 0
+                const loadAmount = form.getFieldValue("load-amount") || 0
+                const cardType = form.getFieldValue("card-type") || 0
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0;
+                  form.getFieldValue("additional-purchase-quantity") || 0
 
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                );
+                )
 
                 addToBulkCart({
                   id: uuidV4(),
@@ -212,7 +242,7 @@ const BulkOrder = () => {
                   cardType,
                   additionalPurchaseQt,
                   isUsedForInternationalTransaction,
-                });
+                })
 
                 nav("/bulk-checkout", {
                   state: {
@@ -222,7 +252,7 @@ const BulkOrder = () => {
                     phoneNumber: value["phone-number"] || "",
                     brokerId: value["broker-id"] || "",
                   },
-                });
+                })
               }}
             >
               <Form.Item
@@ -256,16 +286,41 @@ const BulkOrder = () => {
                 <Input />
               </Form.Item>
               <Form.Item
-                name="business-address"
-                label="Business Address(Optional)"
+                name="business-name"
+                label="Business Name"
+                style={{
+                  display: "inline-block",
+                  width: "calc(50% - 8px)",
+                }}
                 rules={[
                   {
                     required: true,
-                    message: "Address is required!",
+                    message: "Business Name is required!",
                   },
                 ]}
               >
                 <Input />
+              </Form.Item>
+              <Form.Item
+                name="country"
+                label="Country"
+                style={formItemLayout}
+                rules={[
+                  {
+                    required: true,
+                    message: "Country is required!",
+                  },
+                ]}
+              >
+                <Select
+          options={countryOptions}
+          placeholder="Select a country"
+          isSearchable
+          filterOption={(inputValue, option) =>
+            option.label.toLowerCase().includes(inputValue.toLowerCase())
+          }
+        
+                />
               </Form.Item>
               <Form.Item
                 name="address"
@@ -280,14 +335,63 @@ const BulkOrder = () => {
                 <Input style={{ marginBottom: "0.5rem" }} />
                 <Input />
               </Form.Item>
-
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Form.Item
+                  name="city"
+                  label="City"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(33% - 8px)",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "City is required!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="state"
+                  label="State"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(34% - 8px)",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "State is required!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  name="zipcode"
+                  label="Zip Code"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(33% - 8px)",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "State is required!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </div>
               <Form.Item
                 name="phone-number"
                 label="Phone Number"
                 style={{
                   display: "inline-block",
                   width: "calc(56% - 5px)",
-                 }}
+                }}
                 rules={[
                   {
                     required: true,
@@ -325,7 +429,7 @@ const BulkOrder = () => {
                 style={{
                   display: "inline-block",
                   width: "calc(43% - 8px)",
-                  marginLeft:"16px",
+                  marginLeft: "16px",
                 }}
                 rules={[
                   {
@@ -336,45 +440,12 @@ const BulkOrder = () => {
               >
                 <Input />
               </Form.Item>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Form.Item
-                  name="city"
-                  label="City"
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 8px)",
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Email Address is required!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="state"
-                  label="State"
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 8px)",
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Email Address is required!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-              </div>
+              
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Form.Item
                   name="card-type"
                   label="Card Type"
-                  style={{ display: "inline-block",   width: "calc(50% - 8px)" }}
+                  style={{ display: "inline-block", width: "calc(50% - 8px)" }}
                   rules={[
                     {
                       required: true,
@@ -439,7 +510,7 @@ const BulkOrder = () => {
                 <Form.Item
                   name="broker-id"
                   label="Broker ID"
-                  style={{ width: "50%"}}
+                  style={{ width: "50%" }}
                 >
                   <Input onChange={handleBrokerIdChange} />
                 </Form.Item>
@@ -466,7 +537,7 @@ const BulkOrder = () => {
                 <Form.Item
                   name="international-purchases"
                   valuePropName="checked"
-                  style={{ width: "calc(56% - 3rem)"}}
+                  style={{ width: "calc(56% - 3rem)" }}
                 >
                   <Checkbox>
                     Will cards be used to make international purchases?
@@ -603,6 +674,6 @@ const BulkOrder = () => {
       </div>
       <Footer />
     </>
-  );
-};
-export default BulkOrder;
+  )
+}
+export default BulkOrder
