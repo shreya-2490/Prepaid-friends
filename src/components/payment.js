@@ -299,7 +299,7 @@ const Payment = () => {
 
                                 <div className="nayasa">
                                   <p className="order-detail-para">
-                                    MasterCard
+                                    Prepaid Card
                                   </p>
                                   <p>{`${item?.quantity || 1} x $${
                                     item?.price
