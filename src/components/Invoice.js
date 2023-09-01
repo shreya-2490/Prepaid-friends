@@ -138,19 +138,9 @@ const InvoiceCard = () => {
                     </td>
                   </tr>
                 </table>
-                <h6
-                  style={{
-                    textAlign: "center",
-                    paddingTop: "6rem",
-                    paddingBottom: "1rem",
-                    fontWeight: 600,
-                    fontFamily: "Arial, Helvetica, sans-serif",
-                  }}
-                >
-                  *Estimated Delivery Date: Next Business Day 5:00pm PST
-                </h6>
+           
               </div>
-              <hr style={{ marginTop: "1rem" }} />
+              <hr style={{ marginTop: "5rem" }} />
               <div
                 style={{
                   color: "#fdc886",
