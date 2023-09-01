@@ -19,26 +19,28 @@ const MultiSelect = (props) => {
   let filteredSelectedOptions = filterOptions(props.value, selectInput);
 
   const Option = (props) => (
-    <components.Option {...props} className="multi-select-options-container">
-      {props.value === "*" &&
-      !isAllSelected.current &&
-      filteredSelectedOptions?.length > 0 ? (
-        <input
-          key={props.value}
-          type="checkbox"
-          ref={(input) => {
-            if (input) input.indeterminate = true;
-          }}
-        />
-      ) : (
-        <input
-          key={props.value}
-          type="checkbox"
-          checked={props.isSelected || isAllSelected.current}
-          onChange={() => {}}
-        />
-      )}
-      <label style={{ marginLeft: "5px" }}>{props.label}</label>
+    <components.Option {...props}>
+      <div className="multi-select-options-container">
+        {props.value === "*" &&
+        !isAllSelected.current &&
+        filteredSelectedOptions?.length > 0 ? (
+          <input
+            key={props.value}
+            type="checkbox"
+            ref={(input) => {
+              if (input) input.indeterminate = true;
+            }}
+          />
+        ) : (
+          <input
+            key={props.value}
+            type="checkbox"
+            checked={props.isSelected || isAllSelected.current}
+            onChange={() => {}}
+          />
+        )}
+        <label style={{ marginLeft: "5px" }}>{props.label}</label>
+      </div>
     </components.Option>
   );
 
