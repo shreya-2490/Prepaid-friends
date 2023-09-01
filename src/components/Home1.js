@@ -16,7 +16,7 @@ import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import { usdToBTC } from "../utils/helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDollarSign, faBitcoinSign } from "@fortawesome/free-solid-svg-icons";
+import { faDollarSign, faBitcoinSign, faEnvelope} from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const [usdValue, setUSDValue] = useState("");
@@ -31,6 +31,10 @@ const Home = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [emailValue, setEmailValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isCalculatingCharges, setIsCalculatingCharges] = useState(false);
+  const [additionalCharges, setAdditionalCharges] = useState(null);
+  const [btcRate, setBtcRate] = useState(0);
+  const [isSendingToPayment, setIsSendingToPayment] = useState(false);
 
   const handleMainButtonClick = (event, buttonId) => {
     event.preventDefault()
@@ -107,6 +111,25 @@ const Home = () => {
   const handleModalCancel = () => {
     setIsModalVisible(false);
   };
+
+  const getItemCalculation = (price) => {
+    setIsCalculatingCharges(true);
+    axios
+      ?.post("/api/order-calculation-api", {
+        order_type: "preOwned",
+        items: [
+          {
+            type: "master",
+            quantity: 1,
+            price,
+          },
+        ],
+      })
+      ?.then((res) => setAdditionalCharges(res?.data))
+      ?.catch((err) => console.error(err))
+      ?.finally(setIsCalculatingCharges(false));
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
