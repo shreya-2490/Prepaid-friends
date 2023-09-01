@@ -1,0 +1,19 @@
+.card{
+  position: relative;
+  margin: 4rem;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  /* border: solid 4px rgba(255, 255, 255, 0.1); */
+height: auto;
+width: auto;
+background: white;
+  background-position: center;
+  background-size: cover;
+  box-shadow: none;
+  overflow: hidden;
+
+  backface-visibility: hidden;
+}

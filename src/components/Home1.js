@@ -1,91 +1,91 @@
-import { useState, useEffect } from "react";
-import { Alert, Input, Space, Tag, Checkbox, Modal, Button } from "antd";
-import { useNavigate } from "react-router-dom";
-import "../styles/home.css";
-import axios from "axios";
-import Footer from "./Footer";
-import { Helmet } from "react-helmet";
-import { usdToBTC } from "../utils/helper";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDollarSign, faBitcoinSign } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react"
+import { Alert, Input, Space, Tag, Checkbox, Modal, Button } from "antd"
+import { useNavigate } from "react-router-dom"
+import "../styles/home.css"
+import axios from "axios"
+import Footer from "./Footer"
+import { Helmet } from "react-helmet"
+import { usdToBTC } from "../utils/helper"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faDollarSign, faBitcoinSign,faEnvelope} from "@fortawesome/free-solid-svg-icons"
 
 const Home = () => {
-  const [usdValue, setUSDValue] = useState("");
-  const [btcValue, setBTCValue] = useState("");
-  const [selectedButton, setSelectedButton] = useState(1);
-  const [button, setButton] = useState(1);
-  const [alert, showAlert] = useState(false);
-  const navigate = useNavigate();
+  const [usdValue, setUSDValue] = useState("")
+  const [btcValue, setBTCValue] = useState("")
+  const [selectedButton, setSelectedButton] = useState(1)
+  const [button, setButton] = useState(1)
+  const [alert, showAlert] = useState(false)
+  const navigate = useNavigate()
   const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
-    useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [emailValue, setEmailValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+    useState(false)
+  const [isChecked, setIsChecked] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [emailValue, setEmailValue] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleMainButtonClick = (event, buttonId) => {
-    event.preventDefault();
-    setButton(buttonId);
-  };
+    event.preventDefault()
+    setButton(buttonId)
+  }
 
   const handleBuyButtonClickMain = () => {
     if (btcValue === "0.00000") {
     } else if (!isChecked) {
-      setIsModalVisible(true);
+      setIsModalVisible(true)
     } else if (isChecked && !emailValue) {
-      setErrorMessage("Please enter your email address.");
+      setErrorMessage("Please enter your email address.")
     } else {
       usdValue
         ? navigate(
             `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
           )
-        : showAlert(true);
+        : showAlert(true)
     }
-  };
+  }
 
   const handleProceed = () => {
     navigate(
       `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
-    );
-  };
+    )
+  }
   const handleModalCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsCalculatingBtcEquivalent(true);
+      setIsCalculatingBtcEquivalent(true)
       try {
-        const response = await axios.post("/api/rate-api");
-        const btcPrice = response.data.value;
-        setBTCValue(usdToBTC(usdValue, btcPrice));
+        const response = await axios.post("/api/rate-api")
+        const btcPrice = response.data.value
+        setBTCValue(usdToBTC(usdValue, btcPrice))
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error)
       } finally {
-        setIsCalculatingBtcEquivalent(false);
+        setIsCalculatingBtcEquivalent(false)
       }
-    };
+    }
 
     if (usdValue) {
-      fetchData();
+      fetchData()
     } else {
-      setBTCValue("");
+      setBTCValue("")
     }
-  }, [usdValue]);
+  }, [usdValue])
 
   const handleUSDSelect = (selectedValue) => {
-    const value = parseFloat(selectedValue);
-    setUSDValue(value || "");
-    selectedValue ? showAlert(false) : showAlert(true);
-  };
+    const value = parseFloat(selectedValue)
+    setUSDValue(value || "")
+    selectedValue ? showAlert(false) : showAlert(true)
+  }
 
   const handleTagClick = (value) => {
-    handleUSDSelect(value);
-  };
+    handleUSDSelect(value)
+  }
 
-  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending";
+  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending"
   const pageDescription =
-    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!";
+    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!"
 
   return (
     <>
@@ -180,6 +180,43 @@ const Home = () => {
                     <Tag onClick={() => handleTagClick("300")}>$300</Tag>
                     <Tag onClick={() => handleTagClick("500")}>$500</Tag>
                   </Space>
+                  <div className="checkbox-email">
+                    <Checkbox
+                      style={{ marginRight: "0.2rem", marginTop: "0.8rem" }}
+                      checked={isChecked}
+                      onChange={() => setIsChecked(!isChecked)}
+                    />
+                    Get order confirmation on email
+                  </div>
+                  <form>
+                    {isChecked && (
+                      <div className="both-gray">
+                        <div className="first-gray">
+                          <div className="input-with-symbol">
+                            <span className="currency-symbol">
+                              <FontAwesomeIcon
+                                icon={faEnvelope}
+                                style={{ color: "#000000" }}
+                              />
+                            </span>
+                            <Input
+                              type="email"
+                              placeholder=" Enter your email"
+                              value={emailValue}
+                              onChange={(e) => setEmailValue(e.target.value)}
+                              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Email is required!",
+                                },
+                              ]}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </form>
                   {usdValue && (
                     <div className="xtra-charges">
                       <>
@@ -198,35 +235,6 @@ const Home = () => {
                           <p>$104</p>
                           <p>0.263636 BTC</p>
                         </div>
-                        <div className="checkbox-email">
-                          <Checkbox
-                            style={{ marginRight: "0.2rem" }}
-                            checked={isChecked}
-                            onChange={() => setIsChecked(!isChecked)}
-                          />
-                          Get order confirmation on email
-                        </div>
-                        <form>
-                          <div className="first-gray">
-                            <div className="input-with-symbol">
-                              {isChecked && (
-                                <Input
-                                  type="email"
-                                  placeholder="Enter your email"
-                                  value={emailValue}
-                                  onChange={(e) =>
-                                    setEmailValue(e.target.value)
-                                  }
-                                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-                                  required
-                                />
-                              )}
-                              {errorMessage && (
-                                <p className="error-message">{errorMessage}</p>
-                              )}
-                            </div>
-                          </div>
-                        </form>
                       </>
                     </div>
                   )}
@@ -300,6 +308,6 @@ const Home = () => {
       </div>
       <Footer />
     </>
-  );
-};
-export default Home;
+  )
+}
+export default Home

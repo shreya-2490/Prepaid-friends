@@ -136,12 +136,15 @@
   }
 
   .bulk-div-1 {
+    position: relative;
     width: 48%;
-    text-align: center;
+    bottom: 8rem;
+    text-align: left;
+    
   }
 
   .bulk-div-2 {
-    width: 52%;
+    width: 80%;
     display: block;
   }
 
@@ -154,9 +157,9 @@
   }
 
   .bulkorder-content {
-    color: white;
+    color: #1b1b1b;
     width: 100%;
-    background-color: #fdc886;
+    background-color: #fff;
     border-radius: 1rem 1rem 0rem 0rem;
     padding-top: 0.7rem;
   }

@@ -27,6 +27,7 @@ import Reset from "./components/reset";
 import { AuthContext } from "./context/auth-context";
 import { useCookies } from "react-cookie";
 // import ShowItem from "./components/Showitem";
+import Invoice from "./components/Invoice"
 import Email from "./components/Emailtemplateimages";
 
 function App() {
@@ -93,6 +94,9 @@ function App() {
               </Routes>
               <Routes>
                 <Route path="/register" element={<Register />} />
+              </Routes>
+              <Routes>
+                <Route path="/invoice" element={<Invoice/>} />
               </Routes>
               <Routes>
                 <Route
