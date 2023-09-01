@@ -117,13 +117,13 @@
     align-items: center;
     justify-content: center;
   }
-.paymentbulk{
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
-  text-align: left;
-  margin-top: 1rem;
-}
+  .paymentbulk {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: left;
+    margin-top: 1rem;
+  }
   .bulk-division {
     width: 90%;
     background-color: #fff;
@@ -140,7 +140,6 @@
     width: 48%;
     bottom: 8rem;
     text-align: left;
-    
   }
 
   .bulk-div-2 {
@@ -323,17 +322,17 @@
     align-items: center;
     justify-content: center;
   }
-.back-arrow{
-  font-size: xx-large;
-}
-.email-arrow{
-  font-size: x-large;
-  margin-right: 0.2rem;
-}
-.hover-text-content{
-  display: flex;
-  align-items: center;
-}
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.2rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
   .change_email .hover-text .back-arrow {
     display: none;
     margin-bottom: 1rem;
@@ -624,17 +623,17 @@
     align-items: center;
     justify-content: center;
   }
-.back-arrow{
-  font-size: xx-large;
-}
-.email-arrow{
-  font-size: x-large;
-  margin-right: 0.2rem;
-}
-.hover-text-content{
-  display: flex;
-  align-items: center;
-}
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.2rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
   .change_email .hover-text .back-arrow {
     display: none;
     margin-bottom: 1rem;
@@ -888,7 +887,7 @@
   .countrycode {
     width: 40%;
   }
-  
+
   .paymentbulk {
     display: block;
     width: 80%;
@@ -898,7 +897,7 @@
   .change_email {
     white-space: nowrap;
     color: #1b1b1b;
-    margin-top:0.3rem;
+    margin-top: 0.3rem;
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
@@ -906,17 +905,17 @@
     display: flex;
     align-items: center;
   }
-.back-arrow{
-  font-size: xx-large;
-}
-.email-arrow{
-  font-size: x-large;
-  margin-right: 0.3rem;
-}
-.hover-text-content{
-  display: flex;
-  align-items: center;
-}
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.3rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
   .change_email .hover-text .back-arrow {
     display: none;
     margin-bottom: 1rem;
@@ -932,4 +931,8 @@
   .change_email:hover .hover-text .hover-text-content {
     display: none;
   }
+}
+
+.select-providers-dropdown {
+  width: 300px;
 }
