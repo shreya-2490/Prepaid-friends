@@ -22,6 +22,7 @@ import {
   Radio,
   FormItemProps,
   Dropdown,
+  Switch,
 } from "antd"
 import Footer from "./Footer"
 import { useNavigate } from "react-router-dom"
@@ -30,7 +31,6 @@ import { Helmet } from "react-helmet"
 import axios from "axios"
 import { DownOutlined } from "@ant-design/icons"
 import MultiSelect from "../shared-components/multi-select"
-
 
 const { Option } = Select
 
@@ -51,15 +51,14 @@ const BulkOrder = () => {
   const [selectedProviders, setSelectedProviders] = useState([])
   const [countryOptions, setCountryOptions] = useState([])
 
-  const formItemLayout: FormItemProps['style'] = {
-    display: 'inline-block',
-    width: 'calc(50% - 8px)',
-    marginLeft: '8px',
-  };
+  const formItemLayout: FormItemProps["style"] = {
+    display: "inline-block",
+    width: "calc(50% - 5px)",
+  }
 
   const handleBrokerIdChange = (e) => {
     const value = e.target.value
-    if (["Knox", "Fionna", "Bobby"].includes(value)) {
+    if (["Knox", "Fionna", "Bobby","knox","fionna","bobby"].includes(value)) {
       setShowDropdown(true)
     } else {
       setShowDropdown(false)
@@ -95,9 +94,9 @@ const BulkOrder = () => {
   const handleSearch = (inputValue) => {
     const filteredOptions = countryOptions.filter((option) =>
       option.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    return filteredOptions;
-  };
+    )
+    return filteredOptions
+  }
 
   useEffect(() => {
     axios
@@ -176,6 +175,16 @@ const BulkOrder = () => {
       <div className="bulk-main">
         <div className="bulk-division">
           <div className="bulk-div-2">
+            <h4
+              style={{
+                fontWeight: "600",
+                marginTop: "2rem",
+                textAlign: "center",
+                textDecoration: "underline",
+              }}
+            >
+              Bulk Prepaid Card Order Form
+            </h4>
             <Form
               name="bulk-orders-form"
               form={form}
@@ -255,303 +264,325 @@ const BulkOrder = () => {
                 })
               }}
             >
-              <Form.Item
-                name="first-name"
-                label="First Name"
-                style={{ display: "inline-block", width: "calc(50% - 8px)" }}
-                rules={[
-                  {
-                    required: true,
-                    message: "First Name is required!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="last-name"
-                label="Last Name"
-                style={{
-                  display: "inline-block",
-                  width: "calc(50% - 8px)",
-                  margin: "0 8px",
-                }}
-                rules={[
-                  {
-                    required: true,
-                    message: "Last Name is required!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="business-name"
-                label="Business Name"
-                style={{
-                  display: "inline-block",
-                  width: "calc(50% - 8px)",
-                }}
-                rules={[
-                  {
-                    required: true,
-                    message: "Business Name is required!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                name="country"
-                label="Country"
-                style={formItemLayout}
-                rules={[
-                  {
-                    required: true,
-                    message: "Country is required!",
-                  },
-                ]}
-              >
-                <Select
-          options={countryOptions}
-          placeholder="Select a country"
-          isSearchable
-          filterOption={(inputValue, option) =>
-            option.label.toLowerCase().includes(inputValue.toLowerCase())
-          }
-        
-                />
-              </Form.Item>
-              <Form.Item
-                name="address"
-                label="Street Address"
-                rules={[
-                  {
-                    required: true,
-                    message: "Address is required!",
-                  },
-                ]}
-                
-              >
-                <Input style={{ marginBottom: "0.5rem" }} placeholder="House Number or Street Name"/>
-                <Input placeholder="Optional" />
-              </Form.Item>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ marginBottom: "1.4rem" }}>
+                <h6 style={{ fontWeight: "600", marginBottom: "0.8rem" }}>
+                  Contact{" "}
+                </h6>
                 <Form.Item
-                  name="city"
-                  label="City"
+                  name="email"
                   style={{
                     display: "inline-block",
-                    width: "calc(33% - 8px)",
+                    width: "calc(100% - 5px)",
                   }}
                   rules={[
                     {
                       required: true,
-                      message: "City is required!",
+                      message: "Email Address is required!",
                     },
                   ]}
                 >
-                  <Input />
+                  <Input placeholder="Email Address" />
                 </Form.Item>
-                <Form.Item
-                  name="state"
-                  label="State"
-                  style={{
-                    display: "inline-block",
-                    width: "calc(34% - 8px)",
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "State is required!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="zipcode"
-                  label="Zip Code"
-                  style={{
-                    display: "inline-block",
-                    width: "calc(33% - 8px)",
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "State is required!",
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
+                <Divider />
               </div>
-              <Form.Item
-                name="phone-number"
-                label="Phone Number"
-                style={{
-                  display: "inline-block",
-                  width: "calc(56% - 5px)",
-                }}
-                rules={[
-                  {
-                    required: true,
-                    message: "Phone number is required!",
-                  },
-                ]}
-              >
-                <span style={{ display: "flex" }}>
-                  <CountrySelect
-                    className={`border-b-2 bg-none outline-none w-1/4 text-xs countrycode ${
-                      onFocuseInput === "country"
-                        ? "border-blue-700 "
-                        : "border-gray-300"
-                    }`}
-                    labels={en}
-                    value={country}
-                    onChange={setCountry}
-                    name="countrySelect"
-                    onFocus={() => setOnFocuseInput("country")}
+              <div style={{ marginBottom: "1rem" }}>
+                <h6 style={{ fontWeight: "600", marginBottom: "0.8rem" }}>
+                  Card Purchase Details
+                </h6>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Form.Item
+                    name="card-type"
+                    style={{
+                      display: "inline-block",
+                      width: "calc(50% - 8px)",
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Card type is required!",
+                      },
+                    ]}
+                  >
+                    <Select defaultValue="visa-master" onChange={() => {}}>
+                      <Option value="visa-master">Visa/MasterCard</Option>
+                      <Option value="visa">Visa Only </Option>
+                      <Option value="masterCard">MasterCard Only </Option>
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="card-quantity"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Card quantity is required!",
+                      },
+                    ]}
+                    style={{
+                      display: "inline-block",
+                      width: "calc(50% - 1px)",
+                    }}
+                  >
+                    <InputNumber
+                      placeholder="Card Quantity"
+                      type="number"
+                      width={50}
+                      min={5}
+                      max={100}
+                      defaultValue=""
+                      onChange={() => {}}
+                      formatter={(value) =>
+                        value < 5 ? (5).toString() : value.toString()
+                      }
+                      parser={(value) =>
+                        parseInt(value, 10) < 5 ? 5 : parseInt(value, 10)
+                      }
+                      style={{ width: "100%", fontWeight: "400" }}
+                    />
+                  </Form.Item>
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Form.Item
+                    name="load-amount"
+                    style={{
+                      display: "inline-block",
+                      width: "calc(50% - 8px)",
+                      marginRight: "10px ",
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Load amount is required!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="Load Amount" />
+                  </Form.Item>
+                  <Form.Item name="broker-id" style={{ width: "50%" }}>
+                    <Input
+                      onChange={handleBrokerIdChange}
+                      placeholder="Broker ID"
+                    />
+                  </Form.Item>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {showDropdown && (
+                    <MultiSelect
+                      key="providers"
+                      placeholder="Select Providers"
+                      options={visaNumbers}
+                      onChange={(selected) => setSelectedProviders(selected)}
+                      value={selectedProviders}
+                      isSelectAll={true}
+                      menuPlacement={"bottom"}
+                      className="select-providers-dropdown"
+                    />
+                  )}
+                  <Form.Item
+                    name="international-purchases"
+                    valuePropName="checked"
+                    style={{ width: "calc(56% - 3rem)" }}
+                  >
+                    <span style={{ marginRight: "1rem" }}>
+                     Allow international purchases?
+                    </span>
+                    <Switch
+                      checkedChildren="Yes"
+                      unCheckedChildren="No"
+                      defaultChecked={false}
+                      style={{ backgroundColor: "#fdc886" }}
+                    />
+                  </Form.Item>
+                </div>
+                <Divider/>
+              </div>
+              <div >
+                <h6 style={{ fontWeight: "600", marginBottom: "1.4rem" }}>
+                  Business Address
+                </h6>
+                <Form.Item
+                  name="first-name"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(50% - 8px)",
+                    marginRight: "10px",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "First Name is required!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="First Name" />
+                </Form.Item>
+                <Form.Item
+                  name="last-name"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(50% - 5px)",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Last Name is required!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Last Name" />
+                </Form.Item>
+                <Form.Item
+                  name="business-name"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(50% - 8px)",
+                    marginRight: "10px",
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Business Name is required!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Business Name" />
+                </Form.Item>
+                <Form.Item
+                  name="country"
+                  style={formItemLayout}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Country is required!",
+                    },
+                  ]}
+                >
+                  <Select
+                    options={countryOptions}
+                    placeholder="Select a country"
+                    isSearchable
+                    filterOption={(inputValue, option) =>
+                      option.label
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                    }
+                  />
+                </Form.Item>
+                <Form.Item
+                  name="address"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Address is required!",
+                    },
+                  ]}
+                >
+                  <Input
+                    style={{ marginBottom: "0.5rem" }}
+                    placeholder="House Number or Street Name"
                   />
                   <Input
-                    type="tel"
-                    id="phone"
-                    placeholder="Enter your phone number"
-                    value={phoneNumber}
-                    onChange={(event) => setPhoneNumber(event.target.value)}
-                    name="phoneNumber"
-                    onFocus={() => setOnFocuseInput("phoneNumber")}
-                  />
-                </span>
-              </Form.Item>
-              <Form.Item
-                name="email"
-                label="Email Address"
-                style={{
-                  display: "inline-block",
-                  width: "calc(43% - 8px)",
-                  marginLeft: "16px",
-                }}
-                rules={[
-                  {
-                    required: true,
-                    message: "Email Address is required!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Form.Item
-                  name="card-type"
-                  label="Card Type"
-                  style={{ display: "inline-block", width: "calc(50% - 8px)" }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Card type is required!",
-                    },
-                  ]}
-                >
-                  <Select defaultValue="visa-master" onChange={() => {}}>
-                    <Option value="visa-master">Visa/MasterCard</Option>
-                    <Option value="visa">Visa Only </Option>
-                    <Option value="masterCard">MasterCard Only </Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  name="card-quantity"
-                  label="Card Quantity"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Card quantity is required!",
-                    },
-                  ]}
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 8px)",
-                  }}
-                >
-                  <InputNumber
-                    type="number"
-                    width={50}
-                    min={5}
-                    max={100}
-                    defaultValue=""
-                    onChange={() => {}}
-                    formatter={(value) =>
-                      value < 5 ? (5).toString() : value.toString()
-                    }
-                    parser={(value) =>
-                      parseInt(value, 10) < 5 ? 5 : parseInt(value, 10)
-                    }
-                    style={{ width: "100%", fontWeight: "400" }}
+                    placeholder="Optional"
+                    style={{ marginTop: "0.5rem" }}
                   />
                 </Form.Item>
-              </div>
-              <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <Form.Item
+                    name="city"
+                    style={{
+                      display: "inline-block",
+                      width: "calc(33% - 8px)",
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "City is required!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="City" />
+                  </Form.Item>
+                  <Form.Item
+                    name="state"
+                    style={{
+                      display: "inline-block",
+                      width: "calc(34% - 8px)",
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "State is required!",
+                      },
+                    ]}
+                  >
+                    <Select placeholder="State" />
+                  </Form.Item>
+                  <Form.Item
+                    name="zipcode"
+                    style={{
+                      display: "inline-block",
+                      width: "calc(33% - 8px)",
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "State is required!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="ZIP code" />
+                  </Form.Item>
+                </div>
                 <Form.Item
-                  name="load-amount"
-                  label="Load Amount"
+                  name="phone-number"
                   style={{
                     display: "inline-block",
-                    width: "calc(50% - 8px)",
-                    marginRight: "17px",
+                    width: "calc(100% - 2px)",
                   }}
                   rules={[
                     {
                       required: true,
-                      message: "Load amount is required!",
+                      message: "Phone number is required!",
                     },
                   ]}
                 >
-                  <Input />
-                </Form.Item>
-                <Form.Item
-                  name="broker-id"
-                  label="Broker ID"
-                  style={{ width: "50%" }}
-                >
-                  <Input onChange={handleBrokerIdChange} />
-                </Form.Item>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                {showDropdown && (
-                  <MultiSelect
-                    key="providers"
-                    placeholder="Select Providers"
-                    options={visaNumbers}
-                    onChange={(selected) => setSelectedProviders(selected)}
-                    value={selectedProviders}
-                    isSelectAll={true}
-                    menuPlacement={"bottom"}
-                    className="select-providers-dropdown"
-                  />
-                )}
-                <Form.Item
-                  name="international-purchases"
-                  valuePropName="checked"
-                  style={{ width: "calc(56% - 3rem)" }}
-                >
-                  <Checkbox>
-                    Will cards be used to make international purchases?
-                  </Checkbox>
+                  <span style={{ display: "flex" }}>
+                    
+                    <Input
+                      type="tel"
+                      id="phone"
+                      placeholder="Phone Number"
+                      value={phoneNumber}
+                      onChange={(event) => {
+                        const numericValue = event.target.value.replace(
+                          /\D/g,
+                          ""
+                        )
+                        const limitedValue = numericValue.slice(0, 10)
+                        setPhoneNumber(limitedValue)
+                      }}
+                      name="phoneNumber"
+                      onFocus={() => setOnFocuseInput("phoneNumber")}
+                    />
+                  </span>
                 </Form.Item>
               </div>
             </Form>
           </div>
           <div className="bulk-div-1">
             <Card className="bulkorder-content">
-              <h4 style={{ marginBottom: "2rem" }}>Order Summary</h4>
-              <p>Select Payment Method</p>
+              <p style={{ fontWeight: "600", fontSize: "1rem" }}>
+                Select Payment Method
+              </p>
 
               <Radio.Group
                 onChange={(e) => setSelectedPaymentMethod(e?.target?.value)}
@@ -582,13 +613,14 @@ const BulkOrder = () => {
                   </p>
                 )}
               </div>
+              <Divider />
               {selectedPaymentMethod === "btc" && (
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-
+                    marginTop:"0.5rem",
                     marginLeft: "5px",
                     fontWeight: "600",
                   }}
@@ -596,6 +628,7 @@ const BulkOrder = () => {
                   <p>BTC Exchange Fee:</p>
                 </div>
               )}
+              <Divider />
               {selectedPaymentMethod === "wire" && (
                 <>
                   <div
@@ -603,26 +636,29 @@ const BulkOrder = () => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-
+                      marginTop:"0.5rem",
                       marginLeft: "5px",
                       fontWeight: "600",
                     }}
                   >
                     <p>Wire Transfer Fee:</p>
+
                     <p>$15</p>
                   </div>
+                  <Divider />
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-
+                      marginTop:"0.5rem",
                       marginLeft: "5px",
                       fontWeight: "600",
                     }}
                   >
                     <p>Invoice Identifier Fee:</p>
                   </div>
+                  <Divider />
                 </>
               )}
               <div
@@ -632,9 +668,11 @@ const BulkOrder = () => {
                   alignItems: "center",
                   marginLeft: "5px",
                   fontWeight: "600",
+                  marginTop:"0.5rem",
                 }}
               >
                 <p>International Transaction Cost</p>
+
                 {reCalculatingCharges ? (
                   <Skeleton.Button size="small" shape="square" active />
                 ) : (
@@ -652,7 +690,7 @@ const BulkOrder = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  marginTop: "2px",
+                  marginTop: "6px",
                   marginLeft: "5px",
                   fontWeight: "700",
                 }}
@@ -664,9 +702,13 @@ const BulkOrder = () => {
                   <p>${calculatedCharges?.order_total || 0}</p>
                 )}
               </div>
-              <div style={{ textAlign: "center" }}>
+              <div>
                 <Checkbox>Agree terms & Conditions</Checkbox>
-                <Button className="buy-usdt" onClick={handleAddToInvoice}>
+                <Button
+                  className="buy-usdt"
+                  onClick={handleAddToInvoice}
+                  style={{ textAlign: "center" }}
+                >
                   Add to Invoice
                 </Button>
               </div>

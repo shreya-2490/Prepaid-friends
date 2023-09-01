@@ -119,7 +119,7 @@ const NavbarCart = () => {
               </li>
 
               <li>
-                <Link to="/bulk-order">BULK ORDERS</Link>
+                <Link to="/bulk-order">BUY BULK</Link>
               </li>
 
               <li className="how">

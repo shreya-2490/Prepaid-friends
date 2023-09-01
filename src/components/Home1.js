@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import {
   Alert,
   Input,
@@ -25,19 +25,20 @@ import {
 const Home = () => {
   const [usdValue, setUSDValue] = useState("");
   const [btcValue, setBTCValue] = useState("");
+  const [selectedButton, setSelectedButton] = useState(1);
   const [button, setButton] = useState(1);
   const [alert, showAlert] = useState(false);
   const navigate = useNavigate();
   const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
-    useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [emailValue, setEmailValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isCalculatingCharges, setIsCalculatingCharges] = useState(false);
-  const [additionalCharges, setAdditionalCharges] = useState(null);
-  const [btcRate, setBtcRate] = useState(0);
-  const [isSendingToPayment, setIsSendingToPayment] = useState(false);
+    useState(false)
+  const [isChecked, setIsChecked] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+  const [emailValue, setEmailValue] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isCalculatingCharges, setIsCalculatingCharges] = useState(false)
+  const [additionalCharges, setAdditionalCharges] = useState(null)
+  const [btcRate, setBtcRate] = useState(0)
+  const [isSendingToPayment, setIsSendingToPayment] = useState(false)
 
   const handleMainButtonClick = (event, buttonId) => {
     event.preventDefault();
@@ -45,15 +46,15 @@ const Home = () => {
   };
 
   const handleBuyButtonClickMain = () => {
-    console.log("this");
+    console.log("this")
     if (btcValue === "0.00000") {
-      return;
+      return
     } else if (!isChecked) {
       setIsModalVisible(true);
     } else if (isChecked && !emailValue) {
       setErrorMessage("Please enter your email address.");
     } else {
-      setIsSendingToPayment(true);
+      setIsSendingToPayment(true)
       usdValue
         ? axios
             ?.post(`/api/preowned-order`, {
@@ -78,7 +79,7 @@ const Home = () => {
               )
             )
             ?.finally(() => setIsSendingToPayment(true))
-        : showAlert(true);
+        : showAlert(true)
     }
   };
 
@@ -104,14 +105,14 @@ const Home = () => {
           err?.response?.data?.error || err?.response?.data?.message
         )
       )
-      ?.finally(() => setIsSendingToPayment(true));
-  };
+      ?.finally(() => setIsSendingToPayment(true))
+  }
   const handleModalCancel = () => {
-    setIsModalVisible(false);
-  };
+    setIsModalVisible(false)
+  }
 
   const getItemCalculation = (price) => {
-    setIsCalculatingCharges(true);
+    setIsCalculatingCharges(true)
     axios
       ?.post("/api/order-calculation-api", {
         order_type: "preOwned",
@@ -128,14 +129,15 @@ const Home = () => {
       ?.finally(setIsCalculatingCharges(false));
   };
 
+
   useEffect(() => {
     const fetchData = async () => {
       setIsCalculatingBtcEquivalent(true);
       try {
-        const response = await axios.post("/api/rate-api");
-        const btcPrice = response.data.value;
-        setBtcRate(btcPrice);
-        setBTCValue(usdToBTC(usdValue, btcPrice));
+        const response = await axios.post("/api/rate-api")
+        const btcPrice = response.data.value
+        setBtcRate(btcPrice)
+        setBTCValue(usdToBTC(usdValue, btcPrice))
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -144,8 +146,8 @@ const Home = () => {
     };
 
     if (usdValue) {
-      fetchData();
-      getItemCalculation(usdValue);
+      fetchData()
+      getItemCalculation(usdValue)
     } else {
       setBTCValue("");
     }
@@ -227,73 +229,39 @@ const Home = () => {
                       </div>
                     </div>
                   </form>
-                  <form>
-                    <div className="both-gray">
-                      <div className="first-gray">
-                        <div className="input-with-symbol">
-                          <span className="currency-symbol">
-                            <FontAwesomeIcon
-                              icon={faBitcoinSign}
-                              style={{ color: "#000000" }}
-                            />
-                          </span>
-
-                          <Input
-                            value={
-                              isCalculatingBtcEquivalent
-                                ? "Calculating..."
-                                : btcValue
-                            }
-                            placeholder="0.00"
-                            className="placeholder-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-
                   <Space size={[0, 8]} wrap className="tags">
                     <span className="popular-amounts">Popular Amounts</span>
                     <Tag onClick={() => handleTagClick("50")}>$50</Tag>
                     <Tag onClick={() => handleTagClick("300")}>$300</Tag>
                     <Tag onClick={() => handleTagClick("500")}>$500</Tag>
                   </Space>
-                  <div className="checkbox-email">
-                    <Checkbox
-                      style={{ marginRight: "0.2rem", marginTop: "0.8rem" }}
-                      checked={isChecked}
-                      onChange={() => setIsChecked(!isChecked)}
-                    />
-                    Get order confirmation on email
-                  </div>
-                  <form>
-                    {isChecked && (
-                      <div className="both-gray">
-                        <div className="first-gray">
-                          <div className="input-with-symbol">
-                            <span className="currency-symbol">
-                              <FontAwesomeIcon
-                                icon={faEnvelope}
-                                style={{ color: "#000000" }}
-                              />
-                            </span>
-                            <Input
-                              type="email"
-                              placeholder=" Enter your email"
-                              value={emailValue}
-                              onChange={(e) => setEmailValue(e.target.value)}
-                              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: "Email is required!",
-                                },
-                              ]}
+
+                  <form style={{ marginTop: "1rem" }}>
+                    <div className="both-gray">
+                      <div className="first-gray">
+                        <div className="input-with-symbol">
+                          <span className="currency-symbol">
+                            <FontAwesomeIcon
+                              icon={faEnvelope}
+                              style={{ color: "#000000" }}
                             />
-                          </div>
+                          </span>
+                          <Input
+                            type="email"
+                            placeholder=" Enter your email"
+                            value={emailValue}
+                            onChange={(e) => setEmailValue(e.target.value)}
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Email is required!",
+                              },
+                            ]}
+                          />
                         </div>
                       </div>
-                    )}
+                    </div>
                   </form>
                   {usdValue && (
                     <div className="xtra-charges">

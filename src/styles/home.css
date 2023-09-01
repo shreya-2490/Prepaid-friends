@@ -259,7 +259,7 @@ cursor: initial;
   cursor: pointer;
 }
 .xtra-charges{
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 0.8rem;
 }
 .checkbox-email{
@@ -350,11 +350,14 @@ font-weight: 600;
 
 .card-selector .ant-select-selector {
   font-size: 1rem;
-  border-color: black !important;
+  border-color: #fdc886 !important;
   border: none;
   margin-bottom: 0.625rem;
-}
 
+}
+.ant-select-selector {
+  height:37px !important;
+}
 .selection-cards-visamastercard {
   display: flex;
   gap: 1rem;
