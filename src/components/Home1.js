@@ -357,8 +357,9 @@ const Home = () => {
                       <Button
                         className="ant-btn-default"
                         onClick={handleProceed}
+                        style={{backgroundColor:"#fdc886"}}
                       >
-                        OK
+                       Proceed to Pay
                       </Button>
                       <Button
                         className="ant-btn-default"
