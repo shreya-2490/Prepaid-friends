@@ -1,27 +1,36 @@
-import { useState, useEffect } from "react"
-import { Alert, Input, Space, Tag, Checkbox, Modal, Button } from "antd"
-import { useNavigate } from "react-router-dom"
-import "../styles/home.css"
-import axios from "axios"
-import Footer from "./Footer"
-import { Helmet } from "react-helmet"
-import { usdToBTC } from "../utils/helper"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faDollarSign, faBitcoinSign,faEnvelope} from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react";
+import {
+  Alert,
+  Input,
+  Space,
+  Tag,
+  Checkbox,
+  Modal,
+  Button,
+  message,
+} from "antd";
+import { useNavigate } from "react-router-dom";
+import "../styles/home.css";
+import axios from "axios";
+import Footer from "./Footer";
+import { Helmet } from "react-helmet";
+import { usdToBTC } from "../utils/helper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDollarSign, faBitcoinSign } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const [usdValue, setUSDValue] = useState("")
-  const [btcValue, setBTCValue] = useState("")
-  const [selectedButton, setSelectedButton] = useState(1)
-  const [button, setButton] = useState(1)
-  const [alert, showAlert] = useState(false)
-  const navigate = useNavigate()
+  const [usdValue, setUSDValue] = useState("");
+  const [btcValue, setBTCValue] = useState("");
+  const [selectedButton, setSelectedButton] = useState(1);
+  const [button, setButton] = useState(1);
+  const [alert, showAlert] = useState(false);
+  const navigate = useNavigate();
   const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
-    useState(false)
-  const [isChecked, setIsChecked] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [emailValue, setEmailValue] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
+    useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleMainButtonClick = (event, buttonId) => {
     event.preventDefault()
@@ -29,36 +38,84 @@ const Home = () => {
   }
 
   const handleBuyButtonClickMain = () => {
+    console.log("this");
     if (btcValue === "0.00000") {
+      return;
     } else if (!isChecked) {
       setIsModalVisible(true)
     } else if (isChecked && !emailValue) {
       setErrorMessage("Please enter your email address.")
     } else {
+      setIsSendingToPayment(true);
       usdValue
-        ? navigate(
-            `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
-          )
-        : showAlert(true)
+        ? axios
+            ?.post(`/api/preowned-order`, {
+              customer_name: "Test Customer",
+              email: emailValue,
+              payment_method: "btc",
+              guest: true,
+              items: [
+                {
+                  type: "visa",
+                  quantity: 1,
+                  price: usdValue,
+                },
+              ],
+            })
+            .then((res) =>
+              navigate(`/payment`, {
+                state: { email: emailValue, data: res?.data },
+              })
+            )
+            .catch((err) =>
+              message.error(
+                err?.response?.data?.error || err?.response?.data?.message
+              )
+            )
+            ?.finally(() => setIsSendingToPayment(true))
+        : showAlert(true);
     }
   }
 
   const handleProceed = () => {
-    navigate(
-      `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
-    )
-  }
+    axios
+      ?.post(`/api/preowned-order`, {
+        customer_name: "Test Customer",
+        email: "arpan@digitallydrunk1.com",
+        payment_method: "btc",
+        guest: true,
+        items: [
+          {
+            type: "visa",
+            quantity: 1,
+            price: usdValue,
+          },
+        ],
+      })
+      .then((res) =>
+        navigate(`/payment`, {
+          state: { data: res?.data },
+        })
+      )
+      .catch((err) =>
+        message.error(
+          err?.response?.data?.error || err?.response?.data?.message
+        )
+      )
+      ?.finally(() => setIsSendingToPayment(true));
+  };
   const handleModalCancel = () => {
-    setIsModalVisible(false)
-  }
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       setIsCalculatingBtcEquivalent(true)
       try {
-        const response = await axios.post("/api/rate-api")
-        const btcPrice = response.data.value
-        setBTCValue(usdToBTC(usdValue, btcPrice))
+        const response = await axios.post("/api/rate-api");
+        const btcPrice = response.data.value;
+        setBtcRate(btcPrice);
+        setBTCValue(usdToBTC(usdValue, btcPrice));
       } catch (error) {
         console.error("Error fetching data:", error)
       } finally {
@@ -67,7 +124,8 @@ const Home = () => {
     }
 
     if (usdValue) {
-      fetchData()
+      fetchData();
+      getItemCalculation(usdValue);
     } else {
       setBTCValue("")
     }
@@ -232,8 +290,14 @@ const Home = () => {
                             fontWeight: "600",
                           }}
                         >
-                          <p>$104</p>
-                          <p>0.263636 BTC</p>
+                          <p>${additionalCharges?.order_total}</p>
+                          <p>
+                            {usdToBTC(
+                              additionalCharges?.order_total,
+                              btcRate
+                            ) || 0}
+                            BTC
+                          </p>
                         </div>
                       </>
                     </div>
