@@ -286,8 +286,8 @@ const BulkOrder = () => {
                 label="Phone Number"
                 style={{
                   display: "inline-block",
-                  width: "calc(50% - 8px)",
-                }}
+                  width: "calc(56% - 5px)",
+                 }}
                 rules={[
                   {
                     required: true,
@@ -324,8 +324,8 @@ const BulkOrder = () => {
                 label="Email Address"
                 style={{
                   display: "inline-block",
-                  width: "calc(50% - 8px)",
-                  margin: "0 8px",
+                  width: "calc(43% - 8px)",
+                  marginLeft:"16px",
                 }}
                 rules={[
                   {
@@ -374,7 +374,7 @@ const BulkOrder = () => {
                 <Form.Item
                   name="card-type"
                   label="Card Type"
-                  style={{ display: "inline-block", width: "50%" }}
+                  style={{ display: "inline-block",   width: "calc(50% - 8px)" }}
                   rules={[
                     {
                       required: true,
@@ -399,7 +399,6 @@ const BulkOrder = () => {
                   style={{
                     display: "inline-block",
                     width: "calc(50% - 8px)",
-                    margin: "0 8px",
                   }}
                 >
                   <InputNumber
@@ -425,8 +424,8 @@ const BulkOrder = () => {
                   label="Load Amount"
                   style={{
                     display: "inline-block",
-                    width: "calc(50% - 15px)",
-                    marginRight: "8px",
+                    width: "calc(50% - 8px)",
+                    marginRight: "17px",
                   }}
                   rules={[
                     {
@@ -440,7 +439,7 @@ const BulkOrder = () => {
                 <Form.Item
                   name="broker-id"
                   label="Broker ID"
-                  style={{ width: "50%" }}
+                  style={{ width: "50%"}}
                 >
                   <Input onChange={handleBrokerIdChange} />
                 </Form.Item>
@@ -467,7 +466,7 @@ const BulkOrder = () => {
                 <Form.Item
                   name="international-purchases"
                   valuePropName="checked"
-                  style={{ width: "50%" }}
+                  style={{ width: "calc(56% - 3rem)"}}
                 >
                   <Checkbox>
                     Will cards be used to make international purchases?

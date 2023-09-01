@@ -45,7 +45,8 @@ const InvoiceCard = () => {
                       <img
                         src={invoice}
                         className="pt-5 invoice-img"
-                        alt="Invoice Logo"
+                      alt="Invoice Logo"
+                      
                       />
                     </div>
                   

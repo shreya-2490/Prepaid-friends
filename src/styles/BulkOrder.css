@@ -482,7 +482,7 @@
 
   .bulk-div-1 {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .subtitle-bulk {
@@ -494,9 +494,8 @@
   }
 
   .bulkorder-content {
-    color: white;
+    color: #1b1b1b;
     width: 100%;
-    background-color: #fdc886;
     padding: 1rem 0;
     border-radius: 0.5rem 0.5rem 0rem 0rem;
   }
@@ -817,7 +816,7 @@
 
   .bulk-div-1 {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .subtitle-bulk {
@@ -829,9 +828,8 @@
   }
 
   .bulkorder-content {
-    color: white;
+    color: black;
     width: 100%;
-    background-color: #fdc886;
     border-radius: 0.5rem 0.5rem 0rem 0rem;
   }
 
