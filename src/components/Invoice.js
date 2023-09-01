@@ -151,25 +151,8 @@ const InvoiceCard = () => {
                 }}
               >
                 <p style={{ color: "#fdc886" }}>THIS IS AN UNPAID INVOICE</p>
-                <p style={{ color: "#1b1b1b", fontSize: "medium" }}>
-                  Please use the following wiring instructions to complete
-                  payment:
-                </p>
-                <p
-                  style={{
-                    color: "#1b1b1b",
-                    fontSize: "small",
-                    fontWeight: 400,
-                  }}
-                >
-                  Sandy Spring Bank
-                  <br />
-                  PAYABLE TO CB SURETY LLC <br />
-                  Account # 1714747101 <br />
-                  ABA Routing # 055001096
-                  <br />
-                  MEMO: Sale Proceeds
-                </p>
+               
+           
                 <p
                   style={{
                     color: "#1b1b1b",
