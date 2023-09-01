@@ -331,9 +331,10 @@ const BulkOrder = () => {
                     message: "Address is required!",
                   },
                 ]}
+                
               >
-                <Input style={{ marginBottom: "0.5rem" }} />
-                <Input />
+                <Input style={{ marginBottom: "0.5rem" }} placeholder="House Number or Street Name"/>
+                <Input placeholder="Optional" />
               </Form.Item>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <Form.Item
@@ -453,9 +454,10 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Select defaultValue="Select--" onChange={() => {}}>
-                    <Option value="visa">Visa</Option>
-                    <Option value="masterCard">MasterCard </Option>
+                  <Select defaultValue="visa-master" onChange={() => {}}>
+                    <Option value="visa-master">Visa/MasterCard</Option>
+                    <Option value="visa">Visa Only </Option>
+                    <Option value="masterCard">MasterCard Only </Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
