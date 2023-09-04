@@ -5,171 +5,187 @@ import invoice from "../assets/invoice.svg"
 
 const InvoiceCard = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-          <div className="card">
-            <div className="card-body">
-              <div className="invoice-title">
-                <h4 className="float-end font-size-15">
-                  Invoice #DS0204
-                  <span
-                    className="badge font-size-12 ms-2"
-                    style={{ backgroundColor: "#fdc886" }}
-                  >
-                    Unpaid
-                  </span>
-                </h4>
-                <div className="mb-4">
-                  <img src={logo} className="w-25" alt="Invoice Logo" />
-                </div>
-                <div className="text-muted">
-                  <p className="mb-1">3079 Harrison Ave #10</p>
-                  <p className="mb-1">South Lake Tahoe, CA</p>
-                  <p>
-                    <i className="uil uil-phone me-1"></i> 96150
-                  </p>
-                </div>
-                          </div>
-                          <hr className="my-4" />
-              <td
-                className="invoice-title h-50"
-                style={{ backgroundColor: "#fdc886", borderRadius: "12px" }}
+    <>
+      <div className="invoice-container">
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
+      <div className="page-content container">
+        <div className="page-header text-blue-d2">
+          <h1 className="page-title text-secondary-d1">
+            Invoice
+            <small className="page-info">
+              <i className="fa fa-angle-double-right text-80"></i>
+              ID: #111-222
+            </small>
+          </h1>
+          <div className="page-tools">
+            <div className="action-buttons">
+              <a
+                className="btn bg-white btn-light mx-1px text-95"
+                href="#"
+                data-title="Print"
               >
-                <div width="100%" cellpadding="0" cellspacing="0">
-                  
-                    <div
-                      className="mb-4"
-                      style={{ height: "10rem", margin: "auto" , width:"58rem"}}
-                    >
-                      <img
-                        src={invoice}
-                        className="pt-5 invoice-img"
-                      alt="Invoice Logo"
-                      
-                      />
-                    </div>
-                  
-                
+                <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                Print
+              </a>
+              <a
+                className="btn bg-white btn-light mx-1px text-95"
+                href="#"
+                data-title="PDF"
+              >
+                <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+                Edit Invoice
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="container px-0">
+          <div className="row mt-4">
+            <div className="col-12 col-lg-12">
+              <div className="row">
+                <div className="col-12">
+                  <div className="text-center text-150">
+                   
+                   <img src={logo}></img>
+                  </div>
                 </div>
-              </td>
-              <hr className="my-4" />
-
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%">
-                    <h5 className="font-size-16 mb-3"><b>Billed To:</b></h5>
-                    <h5 className="font-size-10 mb-2"><b>Customer Name</b></h5>
-                    <p className="font-size-15 mb-2">Suman Dutta</p>
-                    <h5 className="font-size-10 mb-2"><b>Business Name</b></h5>
-                    <p className="font-size-15 mb-2">Suman D</p>
-                    <h5 className="font-size-10 mb-2"><b>Email Address</b></h5>
-                    <p className="font-size-15 mb-2">
-                      suman@digitallydrunk.com
-                    </p>
-                  </td>
-                  <td width="50%" align="right">
-                    <h5 className="font-size-15 mb-1"><b>Invoice ID:</b></h5>
-                    <p>#DZ0112</p>
-                    <div className="mt-4">
-                      <h5 className="font-size-15 mb-1"><b>Invoice Date:</b></h5>
-                      <p>12 Oct, 2023</p>
-                    </div>
-                    <div className="mt-4">
-                      <h5 className="font-size-15 mb-1"><b>Due Date:</b></h5>
-                      <p>17 Oct, 2023 </p>
-                    </div>
-                    <div className="mt-4">
-                      <h5 className="font-size-15 mb-1"><b>Amount Due(USD)</b></h5>
-                      <p style={{ color: "#1b1b1b", fontSize: "1.6rem" }}>
-                        <strong>$203.4</strong>
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-              <h5 className="font-size-15">Order Summary</h5>
-              <table className="table align-middle table-nowrap table-centered mb-0">
-                <thead>
-                  <tr>
-                    <th style={{ width: "70px" }}>No.</th>
-                    <th>Item Description</th>
-                    <th>Unit Price</th>
-                    <th>Quantity</th>
-                    <th className="text-end" style={{ width: "120px" }}>
-                      SubTotal
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">01</th>
-                    <td>
-                      <div>
-                        <h5 className="text-truncate font-size-14 mb-1">
-                          BulkCard
-                        </h5>
-                      </div>
-                    </td>
-                    <td>$ 31.00</td>
-                    <td>2</td>
-                    <td className="text-end">$ 62.00</td>
-                  </tr>
-                  {/* Add more table rows as needed */}
-                </tbody>
-              </table>
-              <hr className="my-4" />
-
-              <div className="py-2">
-                <div className="table-responsive">
-                  <table className="table align-middle table-nowrap table-centered mb-0">
-                    {/* Your table content here */}
-                  </table>
-                </div>
-                <table className="d-print-none mt-4 float-end">
-                  <tr>
-                    <td>
-                      <a
-                        href="javascript:window.print()"
-                        className="btn btn-success me-1"
-                      >
-                        <i className="fa fa-print"></i> Send Invoice to Email
-                      </a>
-                    </td>
-                  </tr>
-                </table>
-           
               </div>
-              <hr style={{ marginTop: "5rem" }} />
-              <div
-                style={{
-                  color: "#fdc886",
-                  textAlign: "center",
-                  fontWeight: 700,
-                  fontSize: "x-large",
-                  paddingTop: "2rem",
-                }}
-              >
-                <p style={{ color: "#fdc886" }}>THIS IS AN UNPAID INVOICE</p>
-               
-           
-                <p
-                  style={{
-                    color: "#1b1b1b",
-                    fontSize: "1rem",
-                    fontWeight: 400,
-                  }}
-                >
-                  Once payment is received, virtual cards will be sent to the
-                  email provided at checkout with instructions on how to load
-                  the cards.
-                </p>
+
+              <hr className="row brc-default-l1 mx-n1 mb-4" />
+              <div className="row">
+                <div className="col-sm-6">
+                  <div>
+                  
+                    <span className="text-600 text-110 text-blue align-middle">
+                      Alex Doe
+                    </span>
+                  </div>
+                  <div className="text-grey-m2">
+                    <div className="my-1">Street, City</div>
+                    <div className="my-1">State, Country,Zipcode</div>
+                    <div className="my-1">
+                      <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
+                      <b className="text-600">111-111-111</b>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
+                  <hr className="d-sm-none" />
+                  <div className="text-grey-m2">
+                    <div className="mt-1 mb-2 text-secondary-m1 text-600 text-125">
+                      Invoice
+                    </div>
+                    <div className="my-2">
+                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <span className="text-600 text-90">ID:</span> #111-222
+                    </div>
+                    <div className="my-2">
+                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <span className="text-600 text-90">Issue Date:</span> Oct 12,
+                      2019
+                    </div>
+                    <div className="my-2">
+                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <span className="text-600 text-90">BrokerID:</span>{" "}
+                    
+                      </div>
+                      <div className="my-2">
+                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <span className="text-600 text-90">BIN:</span>{" "}
+                    
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4">
+                <div className="row text-600 text-white bgc-default-tp1 py-25">
+                  <div className="d-none d-sm-block col-1">#</div>
+                  <div className="col-9 col-sm-5">Description</div>
+                  <div className="d-none d-sm-block col-4 col-sm-2">Qty</div>
+                  <div className="d-none d-sm-block col-sm-2">Unit Price</div>
+                  <div className="col-2">Amount</div>
+                </div>
+                <div className="text-95 text-secondary-d3">
+                  <div className="row mb-2 mb-sm-0 py-25">
+                    <div className="d-none d-sm-block col-1">1</div>
+                    <div className="col-9 col-sm-5">Domain registration</div>
+                    <div className="d-none d-sm-block col-2">2</div>
+                    <div className="d-none d-sm-block col-2 text-95">$10</div>
+                    <div className="col-2 text-secondary-d2">$20</div>
+                  </div>
+                  <div className="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+                    <div className="d-none d-sm-block col-1">2</div>
+                    <div className="col-9 col-sm-5">Web hosting</div>
+                    <div className="d-none d-sm-block col-2">1</div>
+                    <div className="d-none d-sm-block col-2 text-95">$15</div>
+                    <div className="col-2 text-secondary-d2">$15</div>
+                  </div>
+                  <div className="row mb-2 mb-sm-0 py-25">
+                    <div className="d-none d-sm-block col-1">3</div>
+                    <div className="col-9 col-sm-5">Software development</div>
+                    <div className="d-none d-sm-block col-2">--</div>
+                    <div className="d-none d-sm-block col-2 text-95">$1,000</div>
+                    <div className="col-2 text-secondary-d2">$1,000</div>
+                  </div>
+                  <div className="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+                    <div className="d-none d-sm-block col-1">4</div>
+                    <div className="col-9 col-sm-5">Consulting</div>
+                    <div className="d-none d-sm-block col-2">1 Year</div>
+                    <div className="d-none d-sm-block col-2 text-95">$500</div>
+                    <div className="col-2 text-secondary-d2">$500</div>
+                  </div>
+                </div>
+                <div className="row border-b-2 brc-default-l2"></div>
+
+                <div className="row mt-3">
+                  <div className="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
+                   Extra Notes
+                  </div>
+                  <div className="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
+                    <div className="row my-2">
+                      <div className="col-7 text-right">SubTotal</div>
+                      <div className="col-5">
+                        <span className="text-120 text-secondary-d1">$2,250</span>
+                      </div>
+                    </div>
+                    <div className="row my-2">
+                      <div className="col-7 text-right">Tax (10%)</div>
+                      <div className="col-5">
+                        <span className="text-110 text-secondary-d1">$225</span>
+                      </div>
+                    </div>
+                    <div className="row my-2 align-items-center bgc-primary-l3 p-2">
+                      <div className="col-7 text-right">Total Amount</div>
+                      <div className="col-5">
+                        <span className="text-150 text-success-d3 opacity-2">
+                          $2,475
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div>
+                  <span className="text-secondary-d1 text-105">
+                    Thank you for your business
+                  </span>
+                  <a
+                    href="#"
+                    className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0"
+                  >
+                    Finalize Invoice
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        </div>
+        </div>
+    </>
   )
 }
 
