@@ -80,6 +80,43 @@ const BulkOrder = () => {
     setStateOfCountry(stateOfCountry);
   }, [selectedCountry]);
 
+  const handleCalculateCharges = () => {
+    const quantity = form.getFieldValue("card-quantity") || 0;
+    const loadAmount = form.getFieldValue("load-amount") || 0;
+    const additionalPurchaseQt =
+      form.getFieldValue("additional-purchase-quantity") || 0;
+    const isUsedForInternationalTransaction = form.getFieldValue(
+      "international-purchases"
+    );
+    const cardType = form.getFieldValue("card-type");
+
+    setReCalculatingCharges(true);
+    axios
+      .post("/api/order-calculation-api", {
+        order_type: "bulk",
+        payment_method: selectedPaymentMethod,
+        items: [
+          {
+            cardType,
+            quantity,
+            amount: loadAmount,
+            additional_transactions: additionalPurchaseQt > 0,
+            additional_transactions_no: additionalPurchaseQt,
+            international_transaction: isUsedForInternationalTransaction,
+          },
+        ],
+      })
+      ?.then((res) => setCalculatedCharges(res?.data))
+      ?.catch((err) => console.error(err))
+      ?.finally(() => setReCalculatingCharges(false));
+  };
+
+  useEffect(() => {
+    if (selectedPaymentMethod) {
+      handleCalculateCharges();
+    }
+  }, [selectedPaymentMethod]);
+
   return (
     <>
       <Helmet>
@@ -105,43 +142,16 @@ const BulkOrder = () => {
               form={form}
               layout="vertical"
               autoComplete="off"
-              onValuesChange={(changedValues, allValues) => {
-                const quantity = form.getFieldValue("card-quantity") || 0;
-                const loadAmount = form.getFieldValue("load-amount") || 0;
-                const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0;
-                const isUsedForInternationalTransaction = form.getFieldValue(
-                  "international-purchases"
-                );
-                const cardType = form.getFieldValue("card-type");
-
+              onValuesChange={(changedValues) => {
                 if (
                   changedValues["card-quantity"] ||
                   changedValues["load-amount"] ||
                   changedValues["additional-purchase-quantity"] ||
                   changedValues["international-purchases"] ||
-                  !changedValues["international-purchases"] ||
+                  changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
-                  setReCalculatingCharges(true);
-                  axios
-                    .post("/api/order-calculation-api", {
-                      order_type: "bulk",
-                      items: [
-                        {
-                          cardType,
-                          quantity,
-                          amount: loadAmount,
-                          additional_transactions: additionalPurchaseQt > 0,
-                          additional_transactions_no: additionalPurchaseQt,
-                          international_transaction:
-                            isUsedForInternationalTransaction,
-                        },
-                      ],
-                    })
-                    ?.then((res) => setCalculatedCharges(res?.data))
-                    ?.catch((err) => console.error(err))
-                    ?.finally(() => setReCalculatingCharges(false));
+                  handleCalculateCharges();
                 }
               }}
               style={{
@@ -503,7 +513,9 @@ const BulkOrder = () => {
               </p>
 
               <Radio.Group
-                onChange={(e) => setSelectedPaymentMethod(e?.target?.value)}
+                onChange={(e) => {
+                  setSelectedPaymentMethod(e?.target?.value);
+                }}
                 value={selectedPaymentMethod}
               >
                 <Radio value={"wire"}>Wire Transfer</Radio>
@@ -524,7 +536,10 @@ const BulkOrder = () => {
                   <Skeleton.Button size="small" shape="square" active />
                 ) : (
                   <p>
-                    $
+                    {(calculatedCharges?.items &&
+                      calculatedCharges?.items[0]?.quantity) ||
+                      0}{" "}
+                    x $
                     {(calculatedCharges?.items &&
                       calculatedCharges?.items[0]?.cost) ||
                       0}
@@ -544,6 +559,11 @@ const BulkOrder = () => {
                   }}
                 >
                   <p>BTC Exchange Fee:</p>
+                  {reCalculatingCharges ? (
+                    <Skeleton.Button size="small" shape="square" active />
+                  ) : (
+                    <p>${calculatedCharges?.transaction_fee}</p>
+                  )}
                 </div>
               )}
               <Divider />
@@ -561,7 +581,11 @@ const BulkOrder = () => {
                   >
                     <p>Wire Transfer Fee:</p>
 
-                    <p>$15</p>
+                    {reCalculatingCharges ? (
+                      <Skeleton.Button size="small" shape="square" active />
+                    ) : (
+                      <p>${calculatedCharges?.transaction_fee}</p>
+                    )}
                   </div>
                   <Divider />
                   <div
@@ -575,6 +599,11 @@ const BulkOrder = () => {
                     }}
                   >
                     <p>Invoice Identifier Fee:</p>
+                    {reCalculatingCharges ? (
+                      <Skeleton.Button size="small" shape="square" active />
+                    ) : (
+                      <p>${calculatedCharges?.invoice_identifier_fee}</p>
+                    )}
                   </div>
                   <Divider />
                 </>
