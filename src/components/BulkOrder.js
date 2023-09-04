@@ -155,7 +155,7 @@ const BulkOrder = () => {
                   changedValues["load-amount"] ||
                   changedValues["additional-purchase-quantity"] ||
                   changedValues["international-purchases"] ||
-                  changedValues["international-purchases"] ||
+                  !changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
                   handleCalculateCharges();
