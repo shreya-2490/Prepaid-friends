@@ -120,6 +120,7 @@ const BulkOrder = () => {
                   changedValues["load-amount"] ||
                   changedValues["additional-purchase-quantity"] ||
                   changedValues["international-purchases"] ||
+                  !changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
                   setReCalculatingCharges(true);
@@ -303,18 +304,16 @@ const BulkOrder = () => {
                     />
                   )}
                   <Form.Item
-                    name="international-purchases"
                     valuePropName="checked"
+                    name="international-purchases"
+                    noStyle
                     style={{ width: "calc(56% - 3rem)" }}
                   >
-                    <span style={{ marginRight: "1rem" }}>
-                      Allow international purchases?
-                    </span>
-                    <Switch
-                      defaultChecked={false}
-                      style={{ backgroundColor: "#fdc886" }}
-                    />
+                    <Switch style={{ backgroundColor: "#fdc886" }} />
                   </Form.Item>
+                  <span style={{ marginRight: "1rem" }}>
+                    Allow international purchases?
+                  </span>
                 </div>
                 <Divider />
               </div>
