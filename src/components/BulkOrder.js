@@ -64,7 +64,14 @@ const BulkOrder = () => {
   };
 
   const handleAddToInvoice = () => {
-    nav("/invoice");
+    nav("/invoice", {
+      state: {
+        personalInfo: form?.getFieldsValue(),
+        charges: calculatedCharges,
+        selectedProviders,
+        selectedPaymentMethod,
+      },
+    });
   };
 
   const pageTitle = "Bulk Order | Prepaid Friends";
@@ -417,10 +424,10 @@ const BulkOrder = () => {
                     style={{ marginBottom: "0.5rem" }}
                     placeholder="House Number or Street Name"
                   />
-                  <Input
+                  {/* <Input
                     placeholder="Optional"
                     style={{ marginTop: "0.5rem" }}
-                  />
+                  /> */}
                 </Form.Item>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
