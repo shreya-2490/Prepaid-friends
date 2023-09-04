@@ -40,6 +40,7 @@ const BulkOrder = () => {
   const [selectedProviders, setSelectedProviders] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [stateOfCountry, setStateOfCountry] = useState([]);
+  const [bins, setBins] = useState([]);
 
   const formItemLayout: FormItemProps["style"] = {
     display: "inline-block",
@@ -52,6 +53,11 @@ const BulkOrder = () => {
       ["Knox", "Fionna", "Bobby", "knox", "fionna", "bobby"].includes(value)
     ) {
       setShowDropdown(true);
+      axios
+        ?.post("/api/get-bins-for-broker", {
+          broker_id: value?.toLowerCase(),
+        })
+        ?.then((res) => setBins(res?.data));
     } else {
       setShowDropdown(false);
     }
@@ -64,35 +70,6 @@ const BulkOrder = () => {
   const pageTitle = "Bulk Order | Prepaid Friends";
   const pageDescription =
     "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service";
-
-  const visaNumbers = [
-    { value: "Visa 455636", label: "Visa 455636" },
-    { value: "Visa 462239", label: "Visa 462239" },
-    { value: "Visa 464579", label: "Visa 464579" },
-    { value: "Visa 423608", label: "Visa 423608" },
-    { value: "Visa 489113", label: "Visa 489113" },
-    { value: "Visa 492063", label: "Visa 492063" },
-    { value: "Visa 453226", label: "Visa 453226" },
-    { value: "Visa 491656", label: "Visa 491656" },
-    { value: "Visa 452668", label: "Visa 452668" },
-    { value: "Visa 491680", label: "Visa 491680" },
-    { value: "Mastercard 511059", label: "Mastercard 511059" },
-    { value: "Mastercard 511320", label: "Mastercard 511320" },
-    { value: "Mastercard 517099", label: "Mastercard 517099" },
-    { value: "Mastercard 517573", label: "Mastercard 517573" },
-    { value: "Mastercard 517594", label: "Mastercard 517594" },
-    { value: "Mastercard 518081", label: "Mastercard 518081" },
-    { value: "Mastercard 518653", label: "Mastercard 518653" },
-    { value: "Mastercard 520521", label: "Mastercard 520521" },
-    { value: "Mastercard 521969", label: "Mastercard 521969" },
-    { value: "Mastercard 522539", label: "Mastercard 522539" },
-    { value: "Mastercard 523678", label: "Mastercard 523678" },
-    { value: "Mastercard 524846", label: "Mastercard 524846" },
-    { value: "Mastercard 535875", label: "Mastercard 535875" },
-    { value: "Mastercard 536116", label: "Mastercard 536116" },
-    { value: "Mastercard 536165", label: "Mastercard 536165" },
-    { value: "Mastercard 536208", label: "Mastercard 536208" },
-  ];
 
   const countries = Country?.getAllCountries();
 
@@ -314,7 +291,10 @@ const BulkOrder = () => {
                     <MultiSelect
                       key="providers"
                       placeholder="Select Providers"
-                      options={visaNumbers}
+                      options={bins?.map((bin) => ({
+                        value: bin,
+                        label: bin,
+                      }))}
                       onChange={(selected) => setSelectedProviders(selected)}
                       value={selectedProviders}
                       isSelectAll={true}
