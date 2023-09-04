@@ -27,7 +27,7 @@ const InvoiceCard = () => {
                 href="#"
                 data-title="Print"
               >
-                <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                <i className="mr-1 fa fa-print text-warning-m1 text-120 w-2  mr-2"></i>
                 Print
               </a>
               <a
@@ -35,7 +35,8 @@ const InvoiceCard = () => {
                 href="#"
                 data-title="PDF"
               >
-                <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+                <i class="mr-1 fa fa-pencil  text-120 w-2 mr-2"></i>
+
                 Edit Invoice
               </a>
             </div>
@@ -58,7 +59,7 @@ const InvoiceCard = () => {
                 <div className="col-sm-6">
                   <div>
                   
-                    <span className="text-600 text-110 text-blue align-middle">
+                    <span className="text-600 text-110 align-middle">
                       Alex Doe
                     </span>
                   </div>
@@ -79,21 +80,21 @@ const InvoiceCard = () => {
                       Invoice
                     </div>
                     <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <i className="fa fa-circle text-xs mr-1"></i>{" "}
                       <span className="text-600 text-90">ID:</span> #111-222
                     </div>
                     <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <i className="fa fa-circle  text-xs mr-1"></i>{" "}
                       <span className="text-600 text-90">Issue Date:</span> Oct 12,
                       2019
                     </div>
                     <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <i className="fa fa-circle  text-xs mr-1"></i>{" "}
                       <span className="text-600 text-90">BrokerID:</span>{" "}
                     
                       </div>
                       <div className="my-2">
-                      <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                      <i className="fa fa-circle  text-xs mr-1"></i>{" "}
                       <span className="text-600 text-90">BIN:</span>{" "}
                     
                       </div>
@@ -101,7 +102,7 @@ const InvoiceCard = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <div className="row text-600 text-white bgc-default-tp1 py-25">
+                <div className="row text-600 bgc-default-tp1 py-25">
                   <div className="d-none d-sm-block col-1">#</div>
                   <div className="col-9 col-sm-5">Description</div>
                   <div className="d-none d-sm-block col-4 col-sm-2">Qty</div>
@@ -174,7 +175,7 @@ const InvoiceCard = () => {
                   </span>
                   <a
                     href="#"
-                    className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0"
+                    className="btn  btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn"
                   >
                     Finalize Invoice
                   </a>

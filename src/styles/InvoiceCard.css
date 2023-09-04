@@ -3,6 +3,12 @@
   color: #484b51;
   
 }
+.fa-circle{
+  color: #fdc886;
+}
+.text-secondary-m1{
+color: #1b1b1b;
+}
 .text-secondary-d1 {
   color: #728299!important;
 }
@@ -74,7 +80,7 @@ hr {
   background-color: #fdc886!important;
 }
 .bgc-default-l4, .bgc-h-default-l4:hover {
-  background-color: #f3f8fa!important;
+  background-color: #fdf8f2f5!important;
 }
 .page-header .page-tools {
   -ms-flex-item-align: end;
@@ -115,4 +121,13 @@ hr {
 .align-bottom {
   vertical-align: bottom!important;
 }
-
+.invoice-btn{
+  float:right !important; 
+  margin-bottom: 2rem;
+}
+.fa-pencil{
+  margin-right: 0.3rem;
+}
+.fa-print{
+  margin-right: 0.3rem;
+}
