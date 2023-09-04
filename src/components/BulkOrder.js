@@ -1,13 +1,8 @@
-import React, { useContext, useEffect, useState } from "react"
-import {
-  getCountries,
-  getCountryCallingCode,
-} from "react-phone-number-input/input"
-import en from "react-phone-number-input/locale/en.json"
-import "react-phone-number-input/style.css"
-import NavbarCart from "./NavbarCart"
-import "../styles/BulkOrder.css"
-import { v4 as uuidV4 } from "uuid"
+import React, { useContext, useEffect, useState } from "react";
+import "react-phone-number-input/style.css";
+import NavbarCart from "./NavbarCart";
+import "../styles/BulkOrder.css";
+import { v4 as uuidV4 } from "uuid";
 import {
   Button,
   Form,
@@ -18,103 +13,57 @@ import {
   Checkbox,
   Skeleton,
   Divider,
-  Menu,
   Radio,
   FormItemProps,
-  Dropdown,
   Switch,
-} from "antd"
-import Footer from "./Footer"
-import { useNavigate } from "react-router-dom"
-import { CartContext } from "./CartContext"
-import { Helmet } from "react-helmet"
-import axios from "axios"
-import { DownOutlined } from "@ant-design/icons"
-import MultiSelect from "../shared-components/multi-select"
+} from "antd";
+import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "./CartContext";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import MultiSelect from "../shared-components/multi-select";
+import { Country, State } from "country-state-city";
 
-const { Option } = Select
+const { Option } = Select;
 
 const BulkOrder = () => {
-  const nav = useNavigate()
-  const [form] = Form.useForm()
-  const { addToBulkCart } = useContext(CartContext)
-  const [onFocuseInput, setOnFocuseInput] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [country, setCountry] = useState("us")
-  const [calculatedCharges, setCalculatedCharges] = useState(null)
-  const [reCalculatingCharges, setReCalculatingCharges] = useState(null)
-  const [showDropdown, setShowDropdown] = useState(false)
-  const [checkedList, setCheckedList] = useState([])
-  const [indeterminate, setIndeterminate] = useState(true)
-  const [checkAll, setCheckAll] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("")
-  const [selectedProviders, setSelectedProviders] = useState([])
-  const [countryOptions, setCountryOptions] = useState([])
+  const nav = useNavigate();
+  const [form] = Form.useForm();
+  const { addToBulkCart } = useContext(CartContext);
+  const [onFocuseInput, setOnFocuseInput] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [calculatedCharges, setCalculatedCharges] = useState(null);
+  const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedProviders, setSelectedProviders] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [stateOfCountry, setStateOfCountry] = useState([]);
 
   const formItemLayout: FormItemProps["style"] = {
     display: "inline-block",
     width: "calc(50% - 5px)",
-  }
+  };
 
   const handleBrokerIdChange = (e) => {
-    const value = e.target.value
-    if (["Knox", "Fionna", "Bobby","knox","fionna","bobby"].includes(value)) {
-      setShowDropdown(true)
+    const value = e.target.value;
+    if (
+      ["Knox", "Fionna", "Bobby", "knox", "fionna", "bobby"].includes(value)
+    ) {
+      setShowDropdown(true);
     } else {
-      setShowDropdown(false)
+      setShowDropdown(false);
     }
-  }
-
-  const onCheckAllChange = (e) => {
-    setCheckedList(e.target.checked ? visaNumbers : [])
-    setIndeterminate(false)
-    setCheckAll(e.target.checked)
-  }
+  };
 
   const handleAddToInvoice = () => {
-    nav("/invoice")
-  }
-  const CountrySelect = ({ value, onChange, labels, ...rest }) => (
-    <select
-      {...rest}
-      value={value}
-      onChange={(event) => {
-        onChange(event.target.value || undefined)
-      }}
-    >
-      <option value="US">US +1</option>
-      {getCountries().map((country) => (
-        <option key={country} value={country}>
-          {country} +{getCountryCallingCode(country)}
-        </option>
-      ))}
-    </select>
-  )
+    nav("/invoice");
+  };
 
-  const handleSearch = (inputValue) => {
-    const filteredOptions = countryOptions.filter((option) =>
-      option.label.toLowerCase().includes(inputValue.toLowerCase())
-    )
-    return filteredOptions
-  }
-
-  useEffect(() => {
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        const countries = response.data.map((country) => ({
-          value: country.cca2,
-          label: country.name.common,
-        }))
-        setCountryOptions(countries)
-      })
-      .catch((error) => {
-        console.error("Error fetching countries:", error)
-      })
-  }, [])
-  const pageTitle = "Bulk Order | Prepaid Friends"
+  const pageTitle = "Bulk Order | Prepaid Friends";
   const pageDescription =
-    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service"
+    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service";
 
   const visaNumbers = [
     { value: "Visa 455636", label: "Visa 455636" },
@@ -143,27 +92,16 @@ const BulkOrder = () => {
     { value: "Mastercard 536116", label: "Mastercard 536116" },
     { value: "Mastercard 536165", label: "Mastercard 536165" },
     { value: "Mastercard 536208", label: "Mastercard 536208" },
-  ]
+  ];
 
-  const menu = (
-    <Menu triggerSubMenuAction="click">
-      <Menu.Item>
-        <Checkbox
-          indeterminate={indeterminate}
-          onChange={onCheckAllChange}
-          checked={checkAll}
-        >
-          Select All
-        </Checkbox>
-      </Menu.Item>
+  const countries = Country?.getAllCountries();
 
-      {visaNumbers.map((number) => (
-        <Menu.Item key={number}>
-          <Checkbox>{number}</Checkbox>
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
+  useEffect(() => {
+    const stateOfCountry = State?.getStatesOfCountry(selectedCountry)?.map(
+      (state) => ({ value: state?.isoCode, label: state?.name })
+    );
+    setStateOfCountry(stateOfCountry);
+  }, [selectedCountry]);
 
   return (
     <>
@@ -190,16 +128,15 @@ const BulkOrder = () => {
               form={form}
               layout="vertical"
               autoComplete="off"
-              onValuesChange={(changedValues) => {
-                console.log(changedValues)
-                const quantity = form.getFieldValue("card-quantity") || 0
-                const loadAmount = form.getFieldValue("load-amount") || 0
+              onValuesChange={(changedValues, allValues) => {
+                const quantity = form.getFieldValue("card-quantity") || 0;
+                const loadAmount = form.getFieldValue("load-amount") || 0;
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0
+                  form.getFieldValue("additional-purchase-quantity") || 0;
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                )
-                const cardType = form.getFieldValue("card-type")
+                );
+                const cardType = form.getFieldValue("card-type");
 
                 if (
                   changedValues["card-quantity"] ||
@@ -208,7 +145,7 @@ const BulkOrder = () => {
                   changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
-                  setReCalculatingCharges(true)
+                  setReCalculatingCharges(true);
                   axios
                     .post("/api/order-calculation-api", {
                       order_type: "bulk",
@@ -226,22 +163,22 @@ const BulkOrder = () => {
                     })
                     ?.then((res) => setCalculatedCharges(res?.data))
                     ?.catch((err) => console.error(err))
-                    ?.finally(() => setReCalculatingCharges(false))
+                    ?.finally(() => setReCalculatingCharges(false));
                 }
               }}
               style={{
                 margin: "75px 20px 0px 20px",
               }}
               onFinish={(value) => {
-                const quantity = form.getFieldValue("card-quantity") || 0
-                const loadAmount = form.getFieldValue("load-amount") || 0
-                const cardType = form.getFieldValue("card-type") || 0
+                const quantity = form.getFieldValue("card-quantity") || 0;
+                const loadAmount = form.getFieldValue("load-amount") || 0;
+                const cardType = form.getFieldValue("card-type") || 0;
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0
+                  form.getFieldValue("additional-purchase-quantity") || 0;
 
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                )
+                );
 
                 addToBulkCart({
                   id: uuidV4(),
@@ -251,7 +188,7 @@ const BulkOrder = () => {
                   cardType,
                   additionalPurchaseQt,
                   isUsedForInternationalTransaction,
-                })
+                });
 
                 nav("/bulk-checkout", {
                   state: {
@@ -261,7 +198,7 @@ const BulkOrder = () => {
                     phoneNumber: value["phone-number"] || "",
                     brokerId: value["broker-id"] || "",
                   },
-                })
+                });
               }}
             >
               <div style={{ marginBottom: "1.4rem" }}>
@@ -391,19 +328,17 @@ const BulkOrder = () => {
                     style={{ width: "calc(56% - 3rem)" }}
                   >
                     <span style={{ marginRight: "1rem" }}>
-                     Allow international purchases?
+                      Allow international purchases?
                     </span>
                     <Switch
-                      checkedChildren="Yes"
-                      unCheckedChildren="No"
                       defaultChecked={false}
                       style={{ backgroundColor: "#fdc886" }}
                     />
                   </Form.Item>
                 </div>
-                <Divider/>
+                <Divider />
               </div>
-              <div >
+              <div>
                 <h6 style={{ fontWeight: "600", marginBottom: "1.4rem" }}>
                   Business Address
                 </h6>
@@ -465,7 +400,12 @@ const BulkOrder = () => {
                   ]}
                 >
                   <Select
-                    options={countryOptions}
+                    options={countries?.map((country) => ({
+                      value: country?.isoCode,
+                      label: country?.name,
+                    }))}
+                    value={selectedCountry}
+                    onChange={(val) => setSelectedCountry(val)}
                     placeholder="Select a country"
                     isSearchable
                     filterOption={(inputValue, option) =>
@@ -524,7 +464,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Select placeholder="State" />
+                    <Select placeholder="State" options={stateOfCountry} />
                   </Form.Item>
                   <Form.Item
                     name="zipcode"
@@ -535,7 +475,7 @@ const BulkOrder = () => {
                     rules={[
                       {
                         required: true,
-                        message: "State is required!",
+                        message: "Zip code is required!",
                       },
                     ]}
                   >
@@ -556,7 +496,6 @@ const BulkOrder = () => {
                   ]}
                 >
                   <span style={{ display: "flex" }}>
-                    
                     <Input
                       type="tel"
                       id="phone"
@@ -566,9 +505,9 @@ const BulkOrder = () => {
                         const numericValue = event.target.value.replace(
                           /\D/g,
                           ""
-                        )
-                        const limitedValue = numericValue.slice(0, 10)
-                        setPhoneNumber(limitedValue)
+                        );
+                        const limitedValue = numericValue.slice(0, 10);
+                        setPhoneNumber(limitedValue);
                       }}
                       name="phoneNumber"
                       onFocus={() => setOnFocuseInput("phoneNumber")}
@@ -620,7 +559,7 @@ const BulkOrder = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    marginTop:"0.5rem",
+                    marginTop: "0.5rem",
                     marginLeft: "5px",
                     fontWeight: "600",
                   }}
@@ -636,7 +575,7 @@ const BulkOrder = () => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      marginTop:"0.5rem",
+                      marginTop: "0.5rem",
                       marginLeft: "5px",
                       fontWeight: "600",
                     }}
@@ -651,7 +590,7 @@ const BulkOrder = () => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      marginTop:"0.5rem",
+                      marginTop: "0.5rem",
                       marginLeft: "5px",
                       fontWeight: "600",
                     }}
@@ -668,7 +607,7 @@ const BulkOrder = () => {
                   alignItems: "center",
                   marginLeft: "5px",
                   fontWeight: "600",
-                  marginTop:"0.5rem",
+                  marginTop: "0.5rem",
                 }}
               >
                 <p>International Transaction Cost</p>
@@ -718,6 +657,6 @@ const BulkOrder = () => {
       </div>
       <Footer />
     </>
-  )
-}
-export default BulkOrder
+  );
+};
+export default BulkOrder;

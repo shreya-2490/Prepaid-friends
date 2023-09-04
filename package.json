@@ -24,6 +24,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.0.1",
     "country-data": "^0.0.31",
+    "country-state-city": "^3.2.0",
     "dayjs": "^1.11.9",
     "font-awesome": "^4.7.0",
     "gh-pages": "^4.0.0",
