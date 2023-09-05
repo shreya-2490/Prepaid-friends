@@ -12,7 +12,6 @@ import ContactUs from "./components/ContactUs";
 import Payment from "./components/payment";
 import { CartProvider } from "./components/CartContext";
 import Dashboard from "./components/Dashboard";
-import Preowned from "./components/Preowned";
 import Terms from "./components/Terms&Conditions";
 import Policy from "./components/Privacypolicy";
 import BulkCheckout from "./components/BulkCheckout";
@@ -147,17 +146,6 @@ function App() {
               </Routes>
               <Routes>
                 <Route path="/how-it-works" element={<HowItWorks />} />
-              </Routes>
-              <Routes>
-                <Route
-                  path="/preowned"
-                  element={
-                    <Preowned
-                      selectedProvider={selectedProvider}
-                      selectedPrice={selectedPrice}
-                    />
-                  }
-                />
               </Routes>
             </ScrollToTop>
           </Router>

@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Alert, Skeleton } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import visa from "../assets/visahome.png";
-import visawhite from "../assets/visahomewhite.png";
 import mastercard from "../assets/masterhome.png";
-import masterwhite from "../assets/masterhomewhite.png";
 import "../styles/home.css";
 import axios from "axios";
 import Footer from "./Footer";
@@ -28,11 +25,6 @@ const Home = () => {
   const handleButtonClick = (event, buttonId) => {
     event.preventDefault();
     setSelectedButton(buttonId);
-    if (buttonId === 1) {
-      setSelectedImage(visawhite);
-    } else if (buttonId === 2) {
-      setSelectedImage(masterwhite);
-    }
   };
 
   const handleMainButtonClick = (event, buttonId) => {
@@ -156,39 +148,7 @@ const Home = () => {
               {button === 1 && (
                 <div className="forms">
                   <div style={{ marginBottom: "20px" }}>
-                    <form>
-                      <div className="card-selector-container">
-                        <p className="choose-card">Select Card</p>
-                        <div className="selection-cards-visamastercard">
-                          <button
-                            className={`button ${
-                              selectedButton === 1 ? "selected" : ""
-                            }`}
-                            onClick={(event) => handleButtonClick(event, 1)}
-                          >
-                            <img
-                              src={selectedButton === 1 ? visawhite : visa}
-                              alt="Visa Card"
-                              className="visa-card"
-                            />
-                          </button>
-                          <button
-                            className={`mastercard-button ${
-                              selectedButton === 2 ? "selected1" : ""
-                            }`}
-                            onClick={(event) => handleButtonClick(event, 2)}
-                          >
-                            <img
-                              src={
-                                selectedButton === 2 ? masterwhite : mastercard
-                              }
-                              alt="Master Card"
-                              className="master-card"
-                            ></img>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+               
                   </div>
                   <div>
                     <form>

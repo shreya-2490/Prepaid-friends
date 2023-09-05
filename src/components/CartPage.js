@@ -7,7 +7,6 @@ import NavbarCart from "./NavbarCart"
 import wifi from "../assets/wifi1.png"
 import map from "../assets/map1.png"
 import master from "../assets/mastercard preowned.png"
-import visa from "../assets/visa preowned.png"
 import "../styles/CartPage.css"
 import { v4 as uuidv4 } from "uuid"
 import { Modal, Button } from "antd"
@@ -153,13 +152,7 @@ const Cart = ({ handleAddToCart }) => {
                           </section>
                         </aside>
                         <aside>
-                          <section>
-                            {selectedButton == 1 ? (
-                              <img src={visa} class="brand" />
-                            ) : (
-                              <img src={master} class="brand1" />
-                            )}
-                          </section>
+                   
                         </aside>
                       </div>
                     </div>
