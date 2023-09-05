@@ -38,7 +38,9 @@ const BulkOrder = () => {
   const [calculatedCharges, setCalculatedCharges] = useState(null);
   const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
+    state?.selectedPaymentMethod || ""
+  );
   const [selectedProviders, setSelectedProviders] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [stateOfCountry, setStateOfCountry] = useState([]);
@@ -142,7 +144,7 @@ const BulkOrder = () => {
   const ResultloadAmt =
     form.getFieldValue("card-quantity") * form.getFieldValue("load-amount");
 
-  console.log(location?.state);
+  console.log(state);
 
   return (
     <>
@@ -525,24 +527,22 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <span style={{ display: "flex" }}>
-                    <Input
-                      type="tel"
-                      id="phone"
-                      placeholder="Phone Number*"
-                      value={phoneNumber}
-                      onChange={(event) => {
-                        const numericValue = event.target.value.replace(
-                          /\D/g,
-                          ""
-                        );
-                        const limitedValue = numericValue.slice(0, 10);
-                        setPhoneNumber(limitedValue);
-                      }}
-                      name="phoneNumber"
-                      onFocus={() => setOnFocuseInput("phoneNumber")}
-                    />
-                  </span>
+                  <Input
+                    type="tel"
+                    id="phone"
+                    placeholder="Phone Number*"
+                    value={phoneNumber}
+                    onChange={(event) => {
+                      const numericValue = event.target.value.replace(
+                        /\D/g,
+                        ""
+                      );
+                      const limitedValue = numericValue.slice(0, 10);
+                      setPhoneNumber(limitedValue);
+                    }}
+                    name="phoneNumber"
+                    onFocus={() => setOnFocuseInput("phoneNumber")}
+                  />
                 </Form.Item>
               </div>
             </Form>
@@ -557,7 +557,7 @@ const BulkOrder = () => {
                 onChange={(e) => {
                   setSelectedPaymentMethod(e?.target?.value);
                 }}
-                value={selectedPaymentMethod || state?.selectedPaymentMethod}
+                value={selectedPaymentMethod}
               >
                 <Radio value={"wire"}>Wire Transfer</Radio>
                 <Radio value={"btc"}>BTC</Radio>
