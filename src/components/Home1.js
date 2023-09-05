@@ -1,77 +1,64 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   Alert,
   Input,
   Space,
   Tag,
-  Checkbox,
   Modal,
   Button,
   message,
   Divider,
-} from "antd"
-import { useNavigate } from "react-router-dom"
-import { InfoCircleOutlined } from "@ant-design/icons"
-import "../styles/home.css"
-import axios from "axios"
-import Footer from "./Footer"
-import { Helmet } from "react-helmet"
-import { usdToBTC } from "../utils/helper"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faDollarSign,
-  faBitcoinSign,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons"
+} from "antd";
+import { useNavigate } from "react-router-dom";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import "../styles/home.css";
+import axios from "axios";
+import Footer from "./Footer";
+import { Helmet } from "react-helmet";
+import { usdToBTC } from "../utils/helper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
-  const [usdValue, setUSDValue] = useState("")
-  const [btcValue, setBTCValue] = useState("")
-  const [selectedButton, setSelectedButton] = useState(1)
-  const [button, setButton] = useState(1)
-  const [alert, showAlert] = useState(false)
-  const navigate = useNavigate()
+  const [usdValue, setUSDValue] = useState("");
+  const [btcValue, setBTCValue] = useState("");
+  const [button, setButton] = useState(1);
+  const [alert, showAlert] = useState(false);
+  const navigate = useNavigate();
   const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
-    useState(false)
-  const [isChecked, setIsChecked] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false)
-  const [emailValue, setEmailValue] = useState("")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [isCalculatingCharges, setIsCalculatingCharges] = useState(false)
-  const [additionalCharges, setAdditionalCharges] = useState(null)
-  const [btcRate, setBtcRate] = useState(0)
-  const [isSendingToPayment, setIsSendingToPayment] = useState(false)
-  const [cardsSold, setCardsSold] = useState(0)
-  const [happyCustomers, setHappyCustomers] = useState(0)
-  const [cardValue, setCardValue] = useState(0)
+    useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
+  const [isCalculatingCharges, setIsCalculatingCharges] = useState(false);
+  const [additionalCharges, setAdditionalCharges] = useState(null);
+  const [btcRate, setBtcRate] = useState(0);
+  const [isSendingToPayment, setIsSendingToPayment] = useState(false);
+  const [cardsSold, setCardsSold] = useState(0);
+  const [happyCustomers, setHappyCustomers] = useState(0);
+  const [cardValue, setCardValue] = useState(0);
 
   const handleMainButtonClick = (event, buttonId) => {
-    event.preventDefault()
-    setButton(buttonId)
-  }
+    event.preventDefault();
+    setButton(buttonId);
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCardsSold(Math.floor(Math.random() * 10000))
-      setHappyCustomers(Math.floor(Math.random() * 5000))
-      setCardValue((Math.random() * 1000000).toFixed(1))
-    }, 2000)
+      setCardsSold(Math.floor(Math.random() * 10000));
+      setHappyCustomers(Math.floor(Math.random() * 5000));
+      setCardValue((Math.random() * 1000000).toFixed(1));
+    }, 2000);
 
     return () => {
-      clearInterval(intervalId)
-    }
-  }, [])
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const handleBuyButtonClickMain = () => {
-    console.log("this")
     if (btcValue === "0.00000") {
-      return
-    } else if (!isChecked) {
-      setIsModalVisible(true)
-    } else if (isChecked && !emailValue) {
-      setErrorMessage("Please enter your email address.")
+      return;
     } else {
-      setIsSendingToPayment(true)
+      setIsSendingToPayment(true);
       usdValue
         ? axios
             ?.post(`/api/preowned-order`, {
@@ -96,12 +83,12 @@ const Home = () => {
               )
             )
             ?.finally(() => setIsSendingToPayment(true))
-        : showAlert(true)
+        : showAlert(true);
     }
-  }
+  };
   const handleButtonClick = () => {
-    navigate("/how-it-works")
-  }
+    navigate("/how-it-works");
+  };
 
   const handleProceed = () => {
     axios
@@ -125,14 +112,14 @@ const Home = () => {
           err?.response?.data?.error || err?.response?.data?.message
         )
       )
-      ?.finally(() => setIsSendingToPayment(true))
-  }
+      ?.finally(() => setIsSendingToPayment(true));
+  };
   const handleModalCancel = () => {
-    setIsModalVisible(false)
-  }
+    setIsModalVisible(false);
+  };
 
   const getItemCalculation = (price) => {
-    setIsCalculatingCharges(true)
+    setIsCalculatingCharges(true);
     axios
       ?.post("/api/order-calculation-api", {
         order_type: "preOwned",
@@ -146,45 +133,45 @@ const Home = () => {
       })
       ?.then((res) => setAdditionalCharges(res?.data))
       ?.catch((err) => console.error(err))
-      ?.finally(setIsCalculatingCharges(false))
-  }
+      ?.finally(setIsCalculatingCharges(false));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsCalculatingBtcEquivalent(true)
+      setIsCalculatingBtcEquivalent(true);
       try {
-        const response = await axios.post("/api/rate-api")
-        const btcPrice = response.data.value
-        setBtcRate(btcPrice)
-        setBTCValue(usdToBTC(usdValue, btcPrice))
+        const response = await axios.post("/api/rate-api");
+        const btcPrice = response.data.value;
+        setBtcRate(btcPrice);
+        setBTCValue(usdToBTC(usdValue, btcPrice));
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error("Error fetching data:", error);
       } finally {
-        setIsCalculatingBtcEquivalent(false)
+        setIsCalculatingBtcEquivalent(false);
       }
-    }
+    };
 
     if (usdValue) {
-      fetchData()
-      getItemCalculation(usdValue)
+      fetchData();
+      getItemCalculation(usdValue);
     } else {
-      setBTCValue("")
+      setBTCValue("");
     }
-  }, [usdValue])
+  }, [usdValue]);
 
   const handleUSDSelect = (selectedValue) => {
-    const value = parseFloat(selectedValue)
-    setUSDValue(value || "")
-    selectedValue ? showAlert(false) : showAlert(true)
-  }
+    const value = parseFloat(selectedValue);
+    setUSDValue(value || "");
+    selectedValue ? showAlert(false) : showAlert(true);
+  };
 
   const handleTagClick = (value) => {
-    handleUSDSelect(value)
-  }
+    handleUSDSelect(value);
+  };
 
-  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending"
+  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending";
   const pageDescription =
-    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!"
+    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!";
 
   return (
     <>
@@ -424,6 +411,6 @@ const Home = () => {
       </div>
       <Footer />
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;
