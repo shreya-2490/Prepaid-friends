@@ -44,10 +44,10 @@ const BulkOrder = () => {
   const [bins, setBins] = useState([])
   const [checkboxChecked, setCheckboxChecked] = useState(false)
 
-  const formItemLayout: FormItemProps["style"] = {
+  const formItemLayout = {
     display: "inline-block",
-    width: "calc(50% - 5px)",
-  }
+    width: "calc(50% - 5px)"
+  };  
 
   const handleBrokerIdChange = (e) => {
     const value = e.target.value
