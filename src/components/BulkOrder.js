@@ -66,8 +66,8 @@ const BulkOrder = () => {
   }
 
   const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked);
-  };
+    setCheckboxChecked(e.target.checked)
+  }
 
   const handleAddToInvoice = () => {
     nav("/invoice", {
@@ -129,6 +129,12 @@ const BulkOrder = () => {
       handleCalculateCharges()
     }
   }, [selectedPaymentMethod])
+
+  const costpercardResult =
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) || 0) *
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) || 0)
+  const ResultloadAmt =
+    form.getFieldValue("card-quantity") * form.getFieldValue("load-amount")
 
   return (
     <>
@@ -204,7 +210,7 @@ const BulkOrder = () => {
             >
               <div style={{ marginBottom: "1.4rem" }}>
                 <h6 style={{ fontWeight: "600", marginBottom: "0.8rem" }}>
-                  Contact{" "}
+                  Contact Information{" "}
                 </h6>
                 <Form.Item
                   name="email"
@@ -219,13 +225,13 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="Email Address" />
+                  <Input placeholder="Email Address*" />
                 </Form.Item>
                 <Divider />
               </div>
               <div style={{ marginBottom: "1rem" }}>
                 <h6 style={{ fontWeight: "600", marginBottom: "0.8rem" }}>
-                  Card Purchase Details
+                  Card Information
                 </h6>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -263,7 +269,7 @@ const BulkOrder = () => {
                     }}
                   >
                     <InputNumber
-                      placeholder="Card Quantity"
+                      placeholder="Card Quantity*"
                       type="number"
                       width={50}
                       min={5}
@@ -295,7 +301,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Input placeholder="Load Amount" />
+                    <Input placeholder="Load Amount*" />
                   </Form.Item>
                   <Form.Item name="broker-id" style={{ width: "50%" }}>
                     <Input
@@ -330,7 +336,12 @@ const BulkOrder = () => {
                       name="international-purchases"
                       style={{ width: "calc(86% - 3rem)" }}
                     >
-                      <Switch style={{ backgroundColor: "#fdc886" }} />
+                      <Switch
+                        checkedChildren="Yes"
+                        unCheckedChildren="No"
+                        defaultChecked={false}
+                        style={{marginLeft:"0.3rem"}}
+                      />
                     </Form.Item>
                   </div>
                 </div>
@@ -338,7 +349,7 @@ const BulkOrder = () => {
               </div>
               <div>
                 <h6 style={{ fontWeight: "600", marginBottom: "1.4rem" }}>
-                  Business Address
+                  Business Information
                 </h6>
                 <Form.Item
                   name="first-name"
@@ -354,7 +365,7 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="First Name" />
+                  <Input placeholder="First Name*" />
                 </Form.Item>
                 <Form.Item
                   name="last-name"
@@ -369,7 +380,7 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="Last Name" />
+                  <Input placeholder="Last Name*" />
                 </Form.Item>
                 <Form.Item
                   name="business-name"
@@ -385,7 +396,7 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="Business Name" />
+                  <Input placeholder="Business Name*" />
                 </Form.Item>
                 <Form.Item
                   name="country"
@@ -404,7 +415,7 @@ const BulkOrder = () => {
                     }))}
                     value={selectedCountry}
                     onChange={(val) => setSelectedCountry(val)}
-                    placeholder="Select a country"
+                    placeholder="Select a country*"
                     isSearchable
                     filterOption={(inputValue, option) =>
                       option.label
@@ -424,7 +435,7 @@ const BulkOrder = () => {
                 >
                   <Input
                     style={{ marginBottom: "0.5rem" }}
-                    placeholder="House Number or Street Name"
+                    placeholder="House Number or Street Name*"
                   />
                   {/* <Input
                     placeholder="Optional"
@@ -447,7 +458,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Input placeholder="City" />
+                    <Input placeholder="City*" />
                   </Form.Item>
                   <Form.Item
                     name="state"
@@ -462,7 +473,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Select placeholder="State" options={stateOfCountry} />
+                    <Select placeholder="State*" options={stateOfCountry} />
                   </Form.Item>
                   <Form.Item
                     name="zipcode"
@@ -477,7 +488,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Input placeholder="ZIP code" />
+                    <Input placeholder="ZIP code*" />
                   </Form.Item>
                 </div>
                 <Form.Item
@@ -497,7 +508,7 @@ const BulkOrder = () => {
                     <Input
                       type="tel"
                       id="phone"
-                      placeholder="Phone Number"
+                      placeholder="Phone Number*"
                       value={phoneNumber}
                       onChange={(event) => {
                         const numericValue = event.target.value.replace(
@@ -534,26 +545,68 @@ const BulkOrder = () => {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignItems: "center",
-                  marginTop: "20px",
-                  marginLeft: "5px",
+                  alignItems: "baseline",
+                  marginTop: "15px",
+
                   fontWeight: "600",
                 }}
               >
-                <p>Cost Per Card</p>
-                {reCalculatingCharges ? (
-                  <Skeleton.Button size="small" shape="square" active />
-                ) : (
-                  <p>
-                    {(calculatedCharges?.items &&
-                      calculatedCharges?.items[0]?.quantity) ||
-                      0}{" "}
-                    x $
-                    {(calculatedCharges?.items &&
-                      calculatedCharges?.items[0]?.cost) ||
-                      0}
-                  </p>
-                )}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "20px",
+                    marginLeft: "5px",
+                    fontWeight: "600",
+                  }}
+                >
+                  <p>Cost Per Card</p>
+                  {reCalculatingCharges ? (
+                    <Skeleton.Button size="small" shape="square" active  style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}}/>
+                  ) : (
+                    <p style={{ marginLeft: "5px", fontWeight: "500" }}>
+                      {(calculatedCharges?.items &&
+                        calculatedCharges?.items[0]?.quantity) ||
+                        0}
+                      x $
+                      {(calculatedCharges?.items &&
+                        calculatedCharges?.items[0]?.cost) ||
+                        0}
+                    </p>
+                  )}
+                </div>
+                <p>{costpercardResult}</p>
+              </div>
+              <Divider />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+
+                  fontWeight: "600",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                    marginLeft: "5px",
+                    fontWeight: "600",
+                  }}
+                >
+                  <p>Value Per Card</p>
+                  {reCalculatingCharges ? (
+                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                  ) : (
+                    <p style={{ marginLeft: "5px", fontWeight: "500" }}>
+                      {form.getFieldValue("card-quantity")}x $
+                      {form.getFieldValue("load-amount")}
+                    </p>
+                  )}
+                </div>
+                <p>{ResultloadAmt}</p>
               </div>
               <Divider />
               {selectedPaymentMethod === "btc" && (
@@ -666,21 +719,25 @@ const BulkOrder = () => {
                   className="buy-usdt"
                   onClick={handleAddToInvoice}
                   style={{ textAlign: "center" }}
-                  disabled={!checkboxChecked || !selectedPaymentMethod || !form.getFieldValue("email") ||
-               
-                  !form.getFieldValue("card-quantity") ||
-                  !form.getFieldValue("load-amount") ||
-                 
-                  !form.getFieldValue("country") ||
-                  !form.getFieldValue("address") ||
-                  !form.getFieldValue("phone-number")}
+                  disabled={
+                    !checkboxChecked ||
+                    !selectedPaymentMethod ||
+                    !form.getFieldValue("email") ||
+                    !form.getFieldValue("card-quantity") ||
+                    !form.getFieldValue("load-amount") ||
+                    !form.getFieldValue("country") ||
+                    !form.getFieldValue("address") ||
+                    !form.getFieldValue("phone-number")
+                  }
                 >
                   Add to Invoice
                 </Button>
               </div>
             </Card>
-            <h6 style={{ marginTop: "2rem" }}><strong>Order Notes</strong></h6>
-            <Input.TextArea rows={6} cols={4} />
+            <h6 style={{ marginTop: "2rem" }}>
+              <strong>Order Notes</strong>
+            </h6>
+            <Input.TextArea rows={6} cols={4} name="notes"/>
           </div>
         </div>
       </div>

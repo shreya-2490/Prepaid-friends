@@ -138,7 +138,7 @@
   .bulk-div-1 {
     position: relative;
     width: 48%;
-    bottom: 8rem;
+    bottom: 2rem;
     text-align: left;
   }
   .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
@@ -405,7 +405,11 @@
 }
 .international-purchase{
   display: flex;
-  margin-right: 7rem;
+  margin-right: 6rem;
+  white-space: nowrap;
+}
+.ant-switch.ant-switch-checked .ant-switch-inner {
+  background-color: #fdc886;
 }
 }
 
@@ -758,6 +762,10 @@
   .international-purchase{
     display: flex;
     margin-right: 4rem;
+    white-space: nowrap;
+  }
+  .ant-switch.ant-switch-checked .ant-switch-inner {
+    background-color: #fdc886;
   }
 }
 
@@ -1088,6 +1096,9 @@
   .international-purchase{
     display: flex;
     margin-right: auto;
+  }
+  .ant-switch.ant-switch-checked .ant-switch-inner {
+    background-color: #fdc886;
   }
 }
 

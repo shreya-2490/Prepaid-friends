@@ -1,18 +1,23 @@
-import React from "react";
-import "../styles/InvoiceCard.css";
-import logo from "../assets/logo.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
-import { v4 } from "uuid";
+import React from "react"
+import "../styles/InvoiceCard.css"
+import logo from "../assets/logo.png"
+import { useLocation, useNavigate } from "react-router-dom"
+import dayjs from "dayjs"
+import { v4 } from "uuid"
 
 const InvoiceCard = () => {
-  const location = useLocation();
-  const state = location?.state || {};
-  const nav = useNavigate();
+  const location = useLocation()
+  const state = location?.state || {}
+  const nav = useNavigate()
 
-  const invoiceId = v4();
+  const invoiceId = v4()
+
+  function handlePrintClick() {
+    window.print();
+  }
 
   return (
+
     <>
       <div className="invoice-container">
         <link
@@ -22,10 +27,12 @@ const InvoiceCard = () => {
         <div className="page-content container">
           <div className="page-header text-blue-d2">
             <h1 className="page-title text-secondary-d1">
-              Invoice &nbsp;
               <small className="page-info">
-                <i className="fa fa-angle-double-right text-80"></i>&nbsp;
-                ID: #{invoiceId}
+                Prepaid Friends
+                <br />
+                3079 Harrison Ave #10
+                <br />
+                South Lake Tahoe, CA 96150
               </small>
             </h1>
             <div className="page-tools">
@@ -34,6 +41,7 @@ const InvoiceCard = () => {
                   className="btn bg-white btn-light mx-1px text-95"
                   href="#"
                   data-title="Print"
+                  onClick={handlePrintClick}
                 >
                   <i className="mr-1 fa fa-print text-120 w-2"></i>
                   Print
@@ -47,6 +55,12 @@ const InvoiceCard = () => {
                   Edit Invoice
                 </a>
               </div>
+              <a
+                      href="#"
+                      className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn-upper"
+                    >
+                      Finalize Invoice
+                    </a>
             </div>
           </div>
           <div className="container px-0">
@@ -62,6 +76,7 @@ const InvoiceCard = () => {
 
                 <hr className="row brc-default-l1 mx-n1 mb-4" />
                 <div className="row">
+                  <h6>Billed To:</h6>
                   <div className="col-sm-6">
                     <div>
                       <span className="text-600 text-110 align-middle">
@@ -71,14 +86,21 @@ const InvoiceCard = () => {
                     </div>
                     <div className="text-grey-m2">
                       <div className="my-1">
+                      <i className="fa fa-map-marker text-secondary"></i>
                         {" "}
-                        {state?.personalInfo?.address},{" "}
+                        <b>
+                        {state?.personalInfo?.address},
                         {state?.personalInfo?.city}
+                        </b>
+                     
                       </div>
-                      <div className="my-1">
+                      <div className="my-2 state">
+                        <b>
                         {state?.personalInfo?.state},{" "}
                         {state?.personalInfo?.country},
                         {state?.personalInfo?.zipcode}
+                        </b>
+                    
                       </div>
                       <div className="my-1">
                         <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
@@ -87,6 +109,7 @@ const InvoiceCard = () => {
                         </b>
                       </div>
                       <div className="my-1">
+                      <i className="fa fa-envelope text-secondary"></i>{" "}
                         <b className="text-600">{state?.personalInfo?.email}</b>
                       </div>
                     </div>
@@ -253,7 +276,7 @@ const InvoiceCard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default InvoiceCard;
+export default InvoiceCard

@@ -27,7 +27,7 @@
 }
 .home-upper-heading {
   position: absolute;
-  top: 11.5rem;
+  top: 9.5rem;
   left: 5.5rem;
   font-weight: 600;
   font-size: 1.1rem;
@@ -44,7 +44,7 @@
   position: absolute;
   left: 5rem;
   padding: 0.5rem;
-  top: 13.5rem;
+  top: 11.5rem;
 }
 .home-heading-1 {
   font-family: "Belanosima", sans-serif;
@@ -54,20 +54,20 @@
   padding: 0.7rem;
   width: 40rem;
   position: absolute;
-  top: 17.1rem;
+  top: 15.1rem;
   left: 5rem;
   text-align: left;
 }
 
 .subtitle {
   color: #1b1b1b;
-  font-size: 1rem;
-  margin-top: 20rem;
+  font-size: 0.9rem;
+  margin-top: 15rem;
   margin-left: 2.5rem;
   text-align: justify;
   width: 40rem;
   font-weight: 600;
-  font-size: 1.1rem;
+
   line-height: 1.9rem;
 }
 .how-it-works-btn {
@@ -89,7 +89,7 @@
 }
 .counter-info {
   display: flex;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-weight: 600;
@@ -238,7 +238,7 @@
   border: none;
 }
 .ant-input:placeholder-shown {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 .placeholder-input {
   padding: 0.5rem 1rem;
@@ -479,7 +479,7 @@
   margin-bottom: 0.625rem;
 }
 .ant-select-selector {
-  height: 37px !important;
+  height: 32px !important;
 }
 .selection-cards-visamastercard {
   display: flex;

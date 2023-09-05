@@ -11,6 +11,9 @@ color: #1b1b1b;
 .text-secondary-d1 {
   color: #728299!important;
 }
+.state{
+  margin-left: 0.7rem;
+}
 .page-header {
   margin: 0 0 1rem;
   padding-bottom: 1rem;
@@ -26,7 +29,7 @@ color: #1b1b1b;
 .page-title {
   padding: 0;
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 .ml-n1, .mx-n1 {
@@ -60,6 +63,7 @@ hr {
 
 .text-110 {
   font-size: 1rem!important;
+
 }
 .text-blue {
   color: #478fcc!important;
@@ -120,6 +124,10 @@ hr {
 .invoice-btn{
   float:right !important; 
   margin-bottom: 2rem;
+  margin-right: 10rem;
+}
+.invoice-btn-upper{
+  margin-left: 2rem;
 }
 .fa-pencil{
   margin-right: 0.3rem;
@@ -133,5 +141,8 @@ hr {
   }
   .invoice-btn{
     margin-top: 0rem;
+  }
+  .invoice-btn-upper{
+    margin-left: 2rem;
   }
 }
