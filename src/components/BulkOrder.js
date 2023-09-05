@@ -601,12 +601,12 @@ const BulkOrder = () => {
                     <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")}x $
-                      {form.getFieldValue("load-amount")}
+                      {form.getFieldValue("card-quantity")||0}x $
+                      {form.getFieldValue("load-amount")||0}
                     </p>
                   )}
                 </div>
-                <p>${ResultloadAmt}</p>
+                <p>${ResultloadAmt||0}</p>
               </div>
               <Divider />
               {selectedPaymentMethod === "btc" && (
@@ -693,7 +693,7 @@ const BulkOrder = () => {
                     <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")} x 0.25
+                      {form.getFieldValue("card-quantity")||0} x 0.25
                     </p>
                   )}
                 </div>
