@@ -575,7 +575,7 @@ const BulkOrder = () => {
                     </p>
                   )}
                 </div>
-                <p>{costpercardResult}</p>
+                <p>${costpercardResult}</p>
               </div>
               <Divider />
               <div
@@ -606,7 +606,7 @@ const BulkOrder = () => {
                     </p>
                   )}
                 </div>
-                <p>{ResultloadAmt}</p>
+                <p>${ResultloadAmt}</p>
               </div>
               <Divider />
               {selectedPaymentMethod === "btc" && (
@@ -670,28 +670,37 @@ const BulkOrder = () => {
                   <Divider />
                 </>
               )}
-              <div
+                  <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  alignItems: "center",
-                  marginLeft: "5px",
+                  alignItems: "baseline",
+
                   fontWeight: "600",
-                  marginTop: "0.5rem",
                 }}
               >
-                <p>International Transaction Cost</p>
-
-                {reCalculatingCharges ? (
-                  <Skeleton.Button size="small" shape="square" active />
-                ) : (
-                  <p>
-                    $
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginTop: "10px",
+                    marginLeft: "5px",
+                    fontWeight: "600",
+                  }}
+                >
+                  <p>International Transaction Cost</p>
+                  {reCalculatingCharges ? (
+                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                  ) : (
+                    <p style={{ marginLeft: "5px", fontWeight: "500" }}>
+                      {form.getFieldValue("card-quantity")} x 0.25
+                    </p>
+                  )}
+                </div>
+                <p>$
                     {(calculatedCharges?.items &&
                       calculatedCharges?.items[0]?.international_cost) ||
-                      0}
-                  </p>
-                )}
+                      0}</p>
               </div>
               <Divider />
               <div
