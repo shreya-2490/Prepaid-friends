@@ -18,7 +18,7 @@ import {
   Switch,
 } from "antd"
 import Footer from "./Footer"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { CartContext } from "./CartContext"
 import { Helmet } from "react-helmet"
 import axios from "axios"
@@ -30,6 +30,8 @@ const { Option } = Select
 
 const BulkOrder = () => {
   const nav = useNavigate()
+  const location = useLocation()
+  const { state } = location
   const [form] = Form.useForm()
   const { addToBulkCart } = useContext(CartContext)
   const [onFocuseInput, setOnFocuseInput] = useState("")
@@ -133,10 +135,17 @@ const BulkOrder = () => {
   }, [selectedPaymentMethod])
 
   const costpercardResult =
-    ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) || 0) *
-    ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) || 0)
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) ||
+      (state?.charges?.items && state?.charges?.items[0]?.quantity) ||
+      0) *
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) ||
+      (state?.charges?.items && state?.charges?.items[0]?.cost) ||
+      0)
+
   const ResultloadAmt =
     form.getFieldValue("card-quantity") * form.getFieldValue("load-amount")
+
+  console.log(location?.state)
 
   return (
     <>
@@ -163,6 +172,23 @@ const BulkOrder = () => {
               form={form}
               layout="vertical"
               autoComplete="off"
+              initialValues={{
+                email: state?.personalInfo?.email,
+                "card-quantity": state?.personalInfo["card-quantity"],
+                "load-amount": state?.personalInfo["load-amount"],
+                "broker-id": state?.personalInfo["broker-id"],
+                "international-purchases":
+                  state?.personalInfo["international-purchases"],
+                "first-name": state?.personalInfo["first-name"],
+                "last-name": state?.personalInfo["last-name"],
+                "business-name": state?.personalInfo["business-name"],
+                country: state?.personalInfo["country"],
+                address: state?.personalInfo["address"],
+                city: state?.personalInfo["city"],
+                state: state?.personalInfo["state"],
+                zipcode: state?.personalInfo["zipcode"],
+                "phone-number": state?.personalInfo["phone-number"],
+              }}
               onValuesChange={(changedValues) => {
                 if (
                   changedValues["card-quantity"] ||
@@ -439,10 +465,6 @@ const BulkOrder = () => {
                     style={{ marginBottom: "0.5rem" }}
                     placeholder="House Number or Street Name*"
                   />
-                  {/* <Input
-                    placeholder="Optional"
-                    style={{ marginTop: "0.5rem" }}
-                  /> */}
                 </Form.Item>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -538,7 +560,7 @@ const BulkOrder = () => {
                 onChange={(e) => {
                   setSelectedPaymentMethod(e?.target?.value)
                 }}
-                value={selectedPaymentMethod}
+                value={selectedPaymentMethod || state?.selectedPaymentMethod}
               >
                 <Radio value={"wire"}>Wire Transfer</Radio>
                 <Radio value={"btc"}>BTC</Radio>
@@ -574,10 +596,13 @@ const BulkOrder = () => {
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
                       {(calculatedCharges?.items &&
                         calculatedCharges?.items[0]?.quantity) ||
+                        state?.personalInfo["card-quantity"] ||
                         0}
                       x $
                       {(calculatedCharges?.items &&
                         calculatedCharges?.items[0]?.cost) ||
+                        (state?.charges?.items &&
+                          state?.charges?.items[0]?.cost) ||
                         0}
                     </p>
                   )}
@@ -718,6 +743,8 @@ const BulkOrder = () => {
                   $
                   {(calculatedCharges?.items &&
                     calculatedCharges?.items[0]?.international_cost) ||
+                    (state?.charges?.items &&
+                      state?.charges?.items[0]?.international_cost) ||
                     0}
                 </p>
               </div>
@@ -736,7 +763,12 @@ const BulkOrder = () => {
                 {reCalculatingCharges ? (
                   <Skeleton.Button size="small" shape="square" active />
                 ) : (
-                  <p>${calculatedCharges?.order_total || 0}</p>
+                  <p>
+                    $
+                    {calculatedCharges?.order_total ||
+                      state?.charges?.order_total ||
+                      0}
+                  </p>
                 )}
               </div>
               <div>
@@ -765,13 +797,7 @@ const BulkOrder = () => {
             <h6 style={{ marginTop: "2rem" }}>
               <strong>Order Notes</strong>
             </h6>
-            <Input.TextArea
-              rows={6}
-              cols={4}
-              onChange={(e) => {
-                setXtraNote(e?.target?.value)
-              }}
-            />
+            <Input.TextArea rows={6} cols={4} name="notes" />
           </div>
         </div>
       </div>

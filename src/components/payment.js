@@ -31,6 +31,8 @@ const Payment = () => {
   const [cookies] = useCookies(["pfAuthToken"]);
   const [btcRateLoading, setBTCRateLoading] = useState(true);
 
+  console.log(location?.state);
+
   useEffect(() => {
     setUSDValue(usdValue);
   }, []);
