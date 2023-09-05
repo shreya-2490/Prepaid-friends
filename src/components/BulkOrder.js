@@ -42,12 +42,13 @@ const BulkOrder = () => {
   const [selectedCountry, setSelectedCountry] = useState("")
   const [stateOfCountry, setStateOfCountry] = useState([])
   const [bins, setBins] = useState([])
+  const [xtraNote, setXtraNote] = useState([])
   const [checkboxChecked, setCheckboxChecked] = useState(false)
 
   const formItemLayout = {
     display: "inline-block",
-    width: "calc(50% - 5px)"
-  };  
+    width: "calc(50% - 5px)",
+  }
 
   const handleBrokerIdChange = (e) => {
     const value = e.target.value
@@ -76,6 +77,7 @@ const BulkOrder = () => {
         charges: calculatedCharges,
         selectedProviders,
         selectedPaymentMethod,
+        notes:xtraNote,
       },
     })
   }
@@ -340,7 +342,7 @@ const BulkOrder = () => {
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                         defaultChecked={false}
-                        style={{marginLeft:"0.3rem"}}
+                        style={{ marginLeft: "0.3rem" }}
                       />
                     </Form.Item>
                   </div>
@@ -562,7 +564,12 @@ const BulkOrder = () => {
                 >
                   <p>Cost Per Card</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active  style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}}/>
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
                       {(calculatedCharges?.items &&
@@ -598,15 +605,20 @@ const BulkOrder = () => {
                 >
                   <p>Value Per Card</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")||0}x $
-                      {form.getFieldValue("load-amount")||0}
+                      {form.getFieldValue("card-quantity") || 0}x $
+                      {form.getFieldValue("load-amount") || 0}
                     </p>
                   )}
                 </div>
-                <p>${ResultloadAmt||0}</p>
+                <p>${ResultloadAmt || 0}</p>
               </div>
               <Divider />
               {selectedPaymentMethod === "btc" && (
@@ -670,7 +682,7 @@ const BulkOrder = () => {
                   <Divider />
                 </>
               )}
-                  <div
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -690,17 +702,24 @@ const BulkOrder = () => {
                 >
                   <p>International Transaction Cost</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")||0} x 0.25
+                      {form.getFieldValue("card-quantity") || 0} x 0.25
                     </p>
                   )}
                 </div>
-                <p>$
-                    {(calculatedCharges?.items &&
-                      calculatedCharges?.items[0]?.international_cost) ||
-                      0}</p>
+                <p>
+                  $
+                  {(calculatedCharges?.items &&
+                    calculatedCharges?.items[0]?.international_cost) ||
+                    0}
+                </p>
               </div>
               <Divider />
               <div
@@ -746,7 +765,13 @@ const BulkOrder = () => {
             <h6 style={{ marginTop: "2rem" }}>
               <strong>Order Notes</strong>
             </h6>
-            <Input.TextArea rows={6} cols={4} name="notes"/>
+            <Input.TextArea
+              rows={6}
+              cols={4}
+              onChange={(e) => {
+                setXtraNote(e?.target?.value)
+              }}
+            />
           </div>
         </div>
       </div>
