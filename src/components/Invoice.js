@@ -1,23 +1,22 @@
-import React from "react"
-import "../styles/InvoiceCard.css"
-import logo from "../assets/logo.png"
-import { useLocation, useNavigate } from "react-router-dom"
-import dayjs from "dayjs"
-import { v4 } from "uuid"
+import React from "react";
+import "../styles/InvoiceCard.css";
+import logo from "../assets/logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import { v4 } from "uuid";
 
 const InvoiceCard = () => {
-  const location = useLocation()
-  const state = location?.state || {}
-  const nav = useNavigate()
+  const location = useLocation();
+  const state = location?.state || {};
+  const nav = useNavigate();
 
-  const invoiceId = v4()
+  const invoiceId = v4();
 
   function handlePrintClick() {
     window.print();
   }
 
   return (
-
     <>
       <div className="invoice-container">
         <link
@@ -48,7 +47,7 @@ const InvoiceCard = () => {
                 </a>
                 <a
                   className="btn bg-white btn-light mx-1px text-95"
-                  onClick={() => nav("/bulk-order")}
+                  onClick={() => nav("/bulk-order", { state })}
                   data-title="PDF"
                 >
                   <i className="mr-1 fa fa-pencil  text-120 w-2"></i>
@@ -56,11 +55,11 @@ const InvoiceCard = () => {
                 </a>
               </div>
               <a
-                      href="#"
-                      className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn-upper"
-                    >
-                      Finalize Invoice
-                    </a>
+                href="#"
+                className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn-upper"
+              >
+                Finalize Invoice
+              </a>
             </div>
           </div>
           <div className="container px-0">
@@ -86,21 +85,18 @@ const InvoiceCard = () => {
                     </div>
                     <div className="text-grey-m2">
                       <div className="my-1">
-                      <i className="fa fa-map-marker text-secondary"></i>
-                        {" "}
+                        <i className="fa fa-map-marker text-secondary"></i>{" "}
                         <b>
-                        {state?.personalInfo?.address},
-                        {state?.personalInfo?.city}
+                          {state?.personalInfo?.address},
+                          {state?.personalInfo?.city}
                         </b>
-                     
                       </div>
                       <div className="my-2 state">
                         <b>
-                        {state?.personalInfo?.state},{" "}
-                        {state?.personalInfo?.country},
-                        {state?.personalInfo?.zipcode}
+                          {state?.personalInfo?.state},{" "}
+                          {state?.personalInfo?.country},
+                          {state?.personalInfo?.zipcode}
                         </b>
-                    
                       </div>
                       <div className="my-1">
                         <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
@@ -109,7 +105,7 @@ const InvoiceCard = () => {
                         </b>
                       </div>
                       <div className="my-1">
-                      <i className="fa fa-envelope text-secondary"></i>{" "}
+                        <i className="fa fa-envelope text-secondary"></i>{" "}
                         <b className="text-600">{state?.personalInfo?.email}</b>
                       </div>
                     </div>
@@ -276,7 +272,7 @@ const InvoiceCard = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default InvoiceCard
+export default InvoiceCard;

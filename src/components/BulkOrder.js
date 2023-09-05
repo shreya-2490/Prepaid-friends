@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react"
-import "react-phone-number-input/style.css"
-import NavbarCart from "./NavbarCart"
-import "../styles/BulkOrder.css"
-import { v4 as uuidV4 } from "uuid"
+import React, { useContext, useEffect, useState } from "react";
+import "react-phone-number-input/style.css";
+import NavbarCart from "./NavbarCart";
+import "../styles/BulkOrder.css";
+import { v4 as uuidV4 } from "uuid";
 import {
   Button,
   Form,
@@ -14,60 +14,61 @@ import {
   Skeleton,
   Divider,
   Radio,
-  FormItemProps,
   Switch,
-} from "antd"
-import Footer from "./Footer"
-import { useNavigate } from "react-router-dom"
-import { CartContext } from "./CartContext"
-import { Helmet } from "react-helmet"
-import axios from "axios"
-import MultiSelect from "../shared-components/multi-select"
-import { Country, State } from "country-state-city"
-import FormItem from "antd/es/form/FormItem"
+} from "antd";
+import Footer from "./Footer";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "./CartContext";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import MultiSelect from "../shared-components/multi-select";
+import { Country, State } from "country-state-city";
+import FormItem from "antd/es/form/FormItem";
 
-const { Option } = Select
+const { Option } = Select;
 
 const BulkOrder = () => {
-  const nav = useNavigate()
-  const [form] = Form.useForm()
-  const { addToBulkCart } = useContext(CartContext)
-  const [onFocuseInput, setOnFocuseInput] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [calculatedCharges, setCalculatedCharges] = useState(null)
-  const [reCalculatingCharges, setReCalculatingCharges] = useState(null)
-  const [showDropdown, setShowDropdown] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(false)
-  const [selectedProviders, setSelectedProviders] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState("")
-  const [stateOfCountry, setStateOfCountry] = useState([])
-  const [bins, setBins] = useState([])
-  const [checkboxChecked, setCheckboxChecked] = useState(false)
+  const nav = useNavigate();
+  const location = useLocation();
+  const { state } = location;
+  const [form] = Form.useForm();
+  const { addToBulkCart } = useContext(CartContext);
+  const [onFocuseInput, setOnFocuseInput] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [calculatedCharges, setCalculatedCharges] = useState(null);
+  const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [selectedProviders, setSelectedProviders] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [stateOfCountry, setStateOfCountry] = useState([]);
+  const [bins, setBins] = useState([]);
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
 
   const formItemLayout = {
     display: "inline-block",
-    width: "calc(50% - 5px)"
-  };  
+    width: "calc(50% - 5px)",
+  };
 
   const handleBrokerIdChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     if (
       ["Knox", "Fionna", "Bobby", "knox", "fionna", "bobby"].includes(value)
     ) {
-      setShowDropdown(true)
+      setShowDropdown(true);
       axios
         ?.post("/api/get-bins-for-broker", {
           broker_id: value?.toLowerCase(),
         })
-        ?.then((res) => setBins(res?.data))
+        ?.then((res) => setBins(res?.data));
     } else {
-      setShowDropdown(false)
+      setShowDropdown(false);
     }
-  }
+  };
 
   const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked)
-  }
+    setCheckboxChecked(e.target.checked);
+  };
 
   const handleAddToInvoice = () => {
     nav("/invoice", {
@@ -77,33 +78,33 @@ const BulkOrder = () => {
         selectedProviders,
         selectedPaymentMethod,
       },
-    })
-  }
+    });
+  };
 
-  const pageTitle = "Bulk Order | Prepaid Friends"
+  const pageTitle = "Bulk Order | Prepaid Friends";
   const pageDescription =
-    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service"
+    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service";
 
-  const countries = Country?.getAllCountries()
+  const countries = Country?.getAllCountries();
 
   useEffect(() => {
     const stateOfCountry = State?.getStatesOfCountry(selectedCountry)?.map(
       (state) => ({ value: state?.isoCode, label: state?.name })
-    )
-    setStateOfCountry(stateOfCountry)
-  }, [selectedCountry])
+    );
+    setStateOfCountry(stateOfCountry);
+  }, [selectedCountry]);
 
   const handleCalculateCharges = () => {
-    const quantity = form.getFieldValue("card-quantity") || 0
-    const loadAmount = form.getFieldValue("load-amount") || 0
+    const quantity = form.getFieldValue("card-quantity") || 0;
+    const loadAmount = form.getFieldValue("load-amount") || 0;
     const additionalPurchaseQt =
-      form.getFieldValue("additional-purchase-quantity") || 0
+      form.getFieldValue("additional-purchase-quantity") || 0;
     const isUsedForInternationalTransaction = form.getFieldValue(
       "international-purchases"
-    )
-    const cardType = form.getFieldValue("card-type")
+    );
+    const cardType = form.getFieldValue("card-type");
 
-    setReCalculatingCharges(true)
+    setReCalculatingCharges(true);
     axios
       .post("/api/order-calculation-api", {
         order_type: "bulk",
@@ -121,20 +122,27 @@ const BulkOrder = () => {
       })
       ?.then((res) => setCalculatedCharges(res?.data))
       ?.catch((err) => console.error(err))
-      ?.finally(() => setReCalculatingCharges(false))
-  }
+      ?.finally(() => setReCalculatingCharges(false));
+  };
 
   useEffect(() => {
     if (selectedPaymentMethod) {
-      handleCalculateCharges()
+      handleCalculateCharges();
     }
-  }, [selectedPaymentMethod])
+  }, [selectedPaymentMethod]);
 
   const costpercardResult =
-    ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) || 0) *
-    ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) || 0)
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) ||
+      (state?.charges?.items && state?.charges?.items[0]?.quantity) ||
+      0) *
+    ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) ||
+      (state?.charges?.items && state?.charges?.items[0]?.cost) ||
+      0);
+
   const ResultloadAmt =
-    form.getFieldValue("card-quantity") * form.getFieldValue("load-amount")
+    form.getFieldValue("card-quantity") * form.getFieldValue("load-amount");
+
+  console.log(location?.state);
 
   return (
     <>
@@ -161,6 +169,23 @@ const BulkOrder = () => {
               form={form}
               layout="vertical"
               autoComplete="off"
+              initialValues={{
+                email: state?.personalInfo?.email,
+                "card-quantity": state?.personalInfo["card-quantity"],
+                "load-amount": state?.personalInfo["load-amount"],
+                "broker-id": state?.personalInfo["broker-id"],
+                "international-purchases":
+                  state?.personalInfo["international-purchases"],
+                "first-name": state?.personalInfo["first-name"],
+                "last-name": state?.personalInfo["last-name"],
+                "business-name": state?.personalInfo["business-name"],
+                country: state?.personalInfo["country"],
+                address: state?.personalInfo["address"],
+                city: state?.personalInfo["city"],
+                state: state?.personalInfo["state"],
+                zipcode: state?.personalInfo["zipcode"],
+                "phone-number": state?.personalInfo["phone-number"],
+              }}
               onValuesChange={(changedValues) => {
                 if (
                   changedValues["card-quantity"] ||
@@ -170,22 +195,22 @@ const BulkOrder = () => {
                   !changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
-                  handleCalculateCharges()
+                  handleCalculateCharges();
                 }
               }}
               style={{
                 margin: "75px 20px 0px 20px",
               }}
               onFinish={(value) => {
-                const quantity = form.getFieldValue("card-quantity") || 0
-                const loadAmount = form.getFieldValue("load-amount") || 0
-                const cardType = form.getFieldValue("card-type") || 0
+                const quantity = form.getFieldValue("card-quantity") || 0;
+                const loadAmount = form.getFieldValue("load-amount") || 0;
+                const cardType = form.getFieldValue("card-type") || 0;
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0
+                  form.getFieldValue("additional-purchase-quantity") || 0;
 
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                )
+                );
 
                 addToBulkCart({
                   id: uuidV4(),
@@ -195,7 +220,7 @@ const BulkOrder = () => {
                   cardType,
                   additionalPurchaseQt,
                   isUsedForInternationalTransaction,
-                })
+                });
 
                 nav("/bulk-checkout", {
                   state: {
@@ -205,7 +230,7 @@ const BulkOrder = () => {
                     phoneNumber: value["phone-number"] || "",
                     brokerId: value["broker-id"] || "",
                   },
-                })
+                });
               }}
             >
               <div style={{ marginBottom: "1.4rem" }}>
@@ -340,7 +365,7 @@ const BulkOrder = () => {
                         checkedChildren="Yes"
                         unCheckedChildren="No"
                         defaultChecked={false}
-                        style={{marginLeft:"0.3rem"}}
+                        style={{ marginLeft: "0.3rem" }}
                       />
                     </Form.Item>
                   </div>
@@ -437,10 +462,6 @@ const BulkOrder = () => {
                     style={{ marginBottom: "0.5rem" }}
                     placeholder="House Number or Street Name*"
                   />
-                  {/* <Input
-                    placeholder="Optional"
-                    style={{ marginTop: "0.5rem" }}
-                  /> */}
                 </Form.Item>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
@@ -514,9 +535,9 @@ const BulkOrder = () => {
                         const numericValue = event.target.value.replace(
                           /\D/g,
                           ""
-                        )
-                        const limitedValue = numericValue.slice(0, 10)
-                        setPhoneNumber(limitedValue)
+                        );
+                        const limitedValue = numericValue.slice(0, 10);
+                        setPhoneNumber(limitedValue);
                       }}
                       name="phoneNumber"
                       onFocus={() => setOnFocuseInput("phoneNumber")}
@@ -534,9 +555,9 @@ const BulkOrder = () => {
 
               <Radio.Group
                 onChange={(e) => {
-                  setSelectedPaymentMethod(e?.target?.value)
+                  setSelectedPaymentMethod(e?.target?.value);
                 }}
-                value={selectedPaymentMethod}
+                value={selectedPaymentMethod || state?.selectedPaymentMethod}
               >
                 <Radio value={"wire"}>Wire Transfer</Radio>
                 <Radio value={"btc"}>BTC</Radio>
@@ -562,15 +583,23 @@ const BulkOrder = () => {
                 >
                   <p>Cost Per Card</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active  style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}}/>
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
                       {(calculatedCharges?.items &&
                         calculatedCharges?.items[0]?.quantity) ||
+                        state?.personalInfo["card-quantity"] ||
                         0}
                       x $
                       {(calculatedCharges?.items &&
                         calculatedCharges?.items[0]?.cost) ||
+                        (state?.charges?.items &&
+                          state?.charges?.items[0]?.cost) ||
                         0}
                     </p>
                   )}
@@ -598,15 +627,20 @@ const BulkOrder = () => {
                 >
                   <p>Value Per Card</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")||0}x $
-                      {form.getFieldValue("load-amount")||0}
+                      {form.getFieldValue("card-quantity") || 0}x $
+                      {form.getFieldValue("load-amount") || 0}
                     </p>
                   )}
                 </div>
-                <p>${ResultloadAmt||0}</p>
+                <p>${ResultloadAmt || 0}</p>
               </div>
               <Divider />
               {selectedPaymentMethod === "btc" && (
@@ -670,7 +704,7 @@ const BulkOrder = () => {
                   <Divider />
                 </>
               )}
-                  <div
+              <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -690,17 +724,26 @@ const BulkOrder = () => {
                 >
                   <p>International Transaction Cost</p>
                   {reCalculatingCharges ? (
-                    <Skeleton.Button size="small" shape="square" active style={{marginBottom:"0.8rem", marginLeft:"0.2rem"}} />
+                    <Skeleton.Button
+                      size="small"
+                      shape="square"
+                      active
+                      style={{ marginBottom: "0.8rem", marginLeft: "0.2rem" }}
+                    />
                   ) : (
                     <p style={{ marginLeft: "5px", fontWeight: "500" }}>
-                      {form.getFieldValue("card-quantity")||0} x 0.25
+                      {form.getFieldValue("card-quantity") || 0} x 0.25
                     </p>
                   )}
                 </div>
-                <p>$
-                    {(calculatedCharges?.items &&
-                      calculatedCharges?.items[0]?.international_cost) ||
-                      0}</p>
+                <p>
+                  $
+                  {(calculatedCharges?.items &&
+                    calculatedCharges?.items[0]?.international_cost) ||
+                    (state?.charges?.items &&
+                      state?.charges?.items[0]?.international_cost) ||
+                    0}
+                </p>
               </div>
               <Divider />
               <div
@@ -717,7 +760,12 @@ const BulkOrder = () => {
                 {reCalculatingCharges ? (
                   <Skeleton.Button size="small" shape="square" active />
                 ) : (
-                  <p>${calculatedCharges?.order_total || 0}</p>
+                  <p>
+                    $
+                    {calculatedCharges?.order_total ||
+                      state?.charges?.order_total ||
+                      0}
+                  </p>
                 )}
               </div>
               <div>
@@ -746,12 +794,12 @@ const BulkOrder = () => {
             <h6 style={{ marginTop: "2rem" }}>
               <strong>Order Notes</strong>
             </h6>
-            <Input.TextArea rows={6} cols={4} name="notes"/>
+            <Input.TextArea rows={6} cols={4} name="notes" />
           </div>
         </div>
       </div>
       <Footer />
     </>
-  )
-}
-export default BulkOrder
+  );
+};
+export default BulkOrder;
