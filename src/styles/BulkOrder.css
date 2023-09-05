@@ -146,7 +146,7 @@
     border-color: #fdc886;
   }
   .ant-radio-wrapper .ant-radio-checked .ant-radio-inner:hover{
-    border-color: #fdc886p;
+    border-color: #fdc886;
   }
   .bulk-div-2 {
     width: 80%;
@@ -381,6 +381,32 @@
   .change_email:hover .hover-text .hover-text-content {
     display: none;
   }
+  .css-t3ipsp-control {
+  width: 335px;
+  border-color: #fdc886 !important;
+  height: 2px;
+}
+
+.css-gz0hkv-ValueContainer{
+  overflow: auto !important;
+  max-height: 27px !important;
+  margin-bottom: 0.7rem;
+}
+.css-t3ipsp-control:hover {
+  border-color: #fdc886 !important;
+  height: 2px;
+  width: 335px;
+  box-shadow: none !important;
+}
+.selection-dropdown{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.international-purchase{
+  display: flex;
+  margin-right: 7rem;
+}
 }
 
 /* / =====================Tablet Veiw=========================== / */
@@ -707,6 +733,32 @@
     height: 3rem;
     margin-left: -1.8rem;
   }
+  .css-t3ipsp-control {
+    width: 335px;
+    border-color: #fdc886 !important;
+    height: 2px;
+  }
+  
+  .css-gz0hkv-ValueContainer{
+    overflow: auto !important;
+    max-height: 27px !important;
+    margin-bottom: 0.7rem;
+  }
+  .css-t3ipsp-control:hover {
+    border-color: #fdc886 !important;
+    height: 2px;
+    width: 300px;
+    box-shadow: none !important;
+  }
+  .selection-dropdown{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .international-purchase{
+    display: flex;
+    margin-right: 4rem;
+  }
 }
 
 /* / =====================Mobile Veiw=========================== / */
@@ -944,15 +996,16 @@
   }
   .css-13cymwt-control {
     height: 37px !important;
-    width: 11.3rem !important;
+    width: 17.3rem !important;
     border-color: #fdc886 !important;
-    margin-bottom: 2rem;
+    margin-bottom: 0.1rem;
   }
   .css-1hb7zxy-IndicatorsContainer {
     margin-bottom: 10px !important;
   }
   .css-1jqq78o-placeholder {
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
+    font-size: 0.7rem;
   }
   .css-1yvwecq-ValueContainer {
     padding-bottom: 6rem;
@@ -1000,8 +1053,43 @@
   .change_email:hover .hover-text .hover-text-content {
     display: none;
   }
+  .selection-dropdown{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  
+  .select-providers-dropdown  {
+    width: 235px;
+  }
+  .css-t3ipsp-control {
+    width: 277px;
+    border-color: #fdc886 !important;
+    height: 2px;
+  }
+  
+  .css-gz0hkv-ValueContainer{
+    overflow: hidden !important;
+    max-height: 27px !important;
+    margin-bottom: 0.7rem;
+  }
+  .css-t3ipsp-control:hover {
+    border-color: #fdc886 !important;
+    height: 2px;
+    width: 277px;
+    box-shadow: none !important;
+  }
+  .select-providers-dropdown{
+    width: auto;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .international-purchase{
+    display: flex;
+    margin-right: auto;
+  }
 }
 
-.select-providers-dropdown {
-  width: 235px;
-}
+
+

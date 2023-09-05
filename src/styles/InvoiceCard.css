@@ -1,7 +1,6 @@
 .invoice-container{
   margin-top:20px;
   color: #484b51;
-  
 }
 .fa-circle{
   color: #fdc886;
@@ -30,10 +29,6 @@ color: #1b1b1b;
   font-size: 1.75rem;
   font-weight: 300;
 }
-.brc-default-l1 {
-  border-color: #dce9f0!important;
-}
-
 .ml-n1, .mx-n1 {
   margin-left: -.25rem!important;
 }
@@ -64,7 +59,7 @@ hr {
 }
 
 .text-110 {
-  font-size: 110%!important;
+  font-size: 1rem!important;
 }
 .text-blue {
   color: #478fcc!important;
@@ -81,6 +76,7 @@ hr {
 }
 .bgc-default-l4, .bgc-h-default-l4:hover {
   background-color: #fdf8f2f5!important;
+  border-bottom: #f0911d !important;
 }
 .page-header .page-tools {
   -ms-flex-item-align: end;
@@ -97,7 +93,7 @@ hr {
 }
 
 .text-120 {
-  font-size: 120%!important;
+  font-size: 1.2rem!important;
 }
 .text-primary-m1 {
   color: #4087d4!important;
@@ -130,4 +126,12 @@ hr {
 }
 .fa-print{
   margin-right: 0.3rem;
+}
+@media (min-width: 10px) and (max-width: 640px) {
+  .page-title{
+    font-size: 1rem !important;
+  }
+  .invoice-btn{
+    margin-top: 0rem;
+  }
 }

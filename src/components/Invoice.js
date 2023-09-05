@@ -22,9 +22,9 @@ const InvoiceCard = () => {
         <div className="page-content container">
           <div className="page-header text-blue-d2">
             <h1 className="page-title text-secondary-d1">
-              Invoice
+              Invoice &nbsp;
               <small className="page-info">
-                <i className="fa fa-angle-double-right text-80"></i>
+                <i className="fa fa-angle-double-right text-80"></i>&nbsp;
                 ID: #{invoiceId}
               </small>
             </h1>
@@ -35,7 +35,7 @@ const InvoiceCard = () => {
                   href="#"
                   data-title="Print"
                 >
-                  <i className="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                  <i className="mr-1 fa fa-print text-120 w-2"></i>
                   Print
                 </a>
                 <a
@@ -43,7 +43,7 @@ const InvoiceCard = () => {
                   onClick={() => nav("/bulk-order")}
                   data-title="PDF"
                 >
-                  <i className="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
+                  <i className="mr-1 fa fa-pencil  text-120 w-2"></i>
                   Edit Invoice
                 </a>
               </div>
@@ -54,7 +54,7 @@ const InvoiceCard = () => {
               <div className="col-12 col-lg-12">
                 <div className="row">
                   <div className="col-12">
-                    <div className="text-center text-150">
+                    <div className="text-center text-120 mb-4">
                       <img src={logo}></img>
                     </div>
                   </div>
@@ -64,7 +64,7 @@ const InvoiceCard = () => {
                 <div className="row">
                   <div className="col-sm-6">
                     <div>
-                      <span className="text-600 text-110 text-blue align-middle">
+                      <span className="text-600 text-110 align-middle">
                         {state?.personalInfo["first-name"]}{" "}
                         {state?.personalInfo["last-name"]}
                       </span>
@@ -99,22 +99,27 @@ const InvoiceCard = () => {
                         Invoice
                       </div>
                       <div className="my-2">
-                        <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                        <i className="fa fa-circle text-xs mr-1"></i>{" "}
                         <span className="text-600 text-90">ID:</span> #
                         {invoiceId}
                       </div>
                       <div className="my-2">
-                        <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                        <i className="fa fa-circle text-xs mr-1"></i>{" "}
                         <span className="text-600 text-90">Issue Date:</span>{" "}
                         <span>{dayjs()?.format()}</span>
                       </div>
                       <div className="my-2">
-                        <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                        <i className="fa fa-circle text-xs mr-1"></i>{" "}
+                        <span className="text-600 text-90">CardType:</span>{" "}
+                        <span>{state?.personalInfo["card-type"]}</span>
+                      </div>
+                      <div className="my-2">
+                        <i className="fa fa-circle text-xs mr-1"></i>{" "}
                         <span className="text-600 text-90">BrokerID:</span>{" "}
                         <span>{state?.personalInfo["broker-id"]}</span>
                       </div>
                       <div className="my-2">
-                        <i className="fa fa-circle text-blue-m2 text-xs mr-1"></i>{" "}
+                        <i className="fa fa-circle  text-xs mr-1"></i>{" "}
                         <span className="text-600 text-90">BIN:</span>{" "}
                         <span>
                           {state?.selectedProviders?.map(
@@ -126,7 +131,7 @@ const InvoiceCard = () => {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <div className="row text-600 text-white bgc-default-tp1 py-25">
+                  <div className="row text-600  bgc-default-tp1 py-25">
                     <div className="d-none d-sm-block col-1">#</div>
                     <div className="col-9 col-sm-5">Description</div>
                     <div className="d-none d-sm-block col-4 col-sm-2">Qty</div>
@@ -134,7 +139,7 @@ const InvoiceCard = () => {
                     <div className="col-2">Amount</div>
                   </div>
                   <div className="text-95 text-secondary-d3">
-                    <div className="row mb-2 mb-sm-0 py-25">
+                    <div className="row mb-2 mb-sm-0 py-25 bgc-default-l4">
                       <div className="d-none d-sm-block col-1">1</div>
                       <div className="col-9 col-sm-5">Prepaid Card</div>
                       <div className="d-none d-sm-block col-2">
@@ -159,7 +164,7 @@ const InvoiceCard = () => {
                       <div className="row my-2">
                         <div className="col-7 text-right">SubTotal</div>
                         <div className="col-5">
-                          <span className="text-120 text-secondary-d1">
+                          <span className="text-110 text-secondary-d1">
                             ${state?.charges?.order_subtotal}
                           </span>
                         </div>
@@ -236,7 +241,7 @@ const InvoiceCard = () => {
                     </span>
                     <a
                       href="#"
-                      className="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0"
+                      className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn"
                     >
                       Finalize Invoice
                     </a>

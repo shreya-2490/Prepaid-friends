@@ -37,6 +37,7 @@ ul {
  text-decoration: overline;
  transition: 0.03s;
  font-weight: bold;
+ color: #1b1b1b !important;
 }
 
 
