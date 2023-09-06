@@ -155,7 +155,7 @@ const Payment = () => {
               title="Order Details"
               style={{ borderBottom: "none" }}
             >
-              <img src={visa} width={"100%"} alt="card-info" />
+              <img src={visa} width={"100%"} alt="card-info" className="payment-visa-card"/>
               {email && (
                 <div className="order-details">
                   <p className="order-detail-para">Email Address</p>
