@@ -99,7 +99,7 @@ const Register = () => {
             <input
               className="register-input"
               type="businessname"
-              placeholder="Buisness Name"
+              placeholder="Business Name"
               onChange={(e) => setBusinessName(e?.target?.value)}
             />
             <button

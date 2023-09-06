@@ -1,87 +1,94 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import "../styles/payment.css";
-import { Card, Divider, QRCode, Skeleton } from "antd";
-import visa from "../assets/Visacartpage.png";
-import mastercard from "../assets/Mastercardcartpage.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import Navbarlogo from "./Navbarlogo";
-import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
-import { usdToBTC } from "../utils/helper";
-import { WireTransfer } from "./WireTransfer-thanyoupage";
-import useInterval from "../hooks/useInterval";
-import { useCookies } from "react-cookie";
+import React from "react"
+import { useState, useEffect } from "react"
+import "../styles/payment.css"
+import { Card, Divider, QRCode, Skeleton } from "antd"
+import visa from "../assets/Visacartpage.png"
+import mastercard from "../assets/Mastercardcartpage.png"
+import { useLocation, useNavigate } from "react-router-dom"
+import Navbarlogo from "./Navbarlogo"
+import { v4 as uuidv4 } from "uuid"
+import axios from "axios"
+import { usdToBTC } from "../utils/helper"
+import { WireTransfer } from "./WireTransfer-thanyoupage"
+import useInterval from "../hooks/useInterval"
+import { useCookies } from "react-cookie"
 
 const defaultWireOrderSuccessMessage = `Your order has been placed successfully. Please check your email
-for receipt confirmation and instructions. Thank You!`;
+for receipt confirmation and instructions. Thank You!`
 
 const Payment = () => {
-  const nav = useNavigate();
-  const [btcRate, setBTCRate] = useState(null);
+  const nav = useNavigate()
+  const [btcRate, setBTCRate] = useState(null)
   const [wireOrderSuccessMessage, setWireOrderSuccessMessage] = useState(
     defaultWireOrderSuccessMessage
-  );
-  const location = useLocation();
-  const { email, orderType, data } = location?.state || {};
-  const queryParams = new URLSearchParams(location.search);
-  const input1 = queryParams.get("usdValue");
-  const [usdValue, setUSDValue] = useState(input1);
-  const isBulkOrder = orderType === "bulk-order";
-  const [cookies] = useCookies(["pfAuthToken"]);
-  const [btcRateLoading, setBTCRateLoading] = useState(true);
+  )
+  const location = useLocation()
+  const { email, orderType, data } = location?.state || {}
+  const queryParams = new URLSearchParams(location.search)
+  const input1 = queryParams.get("usdValue")
+  const [usdValue, setUSDValue] = useState(input1)
+  const isBulkOrder = orderType === "bulk-order"
+  const [cookies] = useCookies(["pfAuthToken"])
+  const [btcRateLoading, setBTCRateLoading] = useState(true)
+    const [displayTextIndex, setDisplayTextIndex] = useState(0);
+  const texts = [
+    "Processing your request",
+    "Gathering card information ",
+    "Preparing your card details",
+    "Waiting for Payment Confirmation",
+  ];
 
-  console.log(location?.state);
+  console.log(location?.state)
 
   useEffect(() => {
-    setUSDValue(usdValue);
-  }, []);
+    setUSDValue(usdValue)
+  }, [])
 
   useEffect(() => {
-    const currentDate = new Date();
+    const currentDate = new Date()
 
     // Convert UTC time to PST (UTC - 8 hours)
-    const currentPSTHour = currentDate.getUTCHours() - 8;
+    const currentPSTHour = currentDate.getUTCHours() - 8
 
     const getNextBusinessDayPST = (date) => {
-      const pstOffsetHours = -8;
-      const pstOffsetMilliseconds = pstOffsetHours * 60 * 60 * 1000;
+      const pstOffsetHours = -8
+      const pstOffsetMilliseconds = pstOffsetHours * 60 * 60 * 1000
 
-      const utcDate = date.getTime();
-      const utcDayOfWeek = new Date(utcDate).getUTCDay();
+      const utcDate = date.getTime()
+      const utcDayOfWeek = new Date(utcDate).getUTCDay()
 
-      let daysToAdd = 1;
+      let daysToAdd = 1
 
       if (utcDayOfWeek === 5) {
-        daysToAdd = 3;
+        daysToAdd = 3
       } else if (utcDayOfWeek === 6) {
-        daysToAdd = 2;
+        daysToAdd = 2
       }
 
       const pstNextBusinessDay = new Date(
         utcDate + pstOffsetMilliseconds + daysToAdd * 24 * 60 * 60 * 1000
-      );
+      )
 
-      return pstNextBusinessDay;
-    };
+      return pstNextBusinessDay
+    }
 
-    const nextBusinessDayPST = getNextBusinessDayPST(currentDate);
+    const nextBusinessDayPST = getNextBusinessDayPST(currentDate)
 
     const nextBusinessDay = nextBusinessDayPST.toLocaleString("en-US", {
       weekday: "long",
-    });
+    })
 
     const isWorkingDayPST = (date) => {
-      const pstOffsetHours = -8;
-      const pstOffsetMilliseconds = pstOffsetHours * 60 * 60 * 1000;
+      const pstOffsetHours = -8
+      const pstOffsetMilliseconds = pstOffsetHours * 60 * 60 * 1000
 
-      const pstDate = new Date(date.getTime() + pstOffsetMilliseconds);
-      const pstDayOfWeek = pstDate.getUTCDay();
+      const pstDate = new Date(date.getTime() + pstOffsetMilliseconds)
+      const pstDayOfWeek = pstDate.getUTCDay()
 
-      return pstDayOfWeek >= 1 && pstDayOfWeek <= 5;
-    };
+      return pstDayOfWeek >= 1 && pstDayOfWeek <= 5
+    }
 
-    const isWorkingDay = isWorkingDayPST(currentDate);
+    const isWorkingDay = isWorkingDayPST(currentDate)
 
     if (
       data?.payment_method === "wire" &&
@@ -92,7 +99,7 @@ const Payment = () => {
     ) {
       setWireOrderSuccessMessage(
         `Our team will contact you before 10:00am PST on ${nextBusinessDay}.`
-      );
+      )
     } else if (
       data?.payment_method === "wire" &&
       data?.objectDataReturn?.order_total > 500 &&
@@ -101,32 +108,32 @@ const Payment = () => {
     ) {
       setWireOrderSuccessMessage(
         `Our team will contact you within the hour to confirm your order and send payment instructions. Thank you!!`
-      );
+      )
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
-      setBTCRateLoading(true);
+      setBTCRateLoading(true)
       try {
-        const response = await axios.post("/api/rate-api");
-        const btcPrice = response.data.value;
-        setBTCRate(btcPrice);
+        const response = await axios.post("/api/rate-api")
+        const btcPrice = response.data.value
+        setBTCRate(btcPrice)
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching data:", error)
       } finally {
-        setBTCRateLoading(false);
+        setBTCRateLoading(false)
       }
-    };
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
 
   const totalCartItemsCount = data?.objectDataReturn?.items?.reduce(
     (accumulator, object) => {
-      return accumulator + Number(object.quantity);
+      return accumulator + Number(object.quantity)
     },
     0
-  );
+  )
 
   useInterval(() => {
     if (data?.payment_method !== "wire") {
@@ -134,11 +141,22 @@ const Payment = () => {
         if (res?.data?.status === "Payment not Confirmed Yet.") {
           nav("/thank-you", {
             state: { orderNumber: data?.order_number, email },
-          });
+          })
         }
-      });
+      })
     }
-  }, 3000);
+  }, 3000)
+
+  useEffect(() => {
+    // Use setInterval to rotate through the texts every 10 seconds
+    const intervalId = setInterval(() => {
+      setDisplayTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 5000); // 10000 milliseconds (10 seconds)
+
+    // Clean up the interval when the component unmounts or when you no longer need it
+    return () => clearInterval(intervalId);
+  }, []);
+  const currentText = texts[displayTextIndex];
 
   return (
     <>
@@ -155,7 +173,18 @@ const Payment = () => {
               title="Order Details"
               style={{ borderBottom: "none" }}
             >
-              <img src={visa} width={"100%"} alt="card-info" className="payment-visa-card"/>
+              <div class="image-container">
+                <div class="loader">
+                  <p className="payment-confirmation">{currentText}</p>
+                </div>
+                <img
+                  src={visa}
+                  width={"100%"}
+                  alt="card-info"
+                  className="payment-visa-card"
+                />
+              </div>
+
               {email && (
                 <div className="order-details">
                   <p className="order-detail-para">Email Address</p>
@@ -184,7 +213,7 @@ const Payment = () => {
               {isBulkOrder ? (
                 <>
                   {data?.objectDataReturn?.items?.map((item) => {
-                    const { quantity, amount, subtotal, cardType } = item;
+                    const { quantity, amount, subtotal, cardType } = item
 
                     return (
                       <div className="custom-upper-para-pay">
@@ -209,7 +238,7 @@ const Payment = () => {
                           )}
                         </div>
                       </div>
-                    );
+                    )
                   })}
                   <div className="custom-bottom-para pay-para">
                     <p className="subtotal">Subtotal</p>
@@ -382,7 +411,7 @@ const Payment = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Payment;
+export default Payment
