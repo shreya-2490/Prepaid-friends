@@ -413,6 +413,18 @@
 .ant-select-selection-placeholder {
   font-size: 0.8rem !important;
 }
+.css-1iq9at8 {
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: auto;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  max-height: 29px;
+}
 }
 
 /* / =====================Tablet View=========================== / */
@@ -747,7 +759,18 @@
     border-color: #fdc886 !important;
     height: 2px;
   }
-  
+  .css-1iq9at8 {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: auto;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    max-height: 29px;
+  }
   .css-gz0hkv-ValueContainer{
     overflow: auto !important;
     max-height: 27px !important;
@@ -1008,6 +1031,18 @@
   }
   .countrycode {
     width: 40%;
+  }
+  .css-1iq9at8 {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: auto;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    max-height: 29px;
   }
   .css-13cymwt-control {
     height: 37px !important;
