@@ -173,6 +173,7 @@ const BulkOrder = () => {
               autoComplete="off"
               initialValues={{
                 email: state?.personalInfo?.email,
+                "card-type": state?.personalInfo["card-type"] || "visa-master",
                 "card-quantity": state?.personalInfo["card-quantity"],
                 "load-amount": state?.personalInfo["load-amount"],
                 "broker-id": state?.personalInfo["broker-id"],
@@ -276,7 +277,7 @@ const BulkOrder = () => {
                       },
                     ]}
                   >
-                    <Select defaultValue="visa-master" onChange={() => {}}>
+                    <Select name="card-type">
                       <Option value="visa-master">Visa/MasterCard</Option>
                       <Option value="visa">Visa Only </Option>
                       <Option value="masterCard">MasterCard Only </Option>
