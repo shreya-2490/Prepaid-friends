@@ -55,9 +55,9 @@ const BulkOrder = () => {
   }
 
   const handleBrokerIdChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value.toLowerCase()
     if (
-      ["Knox", "Fionna", "Bobby", "knox", "fionna", "bobby"].includes(value)
+      ["knox", "fionna", "bobby"].includes(value)
     ) {
       setShowDropdown(true)
       axios
