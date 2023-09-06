@@ -199,8 +199,8 @@ const InvoiceCard = () => {
                         <div className="col-7 text-right">Cost Per Card</div>
                         <div className="col-5">
                           <span className="text-110">
-                            {state?.charges?.items[0]?.quantity} x $
-                            {state?.charges?.items[0]?.cost}
+                     
+                            ${state?.costpercardResult.toFixed(3)}
                           </span>
                         </div>
                       </div>

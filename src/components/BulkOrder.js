@@ -82,6 +82,7 @@ const BulkOrder = () => {
         selectedProviders,
         selectedPaymentMethod,
         notes: orderNotes,
+        costpercardResult
       },
     })
   }
