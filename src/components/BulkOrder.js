@@ -299,16 +299,9 @@ const BulkOrder = () => {
                       placeholder="Card Quantity*"
                       type="number"
                       width={50}
-                      min={5}
-                      max={100}
                       defaultValue=""
                       onChange={() => {}}
-                      formatter={(value) =>
-                        value < 5 ? (5).toString() : value.toString()
-                      }
-                      parser={(value) =>
-                        parseInt(value, 10) < 5 ? 5 : parseInt(value, 10)
-                      }
+                      parser={(value) => parseInt(value, 10)}
                       style={{ width: "100%", fontWeight: "400" }}
                     />
                   </Form.Item>
