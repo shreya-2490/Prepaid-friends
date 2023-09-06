@@ -77,8 +77,8 @@ const InvoiceCard = () => {
 
                 <hr className="row brc-default-l1 mx-n1 mb-4" />
                 <div className="row">
-                  <h6>Billed To:</h6>
                   <div className="col-sm-6">
+                    <h6>Billed To:</h6>
                     <div>
                       <span className="text-600 text-110 align-middle">
                         {state?.personalInfo["first-name"]}{" "}
@@ -88,27 +88,21 @@ const InvoiceCard = () => {
                     <div className="text-grey-m2">
                       <div className="my-1">
                         <i className="fa fa-map-marker text-secondary"></i>{" "}
-                        <b>
-                          {state?.personalInfo?.address},
-                          {state?.personalInfo?.city}
-                        </b>
+                        {state?.personalInfo?.address},
+                        {state?.personalInfo?.city}
                       </div>
                       <div className="my-2 state">
-                        <b>
-                          {state?.personalInfo?.state},{" "}
-                          {state?.personalInfo?.country},
-                          {state?.personalInfo?.zipcode}
-                        </b>
+                        {state?.personalInfo?.state},{" "}
+                        {state?.personalInfo?.country},
+                        {state?.personalInfo?.zipcode}
                       </div>
                       <div className="my-1">
                         <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
-                        <b className="text-600">
-                          {state?.personalInfo["phone-number"]}
-                        </b>
+                        {state?.personalInfo["phone-number"]}
                       </div>
                       <div className="my-1">
                         <i className="fa fa-envelope text-secondary"></i>{" "}
-                        <b className="text-600">{state?.personalInfo?.email}</b>
+                        <span>{state?.personalInfo?.email}</span>
                       </div>
                     </div>
                   </div>
