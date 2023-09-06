@@ -38,7 +38,9 @@ const BulkOrder = () => {
   const [calculatedCharges, setCalculatedCharges] = useState(null);
   const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
+    state?.selectedPaymentMethod || ""
+  );
   const [selectedProviders, setSelectedProviders] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [stateOfCountry, setStateOfCountry] = useState([]);
@@ -144,7 +146,7 @@ const BulkOrder = () => {
   const ResultloadAmt =
     form.getFieldValue("card-quantity") * form.getFieldValue("load-amount");
 
-  console.log(location?.state);
+  console.log(selectedPaymentMethod);
 
   return (
     <>
