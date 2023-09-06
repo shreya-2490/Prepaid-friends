@@ -1,6 +1,6 @@
 /* / =====================Desktop Veiw=========================== / */
 
-@media (min-width: 1024px) {
+@media (min-width: 1366px) {
   body {
     margin: 0;
     line-height: normal;
@@ -339,7 +339,6 @@
   .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
     padding-inline-end: 18px;
     font-family: 'Outfit';
-    font-size: 1rem;
     font-weight: normal;
   }
 
@@ -411,10 +410,13 @@
 .ant-switch.ant-switch-checked .ant-switch-inner {
   background-color: #fdc886;
 }
+.ant-select-selection-placeholder {
+  font-size: 0.8rem !important;
+}
 }
 
-/* / =====================Tablet Veiw=========================== / */
-@media (min-width: 641px) and (max-width: 1023px) {
+/* / =====================Tablet View=========================== / */
+@media (min-width: 641px) and (max-width: 1365px) {
   body {
     margin: 0;
     line-height: normal;
@@ -434,6 +436,9 @@
 
     /* border radiuses */
     --br-xl: 20px;
+  }
+  .ant-select-selection-placeholder {
+    font-size: 0.8rem;
   }
 
   .frame-inner,
@@ -784,7 +789,9 @@
     --color-linen: #f5f2ea;
     --br-xl: 20px;
   }
-
+  .ant-select-selection-placeholder {
+    font-size: 0.8rem;
+  }
   .frame-inner,
   .frame-item {
     position: absolute;
