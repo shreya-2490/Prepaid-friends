@@ -181,7 +181,7 @@ const Home = () => {
       </Helmet>
       <div className="main-body">
         <div className="home" id="homee">
-          <div>
+          <div className="title-heading-div">
             <h5 className="home-upper-heading">Turn Crypto into Real Money</h5>
             <h1 className="home-heading">Two Steps to Convenience</h1>
             <h1 className="home-heading-1">
@@ -189,13 +189,13 @@ const Home = () => {
             </h1>
           </div>
 
-          <p className="subtitle">
+          <div className="subtitle">
             With zero hidden fees and enhanced security features, you control
             your spending
             <br /> without compromise. Experience a seamless blend of crypto
             functionality and <br />
             everyday usability today!
-          </p>
+          </div>
           <Button className="how-it-works-btn" onClick={handleButtonClick}>
             HOW IT WORKS
           </Button>
