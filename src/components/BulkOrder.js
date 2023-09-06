@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react"
-import "react-phone-number-input/style.css"
-import NavbarCart from "./NavbarCart"
-import "../styles/BulkOrder.css"
-import { v4 as uuidV4 } from "uuid"
+import React, { useContext, useEffect, useState } from "react";
+import "react-phone-number-input/style.css";
+import NavbarCart from "./NavbarCart";
+import "../styles/BulkOrder.css";
+import { v4 as uuidV4 } from "uuid";
 import {
   Button,
   Form,
@@ -14,63 +14,62 @@ import {
   Skeleton,
   Divider,
   Radio,
-  FormItemProps,
   Switch,
-} from "antd"
-import Footer from "./Footer"
-import { useLocation, useNavigate } from "react-router-dom"
-import { CartContext } from "./CartContext"
-import { Helmet } from "react-helmet"
-import axios from "axios"
-import MultiSelect from "../shared-components/multi-select"
-import { Country, State } from "country-state-city"
-import FormItem from "antd/es/form/FormItem"
+} from "antd";
+import Footer from "./Footer";
+import { useLocation, useNavigate } from "react-router-dom";
+import { CartContext } from "./CartContext";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import MultiSelect from "../shared-components/multi-select";
+import { Country, State } from "country-state-city";
+import FormItem from "antd/es/form/FormItem";
 
-const { Option } = Select
+const { Option } = Select;
 
 const BulkOrder = () => {
-  const nav = useNavigate()
-  const location = useLocation()
-  const { state } = location
-  const [form] = Form.useForm()
-  const { addToBulkCart } = useContext(CartContext)
-  const [onFocuseInput, setOnFocuseInput] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [calculatedCharges, setCalculatedCharges] = useState(null)
-  const [reCalculatingCharges, setReCalculatingCharges] = useState(null)
-  const [showDropdown, setShowDropdown] = useState(false)
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(false)
-  const [selectedProviders, setSelectedProviders] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState("")
-  const [stateOfCountry, setStateOfCountry] = useState([])
-  const [bins, setBins] = useState([])
-  const [xtraNote, setXtraNote] = useState([])
-  const [checkboxChecked, setCheckboxChecked] = useState(false)
+  const nav = useNavigate();
+  const location = useLocation();
+  const { state } = location;
+  const [form] = Form.useForm();
+  const { addToBulkCart } = useContext(CartContext);
+  const [onFocuseInput, setOnFocuseInput] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [calculatedCharges, setCalculatedCharges] = useState(null);
+  const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(false);
+  const [selectedProviders, setSelectedProviders] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [stateOfCountry, setStateOfCountry] = useState([]);
+  const [bins, setBins] = useState([]);
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [orderNotes, setOrderNotes] = useState("");
 
   const formItemLayout = {
     display: "inline-block",
     width: "calc(50% - 5px)",
-  }
+  };
 
   const handleBrokerIdChange = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     if (
       ["Knox", "Fionna", "Bobby", "knox", "fionna", "bobby"].includes(value)
     ) {
-      setShowDropdown(true)
+      setShowDropdown(true);
       axios
         ?.post("/api/get-bins-for-broker", {
           broker_id: value?.toLowerCase(),
         })
-        ?.then((res) => setBins(res?.data))
+        ?.then((res) => setBins(res?.data));
     } else {
-      setShowDropdown(false)
+      setShowDropdown(false);
     }
-  }
+  };
 
   const handleCheckboxChange = (e) => {
-    setCheckboxChecked(e.target.checked)
-  }
+    setCheckboxChecked(e.target.checked);
+  };
 
   const handleAddToInvoice = () => {
     nav("/invoice", {
@@ -79,35 +78,35 @@ const BulkOrder = () => {
         charges: calculatedCharges,
         selectedProviders,
         selectedPaymentMethod,
-        notes:xtraNote,
+        notes: orderNotes,
       },
-    })
-  }
+    });
+  };
 
-  const pageTitle = "Bulk Order | Prepaid Friends"
+  const pageTitle = "Bulk Order | Prepaid Friends";
   const pageDescription =
-    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service"
+    "Purchase prepaid cards with BTC exchange at Prepaid Friends. Simplify your transactions by buying prepaid cards in bulk. Experience convenience and secure access to our prepaid card service";
 
-  const countries = Country?.getAllCountries()
+  const countries = Country?.getAllCountries();
 
   useEffect(() => {
     const stateOfCountry = State?.getStatesOfCountry(selectedCountry)?.map(
       (state) => ({ value: state?.isoCode, label: state?.name })
-    )
-    setStateOfCountry(stateOfCountry)
-  }, [selectedCountry])
+    );
+    setStateOfCountry(stateOfCountry);
+  }, [selectedCountry]);
 
   const handleCalculateCharges = () => {
-    const quantity = form.getFieldValue("card-quantity") || 0
-    const loadAmount = form.getFieldValue("load-amount") || 0
+    const quantity = form.getFieldValue("card-quantity") || 0;
+    const loadAmount = form.getFieldValue("load-amount") || 0;
     const additionalPurchaseQt =
-      form.getFieldValue("additional-purchase-quantity") || 0
+      form.getFieldValue("additional-purchase-quantity") || 0;
     const isUsedForInternationalTransaction = form.getFieldValue(
       "international-purchases"
-    )
-    const cardType = form.getFieldValue("card-type")
+    );
+    const cardType = form.getFieldValue("card-type");
 
-    setReCalculatingCharges(true)
+    setReCalculatingCharges(true);
     axios
       .post("/api/order-calculation-api", {
         order_type: "bulk",
@@ -125,14 +124,14 @@ const BulkOrder = () => {
       })
       ?.then((res) => setCalculatedCharges(res?.data))
       ?.catch((err) => console.error(err))
-      ?.finally(() => setReCalculatingCharges(false))
-  }
+      ?.finally(() => setReCalculatingCharges(false));
+  };
 
   useEffect(() => {
     if (selectedPaymentMethod) {
-      handleCalculateCharges()
+      handleCalculateCharges();
     }
-  }, [selectedPaymentMethod])
+  }, [selectedPaymentMethod]);
 
   const costpercardResult =
     ((calculatedCharges?.items && calculatedCharges?.items[0]?.quantity) ||
@@ -140,12 +139,12 @@ const BulkOrder = () => {
       0) *
     ((calculatedCharges?.items && calculatedCharges?.items[0]?.cost) ||
       (state?.charges?.items && state?.charges?.items[0]?.cost) ||
-      0)
+      0);
 
   const ResultloadAmt =
-    form.getFieldValue("card-quantity") * form.getFieldValue("load-amount")
+    form.getFieldValue("card-quantity") * form.getFieldValue("load-amount");
 
-  console.log(location?.state)
+  console.log(location?.state);
 
   return (
     <>
@@ -198,22 +197,22 @@ const BulkOrder = () => {
                   !changedValues["international-purchases"] ||
                   changedValues["card-type"]
                 ) {
-                  handleCalculateCharges()
+                  handleCalculateCharges();
                 }
               }}
               style={{
                 margin: "75px 20px 0px 20px",
               }}
               onFinish={(value) => {
-                const quantity = form.getFieldValue("card-quantity") || 0
-                const loadAmount = form.getFieldValue("load-amount") || 0
-                const cardType = form.getFieldValue("card-type") || 0
+                const quantity = form.getFieldValue("card-quantity") || 0;
+                const loadAmount = form.getFieldValue("load-amount") || 0;
+                const cardType = form.getFieldValue("card-type") || 0;
                 const additionalPurchaseQt =
-                  form.getFieldValue("additional-purchase-quantity") || 0
+                  form.getFieldValue("additional-purchase-quantity") || 0;
 
                 const isUsedForInternationalTransaction = form.getFieldValue(
                   "international-purchases"
-                )
+                );
 
                 addToBulkCart({
                   id: uuidV4(),
@@ -223,7 +222,7 @@ const BulkOrder = () => {
                   cardType,
                   additionalPurchaseQt,
                   isUsedForInternationalTransaction,
-                })
+                });
 
                 nav("/bulk-checkout", {
                   state: {
@@ -233,7 +232,7 @@ const BulkOrder = () => {
                     phoneNumber: value["phone-number"] || "",
                     brokerId: value["broker-id"] || "",
                   },
-                })
+                });
               }}
             >
               <div style={{ marginBottom: "1.4rem" }}>
@@ -538,9 +537,9 @@ const BulkOrder = () => {
                         const numericValue = event.target.value.replace(
                           /\D/g,
                           ""
-                        )
-                        const limitedValue = numericValue.slice(0, 10)
-                        setPhoneNumber(limitedValue)
+                        );
+                        const limitedValue = numericValue.slice(0, 10);
+                        setPhoneNumber(limitedValue);
                       }}
                       name="phoneNumber"
                       onFocus={() => setOnFocuseInput("phoneNumber")}
@@ -558,7 +557,7 @@ const BulkOrder = () => {
 
               <Radio.Group
                 onChange={(e) => {
-                  setSelectedPaymentMethod(e?.target?.value)
+                  setSelectedPaymentMethod(e?.target?.value);
                 }}
                 value={selectedPaymentMethod || state?.selectedPaymentMethod}
               >
@@ -797,12 +796,18 @@ const BulkOrder = () => {
             <h6 style={{ marginTop: "2rem" }}>
               <strong>Order Notes</strong>
             </h6>
-            <Input.TextArea rows={6} cols={4} name="notes" />
+            <Input.TextArea
+              rows={6}
+              cols={4}
+              name="notes"
+              value={orderNotes || state?.notes}
+              onChange={(e) => setOrderNotes(e?.target?.value)}
+            />
           </div>
         </div>
       </div>
       <Footer />
     </>
-  )
-}
-export default BulkOrder
+  );
+};
+export default BulkOrder;

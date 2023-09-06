@@ -15,7 +15,8 @@ const InvoiceCard = () => {
   function handlePrintClick() {
     window.print();
   }
-  const totalamt = state?.charges?.items[0]?.quantity * state?.charges?.items[0]?.amount
+  const totalamt =
+    state?.charges?.items[0]?.quantity * state?.charges?.items[0]?.amount;
 
   return (
     <>
@@ -170,7 +171,7 @@ const InvoiceCard = () => {
                       </div>
                       <div className="col-2 text-secondary-d2">
                         {" "}
-                       ${totalamt}
+                        ${totalamt}
                       </div>
                     </div>
                   </div>
@@ -179,7 +180,7 @@ const InvoiceCard = () => {
                   <div className="row mt-3">
                     <div className="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
                       Extra Notes:
-                      {/* {state?.notes?.xtraNote} */}
+                      {state?.notes}
                     </div>
                     <div className="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
                       <div className="row my-2">
