@@ -1,6 +1,6 @@
 /* / =====================Desktop Veiw=========================== / */
 
-@media (min-width: 1366px) {
+@media (min-width: 1024px) {
   body {
     margin: 0;
     line-height: normal;
@@ -113,7 +113,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 3rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }
@@ -428,7 +428,7 @@
 }
 
 /* / =====================Tablet View=========================== / */
-@media (min-width: 641px) and (max-width: 1365px) {
+@media (min-width: 641px) and (max-width: 1023px) {
   body {
     margin: 0;
     line-height: normal;
@@ -544,7 +544,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 3rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }
@@ -940,7 +940,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 3rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }

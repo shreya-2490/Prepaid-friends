@@ -1,5 +1,5 @@
 /* / ******************* Full Screen **************************** / */
-@media (min-width: 1366px) {
+@media (min-width: 1024px) {
   @import url("https://fonts.googleapis.com/css2?family=Belanosima&display=swap");
 
   .main-body {
@@ -22,7 +22,7 @@
     width: 60%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 1rem;
     z-index: 1;
   }
@@ -36,7 +36,7 @@
   }
 
   .home-heading {
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 2.2rem;
     color: #fdc886;
     text-align: left;
@@ -48,7 +48,7 @@
     top: 11.5rem;
   }
   .home-heading-1 {
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 1.6rem;
     color: #1b1b1b;
     border: 3px solid #fdc886;
@@ -63,7 +63,7 @@
   .subtitle {
     color: #1b1b1b;
     font-size: 0.9rem;
-    margin-top: 15rem;
+    margin-top: 14.4rem;
     margin-left: 2.5rem;
     text-align: justify;
     width: 40rem;
@@ -78,6 +78,7 @@
     width: 9rem;
     height: 2.5rem;
     margin-left: 2.5rem;
+    margin-top: 1rem;
     text-align: center;
     border: none;
     cursor: pointer;
@@ -147,8 +148,8 @@
     flex-direction: column;
     justify-content: unset;
     z-index: 1;
-    margin-top: 5rem;
-    margin-bottom: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
   }
 
   .first-btn {
@@ -239,6 +240,7 @@
   }
   .ant-input:placeholder-shown {
     font-size: 0.8rem;
+    height: 38px !important;
   }
   .placeholder-input {
     padding: 0.5rem 1rem;
@@ -302,7 +304,8 @@
   }
 
   .currency-symbol {
-    padding: 0.56rem 0rem 0.5rem 1rem;
+    padding: 0.5rem 0rem 0.5rem 1rem;
+    height: 38px !important;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     font-size: 19px;
@@ -311,12 +314,13 @@
     background-color: #f5f2ea;
   }
   .usd-symbol {
-    padding: 0.83rem 1rem 0.3rem 1rem;
+    padding: 0.6rem 0.5rem;
+    height: 38px !important;
     border-top-right-radius: 6px;
     text-align: center;
     border-bottom-right-radius: 6px;
-    font-size: 1rem;
-    color: #555;
+    font-size: 0.8rem;
+    color: #1b1b1b;
     font-weight: 600;
     background-color: #f5f2ea;
   }
@@ -424,7 +428,6 @@
     margin-top: 0.9375rem;
     font-weight: 600 !important;
     align-items: center;
-    cursor: pointer;
     display: inline-flex;
     font-family: "Outfit", sans-serif;
     font-weight: 500;
@@ -433,9 +436,9 @@
     margin-bottom: 0.625rem;
     border: none;
   }
-  .buy-usdt:active {
+   .buy-usdt:active {
     transform: scale(0.989);
-  }
+   } 
   .buy-usdt:hover {
     background-color: #f0bd7f;
   }
@@ -785,9 +788,10 @@
       padding: 3rem !important;
       border: none;
     }
-    .ant-input:placeholder-shown {
-      font-size: 0.8rem;
-    }
+   .ant-input:placeholder-shown {
+    font-size: 0.8rem;
+    height: 38px !important;
+  }
     .placeholder-input {
       padding: 0.5rem 1rem;
       margin: 0.5rem auto;
@@ -849,25 +853,27 @@
       align-items: center;
     }
   
-    .currency-symbol {
-      padding: 0.56rem 0rem 0.5rem 1rem;
-      border-top-left-radius: 6px;
-      border-bottom-left-radius: 6px;
-      font-size: 19px;
-      color: #555;
-      font-weight: 600;
-      background-color: #f5f2ea;
-    }
-    .usd-symbol {
-      padding: 0.83rem 1rem 0.3rem 1rem;
-      border-top-right-radius: 6px;
-      text-align: center;
-      border-bottom-right-radius: 6px;
-      font-size: 1rem;
-      color: #555;
-      font-weight: 600;
-      background-color: #f5f2ea;
-    }
+  .currency-symbol {
+    padding: 0.5rem 0rem 0.5rem 1rem;
+    height: 38px !important;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    font-size: 19px;
+    color: #555;
+    font-weight: 600;
+    background-color: #f5f2ea;
+  }
+  .usd-symbol {
+    padding: 0.5rem 0.5rem;
+    height: 38px !important;
+    border-top-right-radius: 6px;
+    text-align: center;
+    border-bottom-right-radius: 6px;
+    font-size: 1rem;
+    color: #555;
+    font-weight: 600;
+    background-color: #f5f2ea;
+  }
     .popular-amounts {
       font-size: 0.8rem;
       margin-right: 1rem;
@@ -1151,7 +1157,7 @@
   }
 
   .home-heading {
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 1.2rem;
     color: #fdc886;
     text-align: center;
@@ -1163,7 +1169,7 @@
     /* top: 11.5rem; */
   }
   .home-heading-1 {
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 1.1rem;
     color: #1b1b1b;
     border: none;
@@ -1343,6 +1349,7 @@
   }
   .ant-input:placeholder-shown {
     font-size: 0.8rem;
+    height: 38px !important;
   }
   .placeholder-input {
     padding: 0.5rem 1rem;
@@ -1409,7 +1416,8 @@
   }
 
   .currency-symbol {
-    padding: 0.56rem 0rem 0.5rem 1rem;
+    padding: 0.5rem 0rem 0.5rem 1rem;
+    height: 38px !important;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     font-size: 19px;
@@ -1418,7 +1426,8 @@
     background-color: #f5f2ea;
   }
   .usd-symbol {
-    padding: 0.83rem 1rem 0.3rem 1rem;
+    padding: 0.5rem 0.5rem;
+    height: 38px !important;
     border-top-right-radius: 6px;
     text-align: center;
     border-bottom-right-radius: 6px;
@@ -1662,7 +1671,7 @@
 
 /* / ****************** Tablet screen ********************* / */
 
-@media (min-width: 767px) and (max-width: 1365px) {
+@media (min-width: 767px) and (max-width: 1023px) {
   .title-heading-div{
     margin: auto;
     text-align: center;
@@ -1709,7 +1718,7 @@
   }
 
   .home-heading {
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 2.2rem;
     color: #fdc886;
     background-color: #1b1b1b;
@@ -1718,7 +1727,7 @@
 
   .home-heading-1 {
     width: 40rem;
-    font-family: "Belanosima", sans-serif;
+    font-family: "Outfit", sans-serif;
     font-size: 1.1rem;
     color: #1b1b1b;
     border: 3px solid #fdc886;
@@ -1907,6 +1916,7 @@
   }
   .ant-input:placeholder-shown {
     font-size: 0.8rem;
+    height: 38px !important;
   }
   .placeholder-input {
     padding: 0.5rem 1rem;
@@ -1970,7 +1980,8 @@
   }
 
   .currency-symbol {
-    padding: 0.56rem 0rem 0.5rem 1rem;
+    padding: 0.5rem 0rem 0.5rem 1rem;
+    height: 38px !important;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     font-size: 19px;
@@ -1979,7 +1990,8 @@
     background-color: #f5f2ea;
   }
   .usd-symbol {
-    padding: 0.83rem 1rem 0.3rem 1rem;
+    padding: 0.5rem 0.5rem;
+    height: 38px !important;
     border-top-right-radius: 6px;
     text-align: center;
     border-bottom-right-radius: 6px;

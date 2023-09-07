@@ -56,9 +56,7 @@ const BulkOrder = () => {
 
   const handleBrokerIdChange = (e) => {
     const value = e.target.value.toLowerCase()
-    if (
-      ["knox", "fionna", "bobby"].includes(value)
-    ) {
+    if (["knox", "fionna", "bobby"].includes(value)) {
       setShowDropdown(true)
       axios
         ?.post("/api/get-bins-for-broker", {
@@ -82,7 +80,7 @@ const BulkOrder = () => {
         selectedProviders,
         selectedPaymentMethod,
         notes: orderNotes,
-        costpercardResult
+        costpercardResult,
       },
     })
   }
@@ -165,18 +163,19 @@ const BulkOrder = () => {
       </Helmet>
       <NavbarCart />
       <div className="bulk-main">
+        <h4
+          style={{
+            fontWeight: "600",
+            marginTop: "2rem",
+            marginBottom: "2rem",
+            textAlign: "center",
+            textDecoration: "underline",
+          }}
+        >
+          Bulk Prepaid Card Order Form
+        </h4>
         <div className="bulk-division">
           <div className="bulk-div-2">
-            <h4
-              style={{
-                fontWeight: "600",
-                marginTop: "2rem",
-                textAlign: "center",
-                textDecoration: "underline",
-              }}
-            >
-              Bulk Prepaid Card Order Form
-            </h4>
             <Form
               name="bulk-orders-form"
               form={form}
@@ -213,7 +212,7 @@ const BulkOrder = () => {
                 }
               }}
               style={{
-                margin: "75px 20px 0px 20px",
+                margin: "40px 20px 0px 20px",
               }}
               onFinish={(value) => {
                 const quantity = form.getFieldValue("card-quantity") || 0
@@ -764,7 +763,7 @@ const BulkOrder = () => {
                     fontWeight: "600",
                   }}
                 >
-                  <p>International Transaction Cost</p>
+                  <p>International Transaction Fee</p>
                   {reCalculatingCharges ? (
                     <Skeleton.Button
                       size="small"
@@ -841,6 +840,7 @@ const BulkOrder = () => {
               cols={4}
               name="notes"
               value={orderNotes || state?.notes}
+              style={{ resize: 'none' }}
               onChange={(e) => setOrderNotes(e?.target?.value)}
             />
           </div>

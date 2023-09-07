@@ -1,6 +1,6 @@
 /* / / =====================Desktop Veiw=========================== / / */
 
-@media (min-width: 1366px) {
+@media (min-width: 1024px) {
   .checkout-main1 {
     background-color: #f5f2ea;
     min-height: 100vh;
@@ -76,6 +76,7 @@
   .email-div {
     display: flex;
     justify-content: space-between;
+    font-size: 0.9rem;
   }
 
   .change {
@@ -135,6 +136,10 @@
     margin-top: 2rem;
     margin-bottom: -0.7rem;
   }
+  .subtotal-value{
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
   .custom-bottom-para-pay-para {
     display: flex;
     align-items: baseline;
@@ -156,6 +161,7 @@
 .order-detail-para {
   margin-bottom: 0rem;
   font-weight: 600;
+  font-size: 0.93rem;
 }
 .ant-qrcode {
   width: auto !important;
@@ -209,7 +215,7 @@
 
 /* / / *************** Tablet Design ******************** / / */
 
-@media (min-width: 641px) and (max-width: 1365px) {
+@media (min-width: 641px) and (max-width: 1023px) {
   .checkout-main1 {
     background-color: #f5f2ea;
     min-height: 100vh;

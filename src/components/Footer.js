@@ -6,7 +6,7 @@ function Footer() {
   return (
     <>
     <div className="footer">
-
+    <div className="termandprivacy">
       <Link to="/terms-conditions" className="termscondition">
         Terms & Conditions <span className="divider-bet">|</span>
       </Link>
@@ -14,7 +14,7 @@ function Footer() {
         Privacy Policy
         </Link>
 
-        
+        </div>
         <span className="copyright">Copyright © 2023 | All Rights Reserved</span>
         <div className="social-handles">
           <a href="https://www.facebook.com/prepaidfriendss" className="social-media" target="_blank"><FacebookOutlined /> </a>

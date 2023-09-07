@@ -1,6 +1,6 @@
 
 /***************************Laptop View**********************/
-@media (min-width: 1366px) {
+@media (min-width: 1024px) {
 
 .footer {
   color: #1b1b1b;
@@ -37,7 +37,10 @@
   color: #1b1b1b;
 
 }
-
+.termandprivacy a:hover{
+  color: #000 !important;
+  font-weight: 600;
+}
 .copyright {
   text-align: right;
   width: 40%;
@@ -101,6 +104,10 @@
     font-size: 1rem;
     white-space: nowrap;
   }
+  .termandprivacy a:hover{
+    color: #000 !important;
+    font-weight: 600;
+  }
   .privacy {
     margin-left: 0.5rem;
     color: #1b1b1b;
@@ -124,7 +131,7 @@
 
 /* **************** Tablet SCreen **************** */
 
-@media screen and (min-width: 768px) and (max-width: 1365px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
 
   .footer-mobile {
     color: #1b1b1b;
@@ -155,6 +162,10 @@
     width: auto;
     font-size: 1rem;
     white-space: nowrap;
+  }
+  .termandprivacy a:hover{
+    color: #000 !important;
+    font-weight: 600;
   }
   .privacy {
     margin-left: 0.5rem;

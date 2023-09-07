@@ -362,7 +362,7 @@ const Payment = () => {
 
                   <p className="subtotal">Total</p>
                   <div className="custom-bottom-para pay-para">
-                    <p>${data?.objectDataReturn?.order_total}</p>
+                    <p className="subtotal-value">${data?.objectDataReturn?.order_total}</p>
                     {btcRateLoading ? (
                       <Skeleton.Button size="small" shape="square" active />
                     ) : (

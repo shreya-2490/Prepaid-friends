@@ -83,7 +83,7 @@
     font: 1rem;
     display: flex;
     margin-left: 0rem;
-    font-weight: 400;
+    font-weight: 600;
     margin-right: 2rem;
   }
 
@@ -355,7 +355,7 @@
   .value {
     font: 1rem;
     display: flex;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .valueheading {
@@ -660,7 +660,7 @@
   .value {
     font: 1rem;
     display: flex;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .value123 {

@@ -28,6 +28,7 @@ const Home = () => {
   const [happyCustomers, setHappyCustomers] = useState(0)
   const [cardValue, setCardValue] = useState(0)
   const [emailError, setEmailError] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleMainButtonClick = (event, buttonId) => {
     event.preventDefault()
@@ -46,6 +47,13 @@ const Home = () => {
     }
   }, [])
 
+  const updateButtonDisabled = () => {
+    if (emailValue && usdValue) {
+      return false
+    }
+    return true
+  }
+
   const handleBuyButtonClickMain = () => {
     if (btcValue === "0.00000") {
       return
@@ -58,6 +66,7 @@ const Home = () => {
       } else {
         setEmailError("")
         setIsSendingToPayment(true)
+        setIsLoading(true)
         usdValue
           ? axios
               ?.post(`/api/preowned-order`, {
@@ -81,7 +90,10 @@ const Home = () => {
                   err?.response?.data?.error || err?.response?.data?.message
                 )
               )
-              ?.finally(() => setIsSendingToPayment(false))
+              ?.finally(() => {
+                setIsSendingToPayment(false)
+                setIsLoading(false)
+              })
           : showAlert(true)
       }
     }
@@ -275,6 +287,7 @@ const Home = () => {
                         className="placeholder-input"
                         placeholder=" Enter your email"
                         value={emailValue}
+                        autoComplete="on"
                         onChange={(e) => setEmailValue(e.target.value)}
                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
                         rules={[
@@ -302,13 +315,14 @@ const Home = () => {
                       />
                     )}
 
-                    <button
+                    <Button
                       className="buy-usdt"
-                      type="button"
+                      type="submit"
                       onClick={handleBuyButtonClickMain}
+                      disabled={isLoading}
                     >
-                      ORDER NOW
-                    </button>
+                      {isLoading ? "Processing your request..." : "ORDER NOW"}
+                    </Button>
                   </div>
                   {usdValue && (
                     <div className="xtra-charges">
@@ -365,50 +379,6 @@ const Home = () => {
                       </>
                     </div>
                   )}
-                  <Modal
-                    title="⚠️ Warning"
-                    open={isModalVisible}
-                    onCancel={handleModalCancel}
-                    footer={null}
-                    className="email-alert-box"
-                  >
-                    <div className="alert-email">
-                      <p>
-                        It appears that you have not entered your email address.
-                        Without an email address, you will not receive an order
-                        confirmation in your inbox.
-                        <br />
-                      </p>
-                      <h5>Why is this important? </h5>
-                      <p>
-                        Your order confirmation email will contain essential
-                        details about your purchase, including your card
-                        details.
-                      </p>
-                      <h5>What to do if you proceed without an email? </h5>
-                      <p>
-                        If you choose to proceed without entering an email, you
-                        can still contact our support team with your wallet
-                        address to receive your card details and order
-                        confirmation.
-                      </p>
-                    </div>
-                    <div className="cart-modal-footer alert-btn">
-                      <Button
-                        className="ant-btn-default"
-                        onClick={handleProceed}
-                        style={{ backgroundColor: "#fdc886" }}
-                      >
-                        Proceed to Pay
-                      </Button>
-                      <Button
-                        className="ant-btn-default"
-                        onClick={handleModalCancel}
-                      >
-                        Enter Email
-                      </Button>
-                    </div>
-                  </Modal>
                 </div>
               </div>
             </div>
