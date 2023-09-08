@@ -1,23 +1,74 @@
-import React from "react"
-import "../styles/InvoiceCard.css"
-import logo from "../assets/logo.png"
-import { useLocation, useNavigate } from "react-router-dom"
-import dayjs from "dayjs"
-import { v4 } from "uuid"
-import { Input } from "antd"
+import React, { useState } from "react";
+import "../styles/InvoiceCard.css";
+import logo from "../assets/logo.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import { v4 } from "uuid";
+import { Button, Input, message } from "antd";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 const InvoiceCard = () => {
-  const location = useLocation()
-  const state = location?.state || {}
-  const nav = useNavigate()
+  const location = useLocation();
+  const state = location?.state || {};
+  const nav = useNavigate();
+  const [isSubmittingInvoice, setIsSubmittingInvoice] = useState(false);
+  const [cookies] = useCookies(["pfAuthToken"]);
 
-  const invoiceId = v4()
+  const invoiceId = v4()?.slice(0, 8);
 
   function handlePrintClick() {
-    window.print()
+    window.print();
   }
   const totalamt =
-    state?.charges?.items[0]?.quantity * state?.charges?.items[0]?.amount
+    state?.charges?.items[0]?.quantity * state?.charges?.items[0]?.amount;
+
+  const handleFinalizeInvoice = (e) => {
+    e?.preventDefault();
+    setIsSubmittingInvoice(true);
+    const { personalInfo, selectedProviders, selectedPaymentMethod } = state;
+    axios
+      ?.post(
+        "/api/save-bulk-order-api",
+        {
+          first_name: personalInfo["first-name"],
+          last_name: personalInfo["last-name"],
+          address: personalInfo?.address,
+          city: personalInfo?.city,
+          state: personalInfo?.state,
+          zip: personalInfo?.zipcode,
+          country: personalInfo?.country,
+          phone_no: personalInfo["phone-number"],
+          broker_id: personalInfo["broker-id"],
+          bin_order: selectedProviders?.map((provider) => provider?.value),
+          business_name: personalInfo["business-name"],
+          email: personalInfo?.email,
+          payment_method: selectedPaymentMethod,
+          guest: cookies?.pfAuthToken ? false : true,
+          items: [
+            {
+              cardType: personalInfo["card-type"],
+              quantity: personalInfo["card-quantity"],
+              amount: personalInfo["load-amount"],
+              additional_transactions: false,
+              additional_transactions_no: 0,
+              international_transaction:
+                personalInfo["international-purchases"],
+            },
+          ],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies?.pfAuthToken}`,
+          },
+        }
+      )
+      ?.then((res) =>
+        message?.success("Invoice has been sent to your email address")
+      )
+      ?.catch((err) => message?.error(err?.response?.data?.error))
+      ?.finally(() => setIsSubmittingInvoice(false));
+  };
 
   return (
     <>
@@ -56,12 +107,15 @@ const InvoiceCard = () => {
                   <i className="mr-1 fa fa-pencil text-success text-120 w-2"></i>
                   Edit Invoice
                 </a>
-                <a
+                <Button
                   href="#"
                   className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn-upper"
+                  onClick={handleFinalizeInvoice}
+                  disabled={isSubmittingInvoice}
+                  loading={isSubmittingInvoice}
                 >
                   Finalize Invoice
-                </a>
+                </Button>
               </div>
             </div>
           </div>
@@ -76,17 +130,19 @@ const InvoiceCard = () => {
                   </div>
                 </div>
 
-                <p style={{borderBottom:"1px dotted #e2e2e2"}}/>
+                <p style={{ borderBottom: "1px dotted #e2e2e2" }} />
                 <div className="row">
                   <div className="col-sm-6">
-                    <h6 className="mt-1 mb-2 text-secondary-m1 text-600 text-125">Billed To</h6>
+                    <h6 className="mt-1 mb-2 text-secondary-m1 text-600 text-125">
+                      Billed To
+                    </h6>
                     <div>
                       <span className="text-600 text-110 align-middle py-2">
                         {state?.personalInfo["first-name"]}{" "}
                         {state?.personalInfo["last-name"]}
                       </span>
                     </div>
-                    <div >
+                    <div>
                       <div className="my-1 py-1">
                         <i className="fa fa-map-marker text-secondary"></i>{" "}
                         {state?.personalInfo?.address},&nbsp;
@@ -95,9 +151,7 @@ const InvoiceCard = () => {
                         {state?.personalInfo?.country},&nbsp;
                         {state?.personalInfo?.zipcode}
                       </div>
-                      <div className="my-2 state">
-                       
-                      </div>
+                      <div className="my-2 state"></div>
                       <div className="my-1 py-1">
                         <i className="fa fa-phone fa-flip-horizontal text-secondary"></i>{" "}
                         {state?.personalInfo["phone-number"]}
@@ -111,7 +165,7 @@ const InvoiceCard = () => {
 
                   <div className="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
                     <hr className="d-sm-none" />
-                    <div >
+                    <div>
                       <div className="mt-1 mb-2 text-secondary-m1 text-600 text-125">
                         Invoice
                       </div>
@@ -178,9 +232,8 @@ const InvoiceCard = () => {
                       <span>Extra Notes:</span>
                       <br />
                       <Input.TextArea
-
                         className="notes"
-                        style={{ width: '300px', height: '150px' }}
+                        style={{ width: "300px", height: "150px" }}
                         name="notes"
                         value={state?.notes}
                         readOnly
@@ -199,7 +252,6 @@ const InvoiceCard = () => {
                         <div className="col-7 text-right">Cost Per Card</div>
                         <div className="col-5">
                           <span className="text-110">
-                     
                             ${state?.costpercardResult.toFixed(3)}
                           </span>
                         </div>
@@ -251,7 +303,9 @@ const InvoiceCard = () => {
                         </>
                       )}
                       <div className="row my-2 align-items-center bgc-primary-l3">
-                        <div className="col-7 text-right total-amt">Total Amount</div>
+                        <div className="col-7 text-right total-amt">
+                          Total Amount
+                        </div>
                         <div className="col-5">
                           <span className="text-success-d3 total-amt">
                             ${state?.charges?.order_total}
@@ -265,22 +319,24 @@ const InvoiceCard = () => {
                     Thank you for your business
                   </p>
                   <div className="finalize-invoice-div">
-                    <a
+                    <Button
                       href="#"
                       className="btn btn-bold px-4 float-right mt-3 mt-lg-0 invoice-btn"
+                      onClick={handleFinalizeInvoice}
+                      disabled={isSubmittingInvoice}
+                      loading={isSubmittingInvoice}
                     >
                       Finalize Invoice
-                    </a>
+                    </Button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-  
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default InvoiceCard
+export default InvoiceCard;
