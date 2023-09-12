@@ -25,9 +25,9 @@ import ProtectedRoute from "./shared-components/protected-route";
 import Reset from "./components/reset";
 import { AuthContext } from "./context/auth-context";
 import { useCookies } from "react-cookie";
-// import ShowItem from "./components/Showitem";
 import Invoice from "./components/Invoice"
 import Email from "./components/Emailtemplateimages";
+import ShowItem from "./components/showItem";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -110,14 +110,14 @@ function App() {
                 <Route path="/contact-us" element={<ContactUs />} />
               </Routes>
               <Routes>
+              <Route path="/show-item/:orderId" element={<ShowItem/>}/>
+              </Routes>
+              <Routes>
                 <Route path="/terms-conditions" element={<Terms />} />
               </Routes>
               <Routes>
                 <Route path="/privacy-policy" element={<Policy />} />
               </Routes>
-              {/* <Routes>
-                <Route path="/view-card" element={<ShowItem />} />
-              </Routes> */}
               <Routes>
                 <Route path="/images" element={<ProtectedRoute><Email /></ProtectedRoute>} />
               </Routes>

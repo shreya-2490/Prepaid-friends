@@ -44,7 +44,7 @@
 
   .box2 {
     width: 50%;
-    padding: 2rem 0;
+    padding: 4.72rem 0;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -66,7 +66,7 @@
   .box2 input {
     background-color: white;
     border: 1px solid #fdc886;
-    padding: 1.2rem 9rem 1.2rem 1.5rem;
+    padding: 0.5rem 7rem 0.5rem 1.5rem;
     border-radius: 1rem;
     font-weight: 500;
     font-size: 0.96rem;
@@ -156,7 +156,7 @@
 
   .box2 input {
     background-color: rgb(245, 242, 234);
-    padding: 1.5rem 9rem 1.5rem 1.5rem;
+    padding: 0.5rem 7rem 0.5rem 1.5rem;
     border-radius: 1rem;
   }
 
@@ -232,7 +232,7 @@
 
   .box2 input {
     background-color: rgb(245, 242, 234);
-    padding: 1.5rem 4rem 1.5rem 1rem;
+    padding: 0.5rem 3rem 0.5rem 1rem;
     border-radius: 0.6rem;
   }
 

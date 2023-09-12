@@ -463,7 +463,7 @@ const BulkOrder = () => {
                     value={selectedCountry}
                     onChange={(val) => setSelectedCountry(val)}
                     placeholder="Select a country*"
-                    isSearchable
+                    isSearchable={true}
                     filterOption={(inputValue, option) =>
                       option.label
                         .toLowerCase()
@@ -541,6 +541,7 @@ const BulkOrder = () => {
                   >
                     <Input
                       placeholder="ZIP code*"
+                      maxLength={6}
                       onKeyPress={(e) => {
                         const charCode = e.which ? e.which : e.keyCode;
                         if (
@@ -569,7 +570,7 @@ const BulkOrder = () => {
                   <span style={{ display: "flex" }}>
                     <Input
                       type="tel"
-                      id="phone"
+                      id="phone-number"
                       placeholder="Phone Number*"
                       value={phoneNumber}
                       onChange={(event) => {
@@ -580,8 +581,8 @@ const BulkOrder = () => {
                         const limitedValue = numericValue.slice(0, 10);
                         setPhoneNumber(limitedValue);
                       }}
-                      name="phoneNumber"
-                      onFocus={() => setOnFocuseInput("phoneNumber")}
+                      name="phone-number"
+                      onFocus={() => setOnFocuseInput("phone-number")}
                     />
                   </span>
                 </Form.Item>

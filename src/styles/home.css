@@ -404,6 +404,9 @@
   .alert-btn {
     padding: 0px 20px 20px;
   }
+  .ant-modal {
+    margin: auto 20rem !important;
+  }
   .email-alert-box .ant-modal-title {
     text-align: center;
     font-size: 1.3rem;
@@ -417,6 +420,7 @@
   }
   .ant-modal .ant-modal-content {
     padding: 0px 0px !important;
+    width: 170%;
   }
   .buy-usdt {
     color: #1b1b1b;
