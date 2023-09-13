@@ -23,10 +23,14 @@ import axios from "axios";
 import MultiSelect from "../shared-components/multi-select";
 import { Country, State } from "country-state-city";
 import FormItem from "antd/es/form/FormItem";
+import { useCookies } from "react-cookie";
+import { AuthContext } from "../context/auth-context";
 
 const { Option } = Select;
 
 const BulkOrder = () => {
+  const [cookies] = useCookies(["pfAuthToken"]);
+  const { user } = useContext(AuthContext);
   const nav = useNavigate();
   const location = useLocation();
   const { state } = location;
@@ -180,7 +184,7 @@ const BulkOrder = () => {
               layout="vertical"
               autoComplete="off"
               initialValues={{
-                email: state?.personalInfo?.email,
+                email: state?.personalInfo?.email || user?.email,
                 "card-type": state?.personalInfo["card-type"] || "visa-master",
                 "card-quantity": state?.personalInfo["card-quantity"],
                 "load-amount": state?.personalInfo["load-amount"],
@@ -261,7 +265,10 @@ const BulkOrder = () => {
                     },
                   ]}
                 >
-                  <Input placeholder="Email Address*" />
+                  <Input
+                    placeholder="Email Address*"
+                    disabled={cookies?.pfAuthToken}
+                  />
                 </Form.Item>
                 <Divider />
               </div>
