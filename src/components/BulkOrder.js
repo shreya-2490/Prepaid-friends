@@ -32,8 +32,9 @@ const BulkOrder = () => {
   const { state } = location;
   const [form] = Form.useForm();
   const { addToBulkCart } = useContext(CartContext);
-  const [onFocuseInput, setOnFocuseInput] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState(
+    state?.personalInfo["phone-number"] || ""
+  );
   const [calculatedCharges, setCalculatedCharges] = useState(null);
   const [reCalculatingCharges, setReCalculatingCharges] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -151,8 +152,6 @@ const BulkOrder = () => {
 
   const ResultloadAmt =
     form.getFieldValue("card-quantity") * form.getFieldValue("load-amount");
-
-  console.log(selectedPaymentMethod);
 
   return (
     <>
@@ -570,7 +569,6 @@ const BulkOrder = () => {
                   <span style={{ display: "flex" }}>
                     <Input
                       type="tel"
-                      id="phone-number"
                       placeholder="Phone Number*"
                       value={phoneNumber}
                       onChange={(event) => {
@@ -582,7 +580,6 @@ const BulkOrder = () => {
                         setPhoneNumber(limitedValue);
                       }}
                       name="phone-number"
-                      onFocus={() => setOnFocuseInput("phone-number")}
                     />
                   </span>
                 </Form.Item>
