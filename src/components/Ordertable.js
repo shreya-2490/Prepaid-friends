@@ -80,11 +80,8 @@ const OrderTable = () => {
     },
     {
       title: "Date",
-      key: "created_at",
-      dataIndex: "created_at",
-      render: (value) => {
-        return <p>{dayjs(value)?.format()}</p>
-      },
+      key: "order_date",
+      dataIndex: "order_date",
     },
     {
       title: "Actions",
