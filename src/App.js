@@ -28,6 +28,7 @@ import { useCookies } from "react-cookie";
 import Invoice from "./components/Invoice"
 import Email from "./components/Emailtemplateimages";
 import ShowItem from "./components/showItem";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -147,6 +148,9 @@ function App() {
               <Routes>
                 <Route path="/how-it-works" element={<HowItWorks />} />
               </Routes>
+              <Routes>
+  <Route path="*" element={<NotFound />} />
+</Routes>
             </ScrollToTop>
           </Router>
         </CartProvider>
