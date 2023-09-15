@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { Alert, Input, Space, Tag, Modal, Button, message, Divider } from "antd"
+import { useState, useEffect, useContext } from "react"
+import { Alert, Input, Space, Tag, Button, message, Divider } from "antd"
 import { useNavigate } from "react-router-dom"
 import { InfoCircleOutlined } from "@ant-design/icons"
 import "../styles/home.css"
@@ -9,6 +9,8 @@ import { Helmet } from "react-helmet"
 import { usdToBTC } from "../utils/helper"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { AuthContext } from "../context/auth-context"
+import { useCookies } from "react-cookie"
 
 const Home = () => {
   const [usdValue, setUSDValue] = useState("")
@@ -16,6 +18,8 @@ const Home = () => {
   const [button, setButton] = useState(1)
   const [alert, showAlert] = useState(false)
   const navigate = useNavigate()
+  const [cookies] = useCookies(["pfAuthToken"])
+  const { user } = useContext(AuthContext)
   const [isCalculatingBtcEquivalent, setIsCalculatingBtcEquivalent] =
     useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -63,6 +67,47 @@ const Home = () => {
         !emailValue.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
       ) {
         setEmailError("Please enter a valid email address.")
+      }
+      if (user?.email) {
+        setEmailError("")
+        setIsSendingToPayment(true)
+        setIsLoading(true)
+        usdValue
+          ? axios
+              ?.post(
+                `/api/preowned-order`,
+                {
+                  email: user?.email,
+                  payment_method: "btc",
+                  guest: false,
+                  items: [
+                    {
+                      quantity: 1,
+                      price: usdValue,
+                    },
+                  ],
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${cookies?.pfAuthToken}`,
+                  },
+                }
+              )
+              .then((res) =>
+                navigate(`/payment`, {
+                  state: { email: emailValue, data: res?.data },
+                })
+              )
+              .catch((err) =>
+                message.error(
+                  err?.response?.data?.error || err?.response?.data?.message
+                )
+              )
+              ?.finally(() => {
+                setIsSendingToPayment(false)
+                setIsLoading(false)
+              })
+          : showAlert(true)
       } else {
         setEmailError("")
         setIsSendingToPayment(true)
@@ -284,9 +329,10 @@ const Home = () => {
                       </span>
                       <Input
                         type="email"
+                        disabled={Boolean(cookies?.pfAuthToken)}
                         className="placeholder-input"
                         placeholder=" Enter your email"
-                        value={emailValue}
+                        value={emailValue || (user?.email ? user.email : '')}
                         autoComplete="on"
                         onChange={(e) => setEmailValue(e.target.value)}
                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"

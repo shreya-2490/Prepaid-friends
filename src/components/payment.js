@@ -1,5 +1,5 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import "../styles/payment.css"
 import { Card, Divider, QRCode, Skeleton } from "antd"
 import visa from "../assets/Visacartpage.png"
@@ -12,7 +12,7 @@ import { usdToBTC } from "../utils/helper"
 import { WireTransfer } from "./WireTransfer-thanyoupage"
 import useInterval from "../hooks/useInterval"
 import { useCookies } from "react-cookie"
-
+import { AuthContext } from "../context/auth-context"
 const defaultWireOrderSuccessMessage = `Your order has been placed successfully. Please check your email
 for receipt confirmation and instructions. Thank You!`
 
@@ -29,14 +29,16 @@ const Payment = () => {
   const [usdValue, setUSDValue] = useState(input1)
   const isBulkOrder = orderType === "bulk-order"
   const [cookies] = useCookies(["pfAuthToken"])
+  const { user } = useContext(AuthContext)
+
   const [btcRateLoading, setBTCRateLoading] = useState(true)
-    const [displayTextIndex, setDisplayTextIndex] = useState(0);
+  const [displayTextIndex, setDisplayTextIndex] = useState(0)
   const texts = [
     "Processing your request",
     "Gathering card information ",
     "Preparing your card details",
     "Waiting for Payment Confirmation",
-  ];
+  ]
 
   console.log(location?.state)
 
@@ -150,13 +152,13 @@ const Payment = () => {
   useEffect(() => {
     // Use setInterval to rotate through the texts every 10 seconds
     const intervalId = setInterval(() => {
-      setDisplayTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 5000); // 10000 milliseconds (10 seconds)
+      setDisplayTextIndex((prevIndex) => (prevIndex + 1) % texts.length)
+    }, 5000) // 10000 milliseconds (10 seconds)
 
     // Clean up the interval when the component unmounts or when you no longer need it
-    return () => clearInterval(intervalId);
-  }, []);
-  const currentText = texts[displayTextIndex];
+    return () => clearInterval(intervalId)
+  }, [])
+  const currentText = texts[displayTextIndex]
 
   return (
     <>
@@ -185,11 +187,11 @@ const Payment = () => {
                 />
               </div>
 
-              {email && (
+              {(user?.email || email) && (
                 <div className="order-details">
                   <p className="order-detail-para">Email Address</p>
                   <div className="email-div">
-                    <p className="emailad">{email}</p>
+                    <p className="emailad">{user?.email || email}</p>
                   </div>
                 </div>
               )}
@@ -362,7 +364,9 @@ const Payment = () => {
 
                   <p className="subtotal">Total</p>
                   <div className="custom-bottom-para pay-para">
-                    <p className="subtotal-value">${data?.objectDataReturn?.order_total}</p>
+                    <p className="subtotal-value">
+                      ${data?.objectDataReturn?.order_total}
+                    </p>
                     {btcRateLoading ? (
                       <Skeleton.Button size="small" shape="square" active />
                     ) : (
