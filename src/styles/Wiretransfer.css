@@ -42,6 +42,9 @@
   .animated-checkmark {
     animation: checkmarkAnimation 0.5s ease-in-out forwards;
   }
+  .cross-icon{
+    height: 3.8rem;
+  }
 
   .wiretransfer-circle h1 {
     font-weight: 800;
@@ -136,6 +139,9 @@
   .animated-checkmark {
     animation: checkmarkAnimation 0.5s ease-in-out forwards;
   }
+  .cross-icon{
+    height: 3.8rem;
+  }
   .wiretransfer-circle h1 {
     font-weight: 800;
     color: #1b1b1bbf;
@@ -227,6 +233,9 @@
 
   .animated-checkmark {
     animation: checkmarkAnimation 0.5s ease-in-out forwards;
+  }
+  .cross-icon{
+    height: 3rem;
   }
 
   .wiretransfer-circle h1 {

@@ -29,6 +29,7 @@ import Invoice from "./components/Invoice"
 import Email from "./components/Emailtemplateimages"
 import ShowItem from "./components/showItem"
 import NotFound from "./components/NotFound"
+import { PaymentFailed } from "./components/PaymentFailed"
 
 function App() {
   const [cartItems, setCartItems] = useState([])
@@ -71,20 +72,24 @@ function App() {
                 />
               </Routes>
 
-              <Routes>
+              {/* <Routes>
                 <Route
                   path="/cart"
                   element={<Cart handleAddToCart={handleAddToCart} />}
                 />
-              </Routes>
-              <Routes>
-                <Route path="/checkout" element={<Checkout />} />
-              </Routes>
+              </Routes> */}
               <Routes>
                 <Route path="/bulk-checkout" element={<BulkCheckout />} />
               </Routes>
               <Routes>
-                <Route path="/payment" element={<Payment />} />
+                <Route
+                  path="/payment"
+                  element={
+                    <ProtectedRoute>
+                      <Payment />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
               <Routes>
                 <Route path="/login" element={<Login />} />
@@ -96,7 +101,14 @@ function App() {
                 <Route path="/register" element={<Register />} />
               </Routes>
               <Routes>
-                <Route path="/invoice" element={<Invoice />} />
+                <Route
+                  path="/invoice"
+                  element={
+                    <ProtectedRoute>
+                      <Invoice />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
               <Routes>
                 <Route
@@ -111,7 +123,14 @@ function App() {
                 <Route path="/contact-us" element={<ContactUs />} />
               </Routes>
               <Routes>
-                <Route path="/show-item/:orderId" element={<ShowItem />} />
+                <Route
+                  path="/show-item/:orderId"
+                  element={
+                    <ProtectedRoute>
+                      <ShowItem />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
               <Routes>
                 <Route path="/terms-conditions" element={<Terms />} />
@@ -140,7 +159,24 @@ function App() {
                 />
               </Routes>
               <Routes>
-                <Route path="/thank-you" element={<Thankyou />} />
+                <Route
+                  path="/thank-you"
+                  element={
+                    <ProtectedRoute>
+                      <Thankyou />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+              <Routes>
+                <Route
+                  path="/payment-failed"
+                  element={
+                    <ProtectedRoute>
+                      <PaymentFailed />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
               <Routes>
                 <Route

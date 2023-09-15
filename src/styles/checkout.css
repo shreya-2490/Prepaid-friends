@@ -581,6 +581,7 @@
 
   .BTC-total {
     font-size: 1rem;
+    font-weight: 600;
   }
 
   .cardtype-img {
@@ -709,6 +710,11 @@
   .BTC {
     font-size: 0.8rem;
     padding-top: 0.5rem;
+  }
+
+  .BTC-total {
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 
   .custom-upper-para {

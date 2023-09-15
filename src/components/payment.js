@@ -145,6 +145,11 @@ const Payment = () => {
             state: { orderNumber: data?.order_number, email },
           })
         }
+        else if (res?.data?.status === "Failed") {
+          nav("/payment-failed", {
+            state: { orderNumber: data?.order_number, email },
+          })
+        }
       })
     }
   }, 3000)
