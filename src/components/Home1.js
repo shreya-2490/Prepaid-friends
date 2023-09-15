@@ -59,88 +59,84 @@ const Home = () => {
   }
 
   const handleBuyButtonClickMain = () => {
-    if (btcValue === "0.00000") {
-      return
+    if ((!emailValue && !user?.email) || !usdValue || usdValue === "0.00") {
+      message.error("Please enter a valid email address and amount.");
+      return;
+    }
+  
+    if (!user?.email && !emailValue.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
+    if (user?.email) {
+      setEmailError("")
+      setIsSendingToPayment(true)
+      setIsLoading(true)
+      axios
+        ?.post(
+          `/api/preowned-order`,
+          {
+            email: user?.email,
+            payment_method: "btc",
+            guest: false,
+            items: [
+              {
+                quantity: 1,
+                price: usdValue,
+              },
+            ],
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${cookies?.pfAuthToken}`,
+            },
+          }
+        )
+        .then((res) =>
+          navigate(`/payment`, {
+            state: { email: emailValue, data: res?.data },
+          })
+        )
+        .catch((err) =>
+          message.error(
+            err?.response?.data?.error || err?.response?.data?.message
+          )
+        )
+        ?.finally(() => {
+          setIsSendingToPayment(false)
+          setIsLoading(false)
+        })
     } else {
-      if (
-        !emailValue ||
-        !emailValue.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-      ) {
-        setEmailError("Please enter a valid email address.")
-      }
-      if (user?.email) {
-        setEmailError("")
-        setIsSendingToPayment(true)
-        setIsLoading(true)
-        usdValue
-          ? axios
-              ?.post(
-                `/api/preowned-order`,
-                {
-                  email: user?.email,
-                  payment_method: "btc",
-                  guest: false,
-                  items: [
-                    {
-                      quantity: 1,
-                      price: usdValue,
-                    },
-                  ],
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${cookies?.pfAuthToken}`,
-                  },
-                }
-              )
-              .then((res) =>
-                navigate(`/payment`, {
-                  state: { email: emailValue, data: res?.data },
-                })
-              )
-              .catch((err) =>
-                message.error(
-                  err?.response?.data?.error || err?.response?.data?.message
-                )
-              )
-              ?.finally(() => {
-                setIsSendingToPayment(false)
-                setIsLoading(false)
-              })
-          : showAlert(true)
-      } else {
-        setEmailError("")
-        setIsSendingToPayment(true)
-        setIsLoading(true)
-        usdValue
-          ? axios
-              ?.post(`/api/preowned-order`, {
-                email: emailValue,
-                payment_method: "btc",
-                guest: true,
-                items: [
-                  {
-                    quantity: 1,
-                    price: usdValue,
-                  },
-                ],
-              })
-              .then((res) =>
-                navigate(`/payment`, {
-                  state: { email: emailValue, data: res?.data },
-                })
-              )
-              .catch((err) =>
-                message.error(
-                  err?.response?.data?.error || err?.response?.data?.message
-                )
-              )
-              ?.finally(() => {
-                setIsSendingToPayment(false)
-                setIsLoading(false)
-              })
-          : showAlert(true)
-      }
+      setEmailError("")
+      setIsSendingToPayment(true)
+      setIsLoading(true)
+      axios
+        ?.post(`/api/preowned-order`, {
+          email: emailValue,
+          payment_method: "btc",
+          guest: true,
+          items: [
+            {
+              quantity: 1,
+              price: usdValue,
+            },
+          ],
+        })
+        .then((res) =>
+          navigate(`/payment`, {
+            state: { email: emailValue, data: res?.data },
+          })
+        )
+        .catch((err) =>
+          message.error(
+            err?.response?.data?.error || err?.response?.data?.message
+          )
+        )
+        ?.finally(() => {
+          setIsSendingToPayment(false)
+          setIsLoading(false)
+        })
     }
   }
 
@@ -332,7 +328,7 @@ const Home = () => {
                         disabled={Boolean(cookies?.pfAuthToken)}
                         className="placeholder-input"
                         placeholder=" Enter your email"
-                        value={emailValue || (user?.email ? user.email : '')}
+                        value={emailValue || (user?.email ? user.email : "")}
                         autoComplete="on"
                         onChange={(e) => setEmailValue(e.target.value)}
                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"

@@ -12,8 +12,12 @@ const OrderTable = () => {
   const [bulkOrders, setBulkOrders] = useState([])
   const navigate = useNavigate()
 
-  const handleShowItem = (orderId) => {
-    navigate(`/show-item/${orderId}`)
+  const handleShowItem = (orderId, orderStatus) => {
+    if (orderStatus === "Payment Confirmed") {
+      navigate(`/show-item/${orderId}`)
+    } else {
+      alert("Order is waiting for payment confirmation.")
+    }
   }
 
   useEffect(() => {
@@ -86,7 +90,9 @@ const OrderTable = () => {
       title: "Actions",
       key: "action",
       render: (text, record) => (
-        <Button onClick={() => handleShowItem(record.id)}>Show Items</Button>
+        <Button onClick={() => handleShowItem(record.id, record.order_status)}>
+          Show Items
+        </Button>
       ),
     },
   ]
