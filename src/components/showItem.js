@@ -50,7 +50,7 @@ function ShowItem() {
         <Divider />
         <Row className="mt-5" gutter={[24, 24]}>
           {cardDetails.map((item, index) => (
-            <Col xs={24} md={6} key={index}>
+            <Col xs={24} md={6} key={index} className="col-cards">
               <div
                 className="wrappercard"
                 onClick={() => handleCardClick(item)}
@@ -59,10 +59,7 @@ function ShowItem() {
                   <div className="card">
                     <img src={map} className="map-img" alt="map" />
                     <div className="top">
-                      <div className="holder">
-                      <h2 className="h2heading">CARDHOLDER's Name</h2>
-                        <h2 className="h2heading">{item.first_name}</h2>
-                      </div>
+                      <h2 className="h1heading">{item.first_name}</h2>
                       <h2 className="h2heading">${item.card_amount}</h2>
                       <img src={wifi} alt="wifi" />
                     </div>

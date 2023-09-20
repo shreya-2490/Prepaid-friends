@@ -45,7 +45,7 @@ body{
     margin-left: auto !important;
     margin-right: auto !important;
    }
-  
+
   @media screen and (max-width: 600px) {
     .detail-table  {
       border: 0;
@@ -140,7 +140,8 @@ body{
     z-index: -1;
   }
   .h1heading {
-    font-size: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
   }
   
   .h2heading {
@@ -217,7 +218,9 @@ body{
   .alert-btn button{
     background-color: #fdc886;
   }
-  
+  .col-cards{
+    max-width: 100% !important;
+  }
   @media (min-width: 10px) and (max-width: 640px) {
     .selection-provider,
     .selection-price {
