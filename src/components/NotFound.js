@@ -1,5 +1,5 @@
 import React from "react";
-import error from "../assets/error.jpg"
+import error from "../assets/error.svg"
 
 const NotFound = () => {
   return (
