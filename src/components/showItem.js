@@ -59,8 +59,11 @@ function ShowItem() {
                   <div className="card">
                     <img src={map} className="map-img" alt="map" />
                     <div className="top">
-                      <h2 className="h2heading">CARDHOLDER</h2>
-                      <h2 className="h2heading">{item.first_name}</h2>
+                      <div className="holder">
+                      <h2 className="h2heading">CARDHOLDER's Name</h2>
+                        <h2 className="h2heading">{item.first_name}</h2>
+                      </div>
+                      <h2 className="h2heading">{item.card_amount}</h2>
                       <img src={wifi} alt="wifi" />
                     </div>
 

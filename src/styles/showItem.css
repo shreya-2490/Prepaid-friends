@@ -41,6 +41,10 @@ body{
     text-transform: uppercase;
     background-color: #F5F2EA;
   }
+  .ant-row {
+    margin-left: auto !important;
+    margin-right: auto !important;
+   }
   
   @media screen and (max-width: 600px) {
     .detail-table  {
@@ -160,6 +164,9 @@ body{
     justify-content: space-between;
     align-items: center;
   }
+  .holder{
+    display: unset !important;
+  }
   
   .top img {
     width: 20px;
@@ -201,8 +208,8 @@ body{
     padding-bottom: 2rem !important;
   }
   .ant-row {
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin-left: 75px !important;
+    margin-right: 10px !important;
    }
    .ant-pagination-item-active {
     border-color: #fdc886 !important;
