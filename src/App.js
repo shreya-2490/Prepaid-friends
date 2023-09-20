@@ -82,14 +82,7 @@ function App() {
                 <Route path="/bulk-checkout" element={<BulkCheckout />} />
               </Routes>
               <Routes>
-                <Route
-                  path="/payment"
-                  element={
-                    <ProtectedRoute>
-                      <Payment />
-                    </ProtectedRoute>
-                  }
-                />
+                <Route path="/payment" element={<Payment />} />
               </Routes>
               <Routes>
                 <Route path="/login" element={<Login />} />
