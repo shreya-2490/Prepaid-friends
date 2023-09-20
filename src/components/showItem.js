@@ -63,7 +63,7 @@ function ShowItem() {
                       <h2 className="h2heading">CARDHOLDER's Name</h2>
                         <h2 className="h2heading">{item.first_name}</h2>
                       </div>
-                      <h2 className="h2heading">{item.card_amount}</h2>
+                      <h2 className="h2heading">${item.card_amount}</h2>
                       <img src={wifi} alt="wifi" />
                     </div>
 
