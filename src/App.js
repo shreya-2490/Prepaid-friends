@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
 import Home1 from "./components/Home1";
 import NavbarCart from "./components/NavbarCart";
-import Checkout from "./components/Checkout";
 import Login from "./components/Login";
-import Cart from "./components/CartPage";
 import BulkOrder from "./components/BulkOrder";
 import ContactUs from "./components/ContactUs";
 import Payment from "./components/payment";
@@ -55,45 +52,24 @@ function App() {
           <Router>
             <ScrollToTop>
               <Routes>
-                <Route
-                  path="/"
-                  element={<NavbarCart handleAddToCart={handleAddToCart} />}
-                />
-              </Routes>
-              <Routes>
+                <Route path="*" element={<NotFound />} />
                 <Route
                   path="/"
                   element={
-                    <Home1
-                      selectedProvider={selectedProvider}
-                      selectedPrice={selectedPrice}
-                    />
+                    <>
+                      <NavbarCart handleAddToCart={handleAddToCart} />
+                      <Home1
+                        selectedProvider={selectedProvider}
+                        selectedPrice={selectedPrice}
+                      />
+                    </>
                   }
                 />
-              </Routes>
-
-              {/* <Routes>
-                <Route
-                  path="/cart"
-                  element={<Cart handleAddToCart={handleAddToCart} />}
-                />
-              </Routes> */}
-              <Routes>
                 <Route path="/bulk-checkout" element={<BulkCheckout />} />
-              </Routes>
-              <Routes>
                 <Route path="/payment" element={<Payment />} />
-              </Routes>
-              <Routes>
                 <Route path="/login" element={<Login />} />
-              </Routes>
-              <Routes>
                 <Route path="/forgot-password" element={<ForgetPassword />} />
-              </Routes>
-              <Routes>
                 <Route path="/register" element={<Register />} />
-              </Routes>
-              <Routes>
                 <Route
                   path="/invoice"
                   element={
@@ -102,20 +78,12 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route
                   path="/reset-password/:stoken"
                   element={<ResetPassword />}
                 />
-              </Routes>
-              <Routes>
                 <Route path="/bulk-order" element={<BulkOrder />} />
-              </Routes>
-              <Routes>
                 <Route path="/contact-us" element={<ContactUs />} />
-              </Routes>
-              <Routes>
                 <Route
                   path="/show-item/:orderId"
                   element={
@@ -124,14 +92,8 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route path="/terms-conditions" element={<Terms />} />
-              </Routes>
-              <Routes>
                 <Route path="/privacy-policy" element={<Policy />} />
-              </Routes>
-              <Routes>
                 <Route
                   path="/images"
                   element={
@@ -140,8 +102,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route
                   path="/dashboard"
                   element={
@@ -150,8 +110,7 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
+
                 <Route
                   path="/thank-you"
                   element={
@@ -160,8 +119,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route
                   path="/payment-failed"
                   element={
@@ -170,8 +127,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route
                   path="/change-password"
                   element={
@@ -180,12 +135,7 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-              </Routes>
-              <Routes>
                 <Route path="/how-it-works" element={<HowItWorks />} />
-              </Routes>
-              <Routes>
-                <Route path="*" element={<NotFound />} />
               </Routes>
             </ScrollToTop>
           </Router>
