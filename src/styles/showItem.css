@@ -208,10 +208,7 @@ body{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
-  .ant-row {
-    margin-left: 75px !important;
-    margin-right: 10px !important;
-   }
+
    .ant-pagination-item-active {
     border-color: #fdc886 !important;
   }
