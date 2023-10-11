@@ -1,0 +1,290 @@
+/* / / =====================Desktop Veiw=========================== / / */
+
+@media (min-width: 1024px) {
+  .wiretransfer {
+    width: 90%;
+    padding: 1.5rem 0;
+    background-color: white;
+    border-radius: 1.4rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .wiretransfer-inner {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @keyframes checkmarkAnimation {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .wiretransfer-circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .animated-checkmark {
+    animation: checkmarkAnimation 0.5s ease-in-out forwards;
+  }
+  .cross-icon{
+    height: 3.8rem;
+  }
+
+  .wiretransfer-circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .wiretransfer-order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .wiretransfer-order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .wiretransfer-order p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .wiretransfer-order h3 {
+    color: #949494;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 30%;
+    text-align: left;
+  }
+
+  .wiretransfer-details {
+    width: 100%;
+    padding: 1rem 0;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+
+  .wiretransfer-account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+/* / / ******************* Tablet Screen ****************** / / */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .wiretransfer {
+    width: 100%;
+    padding: 1.5rem 0;
+    background-color: white;
+    border-radius: 1.4rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .wiretransfer-inner {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  @keyframes checkmarkAnimation {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .wiretransfer-circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .animated-checkmark {
+    animation: checkmarkAnimation 0.5s ease-in-out forwards;
+  }
+  .cross-icon{
+    height: 3.8rem;
+  }
+  .wiretransfer-circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .wiretransfer-order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .wiretransfer-order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .wiretransfer-order p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .wiretransfer-order h3 {
+    color: #949494;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 30%;
+    text-align: left;
+  }
+
+  .wiretransfer-details {
+    width: 100%;
+    padding: 1rem 0;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+  .wiretransfer-account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+/* / / ********************** Mobile Screen ******************* / / */
+
+@media (min-width: 10px) and (max-width: 640px) {
+  .wiretransfer {
+    width: 90%;
+    padding: 1rem 0;
+    background-color: white;
+    border-radius: 1.2rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .wiretransfer-inner {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  @keyframes checkmarkAnimation {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .wiretransfer-circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .animated-checkmark {
+    animation: checkmarkAnimation 0.5s ease-in-out forwards;
+  }
+  .cross-icon{
+    height: 3rem;
+  }
+
+  .wiretransfer-circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .wiretransfer-order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .wiretransfer-order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .wiretransfer-order p {
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .wiretransfer-order h3 {
+    color: #949494;
+    font-weight: 600;
+    font-size: 0.6rem;
+    width: 30%;
+    text-align: left;
+    /* border: 1px solid red; */
+  }
+
+  .wiretransfer-details {
+    width: 100%;
+    padding: 1rem 0;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+
+  .wiretransfer-account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}

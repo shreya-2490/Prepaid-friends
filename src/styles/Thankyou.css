@@ -1,0 +1,414 @@
+/* / / =====================Desktop Veiw=========================== / / */
+
+@media (min-width: 1024px) {
+  .full-page {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f5f2ea;
+  }
+
+  .thankyou {
+    width: 80%;
+    padding: 1.5rem 0;
+    background-color: white;
+    border-radius: 1.4rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .thankyou-inner {
+    display: flex;
+    width: 44%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .order p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .order h3 {
+    color: #949494;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 30%;
+    text-align: left;
+  }
+
+  .details {
+    width: 100%;
+    padding: 1rem 0;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+
+  .truck {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem 0 0 0;
+  }
+
+  .truck h3 {
+    font-size: 1rem;
+    width: 38%;
+    color: #fdc886;
+    font-weight: 900;
+    text-align: justify;
+  }
+
+  .truck p {
+    font-size: 0.8rem;
+    text-align: justify;
+    color: #949494;
+  }
+
+  .truck img {
+    width: 7%;
+    height: 2%;
+  }
+
+  .redirect {
+    display: flex;
+    width: 100%;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(254, 237, 217);
+  }
+
+  .redirect h3 {
+    font-size: 1rem;
+    color: #1b1b1bbf;
+    margin-top: 0.4rem;
+  }
+
+  .redirect img {
+    width: 3%;
+    height: 1.5%;
+  }
+
+  .account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+/* / / ******************* Tablet Screen ****************** / / */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .full-page {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f5f2ea;
+  }
+
+  .thankyou {
+    width: 90%;
+    padding: 1.5rem 0;
+    background-color: white;
+    border-radius: 1.4rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .thankyou-inner {
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+  }
+
+  .order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .order p {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .order h3 {
+    color: #949494;
+    font-weight: 700;
+    font-size: 1rem;
+    width: 30%;
+    text-align: left;
+  }
+
+  .details {
+    width: 100%;
+    text-align: justify;
+    padding: 1rem 0.2rem;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+
+  .truck {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem 0 0 0;
+  }
+
+  .truck h3 {
+    font-size: 1rem;
+    width: 48%;
+    color: #fdc886;
+    font-weight: 900;
+  }
+
+  .truck p {
+    font-size: 0.8rem;
+    text-align: justify;
+    color: #949494;
+  }
+
+  .truck img {
+    width: 7%;
+    height: 2%;
+  }
+
+  .redirect {
+    display: flex;
+    width: 100%;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(254, 237, 217);
+  }
+
+  .redirect h3 {
+    font-size: 1rem;
+    color: #1b1b1bbf;
+    margin-top: 0.4rem;
+  }
+
+  .redirect img {
+    width: 3%;
+    height: 1.5%;
+  }
+
+  .account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}
+
+/* / / ********************** Mobile Screen ******************* / / */
+
+@media (min-width: 10px) and (max-width: 640px) {
+  .full-page {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #f5f2ea;
+  }
+
+  .thankyou {
+    width: 90%;
+    padding: 1rem 0;
+    background-color: white;
+    border-radius: 1.2rem;
+    margin: auto;
+    text-align: center;
+  }
+
+  .thankyou-inner {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .circle {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .circle h1 {
+    font-weight: 800;
+    color: #1b1b1bbf;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  .order {
+    padding: 1rem 0.5rem 0 0.5rem;
+    width: 100%;
+    border-bottom: 1.5px solid #dddddd;
+  }
+
+  .order div {
+    gap: 1rem;
+    display: flex;
+  }
+
+  .order p {
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .order h3 {
+    color: #949494;
+    font-weight: 600;
+    font-size: 0.6rem;
+    width: 30%;
+    text-align: left;
+    /* border: 1px solid red; */
+  }
+
+  .details {
+    text-align: justify;
+    width: 100%;
+    padding: 1rem 0.2rem;
+    color: #949494;
+    border-bottom: 1.5px solid #dddddd;
+    font-size: 0.8rem;
+  }
+
+  .truck {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem 0 0 0;
+  }
+
+  .truck h3 {
+    font-size: 0.7rem;
+    width: 48%;
+    color: #fdc886;
+    font-weight: 900;
+  }
+
+  .truck p {
+    font-size: 0.6rem;
+    text-align: justify;
+    color: #949494;
+  }
+
+  .truck img {
+    width: 7%;
+    height: 2%;
+  }
+
+  .redirect {
+    display: flex;
+    width: 100%;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.2rem 0 0.2rem 1rem;
+    align-items: center;
+    gap: 1rem;
+    background-color: rgb(254, 237, 217);
+  }
+
+  .redirect h3 {
+    font-size: 0.6rem;
+    color: #1b1b1bbf;
+    margin-top: 0.4rem;
+  }
+
+  .redirect img {
+    width: 7%;
+    height: 2%;
+  }
+
+  .account {
+    background-color: rgb(253, 200, 134);
+    padding: 0.3rem 2rem;
+    border: none;
+    border-radius: 3rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+}

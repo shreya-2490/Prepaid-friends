@@ -1,227 +1,73 @@
-/*  =====================  Desktop Veiw ===========================  */
+/* / / / =====================  Desktop Veiw =========================== / / / */
 
 @media (min-width: 1024px) {
 
-.cart-main {
-  background-color: #F5F2EA;
-  height: 120vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
- 
-}
-
-.twocards-cart {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  width: 100%;
-  align-items: center;
-}
-
-
-.custom-card-cart  {
-  border-radius: 0.7rem;
-  width: 75%;
-  margin: 0 auto;
-}
-
-.Contact-title{
-  width: 95%;
-  margin: 0 auto;
-}
-
-.custom-card-cart img{
-  width: 100%;
-  padding: 2.7rem;
-}
-.custom-para2-cart{
-  text-align: justify;
-}
-
-.cart-input input[type="number"] {
-  background-color:white;
-  border-radius: 0.4rem;
-  font-size: 1rem;
-  border: 0.1rem solid #D9D9D9;
-  width: 30%;
-  border: 1px solid blue; 
-}
-
-.cart-input input:hover{
-  border-color: rgb(87, 180, 211);
-}
-
-.cart-btn button{
-  background-color: black;
-  color: white;
-  border-radius: 1.9rem;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  width: 30%;
-  text-align: center;
-  padding: 0.5rem;
-}
-
-.long-value {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  
-}
-.btcvalue{
- margin-bottom: 0.07rem; 
-}
-
-
-.expected-value{
-font-size: 0.9rem;
-
-}
-
-.icons{
-  display: flex;
-  margin: 1rem 0;
-}
-
-}
-
-/*  =====================Tablet Veiw=========================== */
-@media(min-width : 641px) and (max-width: 1023px) {
   .cart-main {
     background-color: #F5F2EA;
-    height: 130vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-   
   }
   
   .twocards-cart {
     display: grid;
-    grid-template-columns: repeat(1,1fr);
-    grid-gap: 3rem;
+    grid-template-columns: repeat(2,1fr);
     width: 100%;
     align-items: center;
   }
   
+  .wrappercardcartpage {
   
-  .custom-card-cart  {
-    border-radius: 0.7rem;
-    width: 60%;
-    margin: 0 auto;
+    margin: 0.5rem auto; /* Add margin to create space between cards */
+    padding: 3.5rem 2rem; /* Add padding for the card content */
+    
   }
-  
-  .Contact-title{
-    width: 85%;
-    margin: 0 auto;
-  }
-  
-  .custom-card-cart img{
-    width: 100%;
-    padding: 2.7rem;
-  }
-  .custom-para2-cart{
-    text-align: justify;
-  }
-  
-  .cart-input input[type="number"] {
-    background-color:white;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    border: 0.1rem solid #D9D9D9;
-    width: 10.8rem;
-  }
-  
-  .cart-input input:hover{
-    border-color: rgb(87, 180, 211);
-  }
-  
-  .cart-btn button{
-    background-color: black;
-    color: white;
-    border-radius: 1.9rem;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    width: 30%;
-   
-    text-align: center;
-    padding: 0.5rem;
-  }
-  
-  .long-value {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  
-  }
-  .btcvalue{
-  margin-bottom: 0.07rem;
-  }
-  
-  .expected-value{
-  font-size: 0.9rem;
-  }
-
-  .icons{
+  .card-containercartpage {
+    height: 20rem;
+    border-radius: 15px;
     display: flex;
-    margin: 3rem 0;
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    margin: 0rem 8rem; /* Add negative margin to compensate for the margin on each card */
+    justify-content: space-between;
+    max-width: 35rem; /* Adjust this value based on your desired width */
   }
-
-
-}
-
- /* =====================Mobile Veiw===========================  */
-@media(min-width : 10px) and (max-width:640px) {
- 
-
-
-  .cart-main {
-    background-color: #F5F2EA;
-    height: 160vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-  }
-  
-  .twocards-cart {
-    display: grid;
-    grid-template-columns: repeat(1,1fr);
-    grid-gap: 3rem;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  
   .custom-card-cart  {
-    border-radius: 0.7rem;
+    border-radius: 0.6rem;
     width: 80%;
     margin: 0 auto;
   }
   
+  .card2-cart{
+    width: 90%;
+  }
+  .card2-cart .ant-card .ant-card-body {
+    padding: 0rem 1.6rem;
+  }
+
+  
   .Contact-title{
-    width: 85%;
+    width: 95%;
     margin: 0 auto;
   }
   
   .custom-card-cart img{
-    width: 100%;
-    padding: 0.5rem;
+    width:100%;
   }
-
+  
   .custom-para2-cart{
     text-align: justify;
   }
-  
+  .amountoncart{
+    margin-bottom: 0.3rem ;
+  }
   .cart-input input[type="number"] {
     background-color:white;
     border-radius: 0.4rem;
     font-size: 1rem;
     border: 0.1rem solid #D9D9D9;
-    width: 10.8rem;
+    width: 30%;
   }
   
   .cart-input input:hover{
@@ -238,25 +84,296 @@ font-size: 0.9rem;
     width: 60%;
     text-align: center;
     padding: 0.5rem;
+    transition: 0.03s all;
   }
-  
+  .cart-btn button:hover{
+   background-color:  #333333;
+  }
+  .cart-btn button:active{
+    transform: scale(0.97);
+  }
   .long-value {
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
-  
   }
+  
   .btcvalue{
-  margin-bottom: 0.07rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0rem;
+  }
+  
+  .cart-input{
+   display: flex;
+   gap: 1.2rem;
+   flex-direction: row;
   }
   
   
   .expected-value{
-  font-size: 0.9rem;
+  font-size:0.85rem;
   
   }
-
+  
   .icons{
+    display: flex;
     margin: 2rem 0;
   }
-}
+  
+  .outline{
+    font-size: 1.5rem;
+     color: #41D195;
+    margin-right: 1rem;
+  }
+  .ant-btn-primary {
+    background-color: #fdc886;
+  }
+  .ant-modal-root .ant-modal-wrap {
+    overflow: hidden !important;
+  }
+  }
+  
+  /* / / / =====================Tablet Veiw=========================== / / / */
+  @media(min-width : 641px) and (max-width: 1023px) {
+    .cart-main {
+      background-color: #F5F2EA;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 7rem 0;
+     
+    }
+    
+    .twocards-cart {
+      display: grid;
+      grid-template-columns: repeat(1,1fr);
+      grid-gap: 3rem;
+      width: 100%;
+      align-items: center;
+    }
+    .wrappercardcartpage {
+  
+      margin: 0.5rem auto; /* Add margin to create space between cards */
+      padding: 3.5rem 2rem; /* Add padding for the card content */
+      
+    }
+    .card-containercartpage {
+      height: 20rem;
+      border-radius: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #ffffff;
+      margin: 0rem 8rem; /* Add negative margin to compensate for the margin on each card */
+      justify-content: space-between;
+      max-width: 35rem; /* Adjust this value based on your desired width */
+    }
+    
+    .custom-card-cart  {
+      border-radius: 0.6rem;
+      width: 60%;
+      margin: 0 auto;
+    }
+    
+    .Contact-title{
+      width: 85%;
+      margin: 0 auto;
+    }
+    .cart-input{
+      display: flex;
+      gap: 2rem;
+      flex-direction: row;
+     }
+    .custom-card-cart img{
+      width: 100%;
+      padding: 2.7rem;
+    }
+    .custom-para2-cart{
+      text-align: justify;
+    }
+    
+    .cart-input input[type="number"] {
+      background-color:white;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+      border: 0.1rem solid #D9D9D9;
+      width: 10.8rem;
+    }
+    
+    .cart-input input:hover{
+      border-color: rgb(87, 180, 211);
+    }
+
+    .card2-cart .ant-card .ant-card-body {
+      padding: 0rem 1.6rem;
+    }
+    /* .btcvalue{
+      display: flex;
+      flex-direction: row;
+      } */
+
+      .cart-btn button{
+      background-color: black;
+      color: white;
+      border-radius: 1.9rem;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      width: 30%;
+     
+      text-align: center;
+      padding: 0.5rem;
+      transition: 0.03s all;
+    }
+
+    .cart-btn button:hover{
+     background-color:  #333333;
+    }
+    .cart-btn button:active{
+      transform: scale(0.97);
+    }
+    
+    .long-value {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    
+    }
+    .btcvalue{
+    margin-bottom: 0.07rem;
+    }
+    
+    .expected-value{
+    font-size: 0.9rem;
+    }
+  
+    .icons{
+      display: flex;
+      margin: 3rem 0;
+    }
+  
+    .ant-btn-primary {
+      background-color: #fdc886;
+    }
+  }
+  
+  /* / / / =====================Mobile Veiw=========================== / / / */
+  @media(min-width : 10px) and (max-width:640px) {
+   
+  
+    .cart-main {
+      background-color: #F5F2EA;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 4rem 0; 
+    }
+    
+    .twocards-cart {
+      display: grid;
+      grid-template-columns: repeat(1,1fr);
+      grid-gap: 3rem;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .number{
+      margin-left: 1rem;
+    }
+
+    .card-containercartpage {
+      width: 87%;
+      padding: 2rem;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1rem;
+      background-color: #ffffff;
+      /* border: 1px solid red; */
+    }
+    
+   .map-img {
+    width: 100%;
+   
+   }
+
+    
+    .Contact-title{
+      width: 85%;
+      margin: 0 auto;
+    }
+    .cart-input{
+      margin-bottom: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: row;
+     }
+     .amountoncart{
+      margin: 0.9rem auto 0.5rem auto ;
+    }
+    
+    .custom-para2-cart{
+      text-align: justify;
+    }
+    
+    .cart-input input[type="number"] {
+      background-color:white;
+      border-radius: 0.4rem;
+      font-size: 1rem;
+      border: 0.1rem solid #D9D9D9;
+      width: 10.8rem;
+    }
+    
+    .cart-input input:hover{
+      border-color: rgb(87, 180, 211);
+    }
+
+    .card2-cart .ant-card .ant-card-body {
+      padding: 0rem 1.6rem;
+    }
+      .cart-btn button{
+      background-color: black;
+      color: white;
+      border-radius: 1.9rem;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      width: 70%;
+      text-align: center;
+      padding: 0.5rem;
+      transition: 0.03s all;
+    }
+    .cart-btn button:hover{
+     background-color:  #333333;
+    }
+    .cart-btn button:active{
+      transform: scale(0.97);
+    }
+    
+    .long-value {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    
+    }
+    .btcvalue{
+    margin-bottom: 0.07rem;
+    }
+    
+    .expected-value{
+    font-size: 0.9rem;
+    }
+  
+    .icons{
+      display: flex;
+      margin: 2rem 0;
+    }
+    .ant-btn-primary {
+      background-color: #fdc886;
+    }
+  }
+
+
+  

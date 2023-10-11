@@ -9,3 +9,6 @@
 code {
   font-family: 'Outfit', sans-serif;
 }
+.custom-ticker-container {
+  background-color: red; /* Change this to your desired background color */
+}

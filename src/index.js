@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CartProvider } from './components/CartContext';
+import { PrismaneProvider } from "@prismane/core";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+     <PrismaneProvider>
     <CartProvider>
       <App />
     </CartProvider>
+    </PrismaneProvider>
   </React.StrictMode>
 );
 

@@ -1,0 +1,248 @@
+/* / / =====================Desktop Veiw=========================== / / */
+
+@media (min-width: 1024px) {
+  .register-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .register-box {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box1 {
+    width: 50%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15.5rem 0;
+    background-color: rgb(253, 200, 134);
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+  }
+  .box1 h1 {
+    /* color: rgb(255, 241, 225);
+    font-weight: 800;
+    font-size: 1.5rem; */
+    display: none;
+  }
+  .register-img {
+    position: absolute;
+    width: 20rem;
+    margin: auto;
+    top: 15.5rem;
+  }
+
+  .box2 {
+    width: 50%;
+    padding: 4.72rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+  }
+
+  .box2 h1 {
+    font-weight: 600;
+    font-family: "Outfit", sans-serif;
+    font-size: 1.5rem;
+    color: #1b1b1b;
+    margin-bottom: 0rem;
+  }
+
+  .box2 input {
+    background-color: white;
+    border: 1px solid #fdc886;
+    padding: 0.5rem 7rem 0.5rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    font-size: 0.96rem;
+  }
+
+  .box2 button {
+    padding: 0.7rem 4rem;
+    border-radius: 1.8rem;
+    color: white;
+    background-color: rgb(253, 200, 134);
+  }
+  .register-input {
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
+}
+
+/* / / ******************* Tablet Screen ****************** / / */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .register-page {
+    width: 100%;
+    display: flex;
+    height: 81vh;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .register-box {
+    width: 80%;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box1 {
+    width: 80%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    background-color: rgb(253, 200, 134);
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+  }
+
+  .box1 h1 {
+    color: rgb(255, 241, 225);
+    font-weight: 800;
+  }
+  .register-img {
+    display: none;
+  }
+
+  .box1 h3 {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .box1 button {
+    border: 1px solid black;
+    padding: 0.7rem 4rem;
+    border-radius: 1.8rem;
+  }
+
+  .box2 {
+    width: 80%;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+  }
+
+  .box2 h1 {
+    font-weight: 800;
+  }
+
+  .box2 input {
+    background-color: rgb(245, 242, 234);
+    padding: 0.5rem 7rem 0.5rem 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .box2 button {
+    padding: 0.7rem 4rem;
+    border-radius: 1.8rem;
+    background-color: rgb(253, 200, 134);
+  }
+  .register-input {
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
+}
+
+/* / / ********************** Mobile Screen ******************* / / */
+
+@media (min-width: 10px) and (max-width: 640px) {
+  .register-page {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .register-box {
+    width: 90%;
+    min-height: 70vh;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box1 {
+    width: 90%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+    background-color: rgb(253, 200, 134);
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+  }
+
+  .box1 h1 {
+    color: rgb(255, 241, 225);
+    font-weight: 800;
+  }
+
+  .register-img {
+    display: none;
+  }
+  .box2 {
+    width: 90%;
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+  }
+
+  .box2 h1 {
+    font-weight: 800;
+  }
+
+  .box2 input {
+    background-color: rgb(245, 242, 234);
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    border-radius: 0.6rem;
+  }
+
+  .box2 button {
+    padding: 0.7rem 4rem;
+    border-radius: 1.8rem;
+    background-color: rgb(253, 200, 134);
+  }
+  .register-input {
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
+}

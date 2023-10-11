@@ -1,78 +1,248 @@
-.listing-design {
-  background-color: #fdc886;
-  height: 70vh;
-  width: 18%;
-  border-radius: 0.9375rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 9.375rem 5rem;
-}
-
-.listing-design ul {
-  list-style: none;
-  text-align: left;
-}
-
-.listing-design ul li {
-  padding: 0.75rem 1.0625rem;
-  text-align: left;
-}
-
-.listing-design ul li:hover {
-  background-color: #1b1b1b;
-  color: white;
-}
-
-.ant-divider-horizontal {
-  margin: 0.625rem !important;
-}
-
-.product-div {
-  display: flex;
-  margin: 0rem 2.5rem;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.product-image {
-  width: 60%;
-  margin-top: 0.625rem;
-}
-
-.searchbox-div {
-  display: flex;
-  justify-content: flex-end;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
   .listing-design {
-    width: 90%;
-    margin: 9.875rem 0rem 0rem 0rem;
+    background-color: #fdc886;
+    width: 18%;
+    border-radius: 0.9375rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 8rem 1rem 2rem 1rem;
+  }
+  .user-profile {
+    background-color: #fdc886;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1b1b1bbd;
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+  }
+  .user-profile:hover {
+    background-color: #fdc886 !important;
+    color: #1b1b1b !important;
+  }
+  .signout-li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+    border-bottom-left-radius: 0.9375rem;
+    border-bottom-right-radius: 0.9375rem;
+  }
+  .listing-design ul {
+    list-style: none;
+    margin: 0 2.5rem;
+    text-align: left;
+    position: fixed;
+    z-index: 99999;
+    background-color: #fdc886;
+    width: 12rem;
+    border-radius: 0.9375rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .ul-list {
+    padding-left: 0rem;
+    margin-bottom: 0rem;
+  }
+  .listing-design ul li {
+    padding: 1.25rem 1.0625rem;
+    text-align: left;
+  }
+
+  .listing-design ul li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  .ant-divider-horizontal {
+    margin: 0rem 0 !important;
   }
 
   .product-div {
-    flex-direction: column;
-    margin: 0rem 1.25rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
   }
 
+  .product-image {
+    width: 55%;
+    margin-left: -1.6rem;
+    margin-top: 0.625rem;
+  }
+  .orderTable h6{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.7rem;
+    text-decoration: underline;
+  }
+}
+/* tab screen */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .listing-design {
+    background-color: #fdc886;
+    border-radius: 0.9375rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 90%;
+    margin: 3.875rem 0rem 2rem 2rem;
+  }
+  .user-profile {
+    background-color: #fdc886;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1b1b1bbd;
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+  }
+
+  .product-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .listing-design ul {
+    list-style: none;
+    text-align: left;
+  }
+  .ul-list {
+    padding-left: 0rem;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
   .product-image {
     width: 100%;
     margin-top: 1.25rem;
   }
 
-  .searchbox-div {
-    justify-content: center;
-    margin-top: 1.25rem;
+  .signout-li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+    border-bottom-left-radius: 0.9375rem;
+    border-bottom-right-radius: 0.9375rem;
+  }
+  .listing-design ul {
+    list-style: none;
+    text-align: left;
+  }
+  .ul-list {
+    padding-left: 0rem;
+  }
+  .listing-design ul li {
+    padding: 1.25rem 1.0625rem;
+    text-align: left;
+  }
+
+  .listing-design ul li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  .ant-divider-horizontal {
+    margin: 0rem 0 !important;
+  }
+  .ordertable {
+    max-width: 100%;
+    margin: 0 1.25rem;
+    padding: 1rem;
+  }
+  .orderTable h6{
+    font-size: 1.3rem;
+    font-weight: 600;
   }
 }
-
-@media (max-width: 576px) {
+/*----------------------Mobile Screen--------------------*/
+@media (min-width: 10px) and (max-width: 640px) {
   .listing-design {
-    width: 100%;
-    margin: 9.875rem 0rem 0rem 0rem;
-    padding: 0.625rem;
+    background-color: #fdc886;
+    border-radius: 0.9375rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 80%;
+    margin: 3.875rem 0rem 2rem 2rem;
   }
-
+  .user-profile {
+    background-color: #fdc886;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1b1b1bbd;
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+  }
   .product-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0rem 0.625rem;
   }
+  .listing-design ul {
+    list-style: none;
+    text-align: left;
+  }
+  .ul-list {
+    padding-left: 0rem;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  .product-image {
+    width: 100%;
+    margin-top: 1.25rem;
+  }
+
+  .signout-li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+    border-bottom-left-radius: 0.9375rem;
+    border-bottom-right-radius: 0.9375rem;
+  }
+  .listing-design ul {
+    list-style: none;
+    text-align: left;
+  }
+  .ul-list {
+    padding-left: 0rem;
+  }
+  .listing-design ul li {
+    padding: 1.25rem 1.0625rem;
+    text-align: left;
+  }
+
+  .listing-design ul li:hover {
+    background-color: #1b1b1b;
+    color: white;
+    padding-left: 1.06rem;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  .ant-divider-horizontal {
+    margin: 0rem 0 !important;
+  }
+  .ordertable {
+    max-width: 100%;
+    margin: 0 1.25rem;
+    padding: 1rem;
+  }
+  .orderTable h6{
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
 }

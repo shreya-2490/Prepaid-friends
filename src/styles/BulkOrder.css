@@ -1,40 +1,156 @@
-/* =====================Desktop Veiw=========================== */
+/* / =====================Desktop Veiw=========================== / */
 
 @media (min-width: 1024px) {
+  body {
+    margin: 0;
+    line-height: normal;
+  }
+
+  :root {
+    /* fonts */
+    --font-outfit: Outfit;
+
+    /* font sizes */
+    --font-size-3xl: 1.38rem;
+
+    /* Colors */
+    --color-white: #fff;
+    --color-gray: rgba(27, 27, 27, 0.75);
+    --color-linen: #f5f2ea;
+
+    /* border radiuses */
+    --br-xl: 20px;
+  }
+
+  .frame-inner,
+  .frame-item {
+    position: absolute;
+    border-radius: var(--br-xl);
+    background-color: var(--color-linen);
+    backdrop-filter: blur(33px);
+    width: 13.56rem;
+    height: 6.56rem;
+    cursor: pointer;
+  }
+  .frame-inner {
+    left: 15.19rem;
+    cursor: pointer;
+  }
+  .wire-transfer,
+  .wire-transfer-wrapper {
+    position: absolute;
+    left: 0;
+    width: 10.19rem;
+    height: 2.31rem;
+  }
+  .wire-transfer {
+    top: 0;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .wire-transfer-wrapper {
+    top: 3rem;
+  }
+  .bank-building-icon {
+    position: absolute;
+    top: 0;
+    left: 0.63rem;
+    width: 2.75rem;
+    height: 2.81rem;
+    object-fit: cover;
+  }
+  .group-container {
+    position: absolute;
+    top: 1rem;
+    left: 17.19rem;
+    cursor: pointer;
+  }
+  .group-container1 {
+    position: absolute;
+    top: 0.84rem;
+    left: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .bitcoin {
+    position: absolute;
+    top: 3.33rem;
+    left: 0;
+    font-weight: 600;
+    display: inline-block;
+    width: 10.25rem;
+    height: 2.31rem;
+  }
+  .bitcoin-icon {
+    position: absolute;
+    top: 0;
+    left: 0.02rem;
+    width: 3.39rem;
+    height: 3.39rem;
+    object-fit: cover;
+  }
+  .group-parent {
+    position: absolute;
+    top: 0.84rem;
+    left: 2rem;
+    width: 25.38rem;
+    height: 5.64rem;
+    font-size: 1rem;
+  }
+  .rectangle-parent {
+    position: relative;
+    height: 8.13rem;
+    text-align: left;
+  }
+  .with-bitcoin .group-container {
+    left: 1rem;
+  }
+  .with-bitcoin .frame-inner {
+    left: 0.1rem;
+  }
   .bulk-main {
     background-color: #f5f2ea;
     width: 100%;
-    /* padding-top: 0.3125rem; */
-    /* top: 0; */
-    /* position: absolute; */
     display: flex;
     flex-direction: column;
-    padding: 6rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }
-
+  .paymentbulk {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: left;
+    margin-top: 1rem;
+  }
   .bulk-division {
     width: 90%;
     background-color: #fff;
     border-radius: 1.25rem;
-    padding: 1rem 1.9rem;
+    padding: 1rem 1rem 3rem 2rem;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: absolute; */
-    /* left: 9%; */
-    /* top: 4.3125rem; */
   }
 
   .bulk-div-1 {
+    position: relative;
     width: 48%;
-    text-align: center;
+    bottom: 0;
+    text-align: left;
   }
-
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    background-color: #fdc886;
+    border-color: #fdc886;
+  }
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner:hover{
+    border-color: #fdc886;
+  }
   .bulk-div-2 {
-    width: 52%;
+    width: 80%;
+    display: block;
   }
 
   .subtitle-bulk {
@@ -43,24 +159,21 @@
 
   .subtitle-bulk-2 {
     color: #1b1b1b;
-    /* margin-top: -0.625rem; */
   }
 
   .bulkorder-content {
-    /* margin: auto; */
-    /* padding-top: 0.3125rem; */
-    color: white;
+    color: #1b1b1b;
     width: 100%;
-    background-color: #fdc886;
-    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    background-color: #F5F2EA;
+    border-radius: 1rem 1rem 1rem 1rem;
+    padding-top: 0.7rem;
   }
-
   .benefits-card {
     width: 18rem;
     height: 3.8rem;
     background-color: white;
     position: absolute;
-    top: 45%;
+    top: 38%;
     left: 25%;
     z-index: 100;
     transform: translate(-50%, -50%);
@@ -69,6 +182,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 1rem;
   }
 
   .benefits-card-content {
@@ -97,11 +211,9 @@
   }
 
   .bulkorder-content-2 {
-    /* margin: auto; */
-    /* padding-top: 0px; */
     color: white;
     width: 100%;
-    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    border-radius: 0rem 0rem 1rem 1rem;
     background-color: #f5f2ea;
   }
 
@@ -133,15 +245,14 @@
   }
 
   .listing-div {
-    padding: 3rem 0;
+    padding: 4rem 4rem 0rem 4rem;
   }
 
   .footer-card2 {
     color: #a1a19f;
-    font-size: 0.625rem;
-    text-align: left;
-    padding: 0.625rem;
-    margin: -0.6875rem 1.25rem;
+    font-size: 0.8rem;
+    text-align: justify;
+    padding: 1.625rem;
   }
 
   .ant-form-item-control-input input:focus,
@@ -151,6 +262,8 @@
   .ant-select-selector:focus
     .ant-form-item-control-input
     .ant-input-number:focus,
+  .ant-input-number:active,
+  .ant-input-number::selection,
   .ant-form-item-control-input .ant-input-number:hover,
   .ant-form-item-control-input input[type="number"]:focus,
   .ant-form-item-control-input input[type="number"]:hover,
@@ -163,16 +276,20 @@
     .ant-checkbox-inner {
     border-color: #fdc886 !important;
   }
-
+  .ant-input-number-input {
+    font-weight: 500;
+  }
   .ant-btn:hover,
   .ant-btn:focus {
-    border-color: #000000 !important;
+    border-color: #fdc886 !important;
     color: #1b1b1b !important;
-    background-color: #fdc886;
-    /* Change this to your desired color */
-    /* Optional: Add a box shadow */
+    background-color: #fdc886 !important;
   }
-
+  /* .ant-btn >span:hover,.ant-btn >span:focus  {
+  border-color: #fdc886 !important;
+  color: #1b1b1b !important;
+  background-color: #fdc886 !important;
+ } */
   .ant-select-item-option[aria-selected="true"] {
     border-color: #fdc886 !important;
   }
@@ -181,18 +298,253 @@
     text-align: center;
     background-color: #fdc886;
     width: 70%;
-    margin: 0 15%;
+    margin: 0 7rem;
   }
+  .buyNowBtn:hover,
+  .buyNowBtn:focus {
+    border-color: #000000 !important;
+    color: #1b1b1b !important;
+    background-color: #fdc886;
+  }
+  .tick-class {
+    margin: 0.2rem 0.4rem;
+  }
+  .PhoneInput {
+    width: 7%;
+  }
+  .countrycode {
+    width: 13%;
+  }
+  .css-13cymwt-control {
+    height: 37px !important;
+    width: 20.9rem !important;
+    border-color: #fdc886 !important;
+    margin-bottom: 2rem;
+  }
+  .css-1hb7zxy-IndicatorsContainer {
+    margin-bottom: 10px !important;
+  }
+  .css-1jqq78o-placeholder {
+    margin-bottom: 10px !important;
+  }
+  .css-1yvwecq-ValueContainer {
+    padding-bottom: 6rem;
+  }
+  .ant-input-number .ant-input-number-input:placeholder-shown {
+    text-overflow: ellipsis;
+    font-family: 'Outfit';
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    padding-inline-end: 18px;
+    font-family: 'Outfit';
+    font-weight: normal;
+  }
+
+  .change_email {
+    white-space: nowrap;
+    color: #1b1b1b;
+    margin-top: 1.4rem;
+    margin-left: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.2rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
+  .change_email .hover-text .back-arrow {
+    display: none;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .change_email:hover .hover-text .back-arrow {
+    display: inline-flex;
+    position: relative;
+    right: 3rem;
+  }
+  .change_email:hover .hover-text .hover-text-content {
+    display: none;
+  }
+  .css-t3ipsp-control {
+  width: 335px;
+  border-color: #fdc886 !important;
+  height: 2px;
 }
 
-/* =====================Tablet Veiw=========================== */
+.css-gz0hkv-ValueContainer{
+  overflow: auto !important;
+  max-height: 27px !important;
+  margin-bottom: 0.7rem;
+}
+.css-t3ipsp-control:hover {
+  border-color: #fdc886 !important;
+  height: 2px;
+  width: 335px;
+  box-shadow: none !important;
+}
+.selection-dropdown{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.international-purchase{
+  display: flex;
+  margin-right: 6rem;
+  white-space: nowrap;
+}
+.ant-switch.ant-switch-checked .ant-switch-inner {
+  background-color: #fdc886;
+}
+.ant-select-selection-placeholder {
+  font-size: 0.8rem !important;
+}
+.css-1iq9at8 {
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  flex: 1 1 0%;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: auto;
+  padding: 2px 8px;
+  box-sizing: border-box;
+  max-height: 29px;
+}
+}
+
+/* / =====================Tablet View=========================== / */
 @media (min-width: 641px) and (max-width: 1023px) {
+  body {
+    margin: 0;
+    line-height: normal;
+  }
+
+  :root {
+    /* fonts */
+    --font-outfit: Outfit;
+
+    /* font sizes */
+    --font-size-3xl: 1.38rem;
+
+    /* Colors */
+    --color-white: #fff;
+    --color-gray: rgba(27, 27, 27, 0.75);
+    --color-linen: #f5f2ea;
+
+    /* border radiuses */
+    --br-xl: 20px;
+  }
+  .ant-select-selection-placeholder {
+    font-size: 0.8rem;
+  }
+
+  .frame-inner,
+  .frame-item {
+    position: absolute;
+    border-radius: var(--br-xl);
+    background-color: var(--color-linen);
+    backdrop-filter: blur(33px);
+    width: 13.56rem;
+    height: 6.56rem;
+    cursor: pointer;
+  }
+  .frame-inner {
+    left: 15.19rem;
+    cursor: pointer;
+  }
+  .wire-transfer,
+  .wire-transfer-wrapper {
+    position: absolute;
+    left: 0;
+    width: 10.19rem;
+    height: 2.31rem;
+  }
+  .wire-transfer {
+    top: 0;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .wire-transfer-wrapper {
+    top: 3rem;
+  }
+  .bank-building-icon {
+    position: absolute;
+    top: 0;
+    left: 0.63rem;
+    width: 2.75rem;
+    height: 2.81rem;
+    object-fit: cover;
+  }
+  .group-container {
+    position: absolute;
+    top: 1rem;
+    left: 17.19rem;
+    cursor: pointer;
+  }
+  .group-container1 {
+    position: absolute;
+    top: 0.84rem;
+    left: 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .bitcoin {
+    position: absolute;
+    top: 3.33rem;
+    left: 0;
+    font-weight: 600;
+    display: inline-block;
+    width: 10.25rem;
+    height: 2.31rem;
+  }
+  .bitcoin-icon {
+    position: absolute;
+    top: 0;
+    left: 0.02rem;
+    width: 3.39rem;
+    height: 3.39rem;
+    object-fit: cover;
+  }
+  .group-parent {
+    position: absolute;
+    top: 0.84rem;
+    left: 2rem;
+    width: 25.38rem;
+    height: 5.64rem;
+    font-size: 1rem;
+  }
+  .rectangle-parent {
+    position: relative;
+    height: 8.13rem;
+    text-align: left;
+  }
+  .with-bitcoin .group-container {
+    left: 1rem;
+  }
+  .with-bitcoin .frame-inner {
+    left: 0.1rem;
+  }
   .bulk-main {
     background-color: #f5f2ea;
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 6rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }
@@ -211,13 +563,12 @@
 
   .bulk-div-1 {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
-
-  .bulk-div-2 {
-    width: 100%;
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    background-color: #fdc886;
+    border-color: #fdc886;
   }
-
   .subtitle-bulk {
     color: #1b1b1b;
   }
@@ -227,11 +578,11 @@
   }
 
   .bulkorder-content {
-    color: white;
+    color: #1b1b1b;
     width: 100%;
-    background-color: #fdc886;
     padding: 1rem 0;
-    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    background-color: #F5F2EA;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   }
 
   .benefits-card {
@@ -239,7 +590,7 @@
     height: 3.5rem;
     background-color: white;
     position: absolute;
-    top: 22.5%;
+    top: 19.5%;
     left: 50%;
     z-index: 100;
     transform: translate(-50%, -50%);
@@ -258,14 +609,12 @@
   .benefits-card-img {
     width: 2.3rem;
     position: absolute;
-    /* bottom: 0.4rem; */
     left: 15%;
     transform: translateX(-90%);
   }
 
   .benefits-card-badge {
     position: absolute;
-    /* bottom: 0.9rem; */
     width: 1.2rem;
     left: 13%;
     transform: translateX(-90%);
@@ -342,16 +691,256 @@
     width: 70%;
     margin: 0 15%;
   }
+  .countrycode {
+    width: 17%;
+  }
+  .css-13cymwt-control {
+    height: 37px !important;
+    width: 18.9rem !important;
+    border-color: #fdc886 !important;
+    margin-bottom: 2rem;
+  }
+  .css-1hb7zxy-IndicatorsContainer {
+    margin-bottom: 10px !important;
+  }
+  .css-1jqq78o-placeholder {
+    margin-bottom: 10px !important;
+  }
+  .css-1yvwecq-ValueContainer {
+    padding-bottom: 6rem;
+  }
+  .change_email {
+    white-space: nowrap;
+    color: #1b1b1b;
+    margin-top: 1.4rem;
+    margin-left: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.2rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
+  .change_email .hover-text .back-arrow {
+    display: none;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .change_email:hover .hover-text .back-arrow {
+    display: inline-flex;
+    position: relative;
+    right: 4rem;
+    bottom: 0.5rem;
+  }
+  .change_email:hover .hover-text .hover-text-content {
+    display: none;
+  }
+  .paymentbulk {
+    display: block;
+    width: 1.5rem;
+    height: 3rem;
+    margin-left: -1.8rem;
+  }
+  .css-t3ipsp-control {
+    width: 335px;
+    border-color: #fdc886 !important;
+    height: 2px;
+  }
+  .css-1iq9at8 {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: auto;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    max-height: 29px;
+  }
+  .css-gz0hkv-ValueContainer{
+    overflow: auto !important;
+    max-height: 27px !important;
+    margin-bottom: 0.7rem;
+  }
+  .css-t3ipsp-control:hover {
+    border-color: #fdc886 !important;
+    height: 2px;
+    width: 300px;
+    box-shadow: none !important;
+  }
+  .selection-dropdown{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .international-purchase{
+    display: flex;
+    margin-right: 4rem;
+    white-space: nowrap;
+  }
+  .ant-switch.ant-switch-checked .ant-switch-inner {
+    background-color: #fdc886;
+  }
 }
 
-/* =====================Mobile Veiw=========================== */
+/* / =====================Mobile Veiw=========================== / */
 @media (min-width: 10px) and (max-width: 640px) {
+  body {
+    margin: 0;
+    line-height: normal;
+  }
+
+  :root {
+    --font-outfit: Outfit;
+    --font-size-3xl: 1.38rem;
+    --color-white: #fff;
+    --color-gray: rgba(27, 27, 27, 0.75);
+    --color-linen: #f5f2ea;
+    --br-xl: 20px;
+  }
+  .ant-select-selection-placeholder {
+    font-size: 0.8rem;
+  }
+  .frame-inner,
+  .frame-item {
+    position: absolute;
+    border-radius: var(--br-xl);
+    background-color: var(--color-linen);
+    backdrop-filter: blur(33px);
+    width: 13.56rem;
+    height: 6.56rem;
+    cursor: pointer;
+  }
+
+  .frame-inner {
+    left: 0.19rem;
+    cursor: pointer;
+  }
+
+  .wire-transfer,
+  .wire-transfer-wrapper {
+    position: absolute;
+    left: 0;
+    width: 10.19rem;
+    height: 2.31rem;
+  }
+
+  .wire-transfer {
+    top: 0;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .wire-transfer-wrapper {
+    bottom: 3.7rem;
+    left: 6.2rem;
+  }
+
+  .bank-building-icon {
+    position: absolute;
+    bottom: 4rem;
+    left: 5.53rem;
+    width: 2.75rem;
+    height: 2.81rem;
+    object-fit: cover;
+  }
+
+  .group-container,
+  .group-container1 {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .group-container {
+    top: 1rem;
+  }
+
+  .group-container1 {
+    top: 8rem;
+    font-size: 1rem;
+  }
+
+  .bitcoin {
+    position: absolute;
+    bottom: 18rem;
+    left: 5rem;
+    font-weight: 600;
+    display: inline-block;
+    width: 10.25rem;
+    height: 2.31rem;
+  }
+
+  .bitcoin-icon {
+    position: absolute;
+    bottom: 18rem;
+    left: 5.02rem;
+    width: 3.39rem;
+    height: 3.39rem;
+    object-fit: cover;
+  }
+
+  .group-parent {
+    position: absolute;
+    top: 0.84rem;
+    left: 2rem;
+    width: 25.38rem;
+    height: 5.64rem;
+    font-size: 1rem;
+  }
+
+  .rectangle-parent {
+    position: relative;
+    height: 22rem;
+    text-align: left;
+  }
+
+  .payment-btn {
+    width: 100%;
+  }
+
+  .rectangle-parent {
+    height: auto;
+  }
+
+  .frame-item,
+  .frame-inner {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .group-container,
+  .group-container1 {
+    position: relative;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+
   .bulk-main {
     background-color: #f5f2ea;
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 5rem 0rem;
+    padding: 1rem 0rem;
     align-items: center;
     justify-content: center;
   }
@@ -370,13 +959,12 @@
 
   .bulk-div-1 {
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
-
-  .bulk-div-2 {
-    width: 100%;
+  .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+    background-color: #fdc886;
+    border-color: #fdc886;
   }
-
   .subtitle-bulk {
     color: #1b1b1b;
   }
@@ -386,10 +974,10 @@
   }
 
   .bulkorder-content {
-    color: white;
+    color: black;
     width: 100%;
-    background-color: #fdc886;
-    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    background-color: #F5F2EA;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   }
 
   .benefits-card {
@@ -438,4 +1026,123 @@
     background-color: #fdc886;
     width: 100%;
   }
+  .PhoneInput {
+    width: 15%;
+  }
+  .countrycode {
+    width: 40%;
+  }
+  .css-1iq9at8 {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: auto;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    max-height: 29px;
+  }
+  .css-13cymwt-control {
+    height: 37px !important;
+    width: 17.3rem !important;
+    border-color: #fdc886 !important;
+    margin-bottom: 0.1rem;
+  }
+  .css-1hb7zxy-IndicatorsContainer {
+    margin-bottom: 10px !important;
+  }
+  .css-1jqq78o-placeholder {
+    margin-bottom: 8px !important;
+    font-size: 0.7rem;
+  }
+  .css-1yvwecq-ValueContainer {
+    padding-bottom: 6rem;
+  }
+  .paymentbulk {
+    display: block;
+    width: 80%;
+    height: 3rem;
+    margin-left: -1rem;
+  }
+  .change_email {
+    white-space: nowrap;
+    color: #1b1b1b;
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .back-arrow {
+    font-size: xx-large;
+  }
+  .email-arrow {
+    font-size: x-large;
+    margin-right: 0.3rem;
+  }
+  .hover-text-content {
+    display: flex;
+    align-items: center;
+  }
+  .change_email .hover-text .back-arrow {
+    display: none;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .change_email:hover .hover-text .back-arrow {
+    display: inline-flex;
+    position: relative;
+    right: 1rem;
+    bottom: 0.3rem;
+  }
+  .change_email:hover .hover-text .hover-text-content {
+    display: none;
+  }
+  .selection-dropdown{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  
+  .select-providers-dropdown  {
+    width: 235px;
+  }
+  .css-t3ipsp-control {
+    width: 277px;
+    border-color: #fdc886 !important;
+    height: 2px;
+  }
+  
+  .css-gz0hkv-ValueContainer{
+    overflow: hidden !important;
+    max-height: 27px !important;
+    margin-bottom: 0.7rem;
+  }
+  .css-t3ipsp-control:hover {
+    border-color: #fdc886 !important;
+    height: 2px;
+    width: 277px;
+    box-shadow: none !important;
+  }
+  .select-providers-dropdown{
+    width: auto;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+  .international-purchase{
+    display: flex;
+    margin-right: auto;
+  }
+  .ant-switch.ant-switch-checked .ant-switch-inner {
+    background-color: #fdc886;
+  }
 }
+
+
+

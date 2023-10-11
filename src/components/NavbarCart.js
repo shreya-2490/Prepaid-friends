@@ -1,22 +1,26 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  UserOutlined,
-  ShoppingCartOutlined,
-  DeleteOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
-import { Badge, Modal, Button, Divider } from "antd";
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Badge, Modal, Button, Avatar, message } from "antd";
 import { CartContext } from "./CartContext";
-import visa from "../assets/Visacart.png";
-import mastercard from "../assets/Mastercardcart.png";
 import "../styles/navbar.css";
 import logo from "../assets/logo.png";
+import "../styles/NavbarCart.css";
+import Cart from "../shared-components/cart";
 
-function NavbarCart() {
-  const { cartCount, cartItems, removeFromCart } = useContext(CartContext);
+import { RxHamburgerMenu } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
+import { useCookies } from "react-cookie";
+import { AuthContext } from "../context/auth-context";
+import axios from "axios";
+
+const NavbarCart = () => {
+  const [cookies] = useCookies(["pfAuthToken"]);
+  const [showMedia, setMedia] = useState(false);
+  const { cartCount, cartItems } = useContext(CartContext);
+  const { user } = useContext(AuthContext);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [resmenu, setResMenu] = useState("none");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleCartClick = () => {
@@ -31,67 +35,127 @@ function NavbarCart() {
     setIsCartOpen(false);
     navigate("/");
   };
-  const handleRemoveItem = (itemId) => {
-    removeFromCart(itemId);
-  };
+
   const handleCheckout = () => {
-    const queryParams = cartItems
-      .map((item) => {
-        return `usdValue=${item.usdValue}&btcValue=${item.btcValue}&selectedButton=${item.card}&id=${item?.id}`;
-      })
-      .join("&");
-    navigate(`/checkout?${queryParams}`);
+    if (user) {
+      setIsLoading(true);
+      axios
+        ?.post(
+          `/api/preowned-order`,
+          {
+            customer_name: user?.customerName,
+            email: user?.email,
+            payment_method: "btc",
+            guest: false,
+            items: cartItems?.map((cartItem) => ({
+              type:
+                cartItem?.type === "1" || cartItem?.type === "visa"
+                  ? "visa"
+                  : "master",
+              quantity: cartItem?.quantity,
+              price: cartItem?.usdValue,
+              bin: cartItem?.bin,
+              card: cartItem?.card,
+              cardId: cartItem?.cardId,
+            })),
+          },
+          {
+            headers: { Authorization: `Bearer ${cookies?.pfAuthToken}` },
+          }
+        )
+        .then((res) => {
+          navigate(`/payment`, {
+            state: { email: user?.email, data: res?.data },
+          });
+        })
+        .catch((error) => {
+          message.error(error.response.data.error);
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      navigate(`/checkout`);
+    }
+  };
+
+  const handleHamburgerClick = (event) => {
+    event.preventDefault();
+    setMedia(!showMedia);
+    document.body.classList.toggle("menu-open", !showMedia);
   };
 
   return (
-    <div className="header">
-      <div className="logo">
-        <Link to="/">
-          <img src={logo} alt="Logo" />
-        </Link>
-      </div>
-      <div className="left">
-        <div
-          className="hamburg"
-          onClick={() => {
-            if (resmenu === "none") setResMenu("flex");
-            else setResMenu("none");
-          }}
-        >
-          <MenuOutlined />
-          <div className="navmenu" style={{ display: resmenu }}>
-            <Link to="/">HOME</Link>
-            <Link to="/bulkorder">BULK ORDERS</Link>
-            <Link to="/contactus">CONTACT US</Link>
-          </div>
+    <>
+      {/* <Ticker/> */}
+      <nav
+        className="navbarrrr"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* { hamburger menu } */}
+        <button className="hamburger" onClick={handleHamburgerClick}>
+          {showMedia ? (
+            <RxCross2 style={{ color: "black" }} />
+          ) : (
+            <RxHamburgerMenu style={{ color: "black" }} />
+          )}
+        </button>
+
+        {/* { logo } */}
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
         </div>
-        <div className="first-four-navigation">
-          <Link to="/">HOME</Link>
-          <Link to="/bulkorder">BULK ORDERS</Link>
-          {/* <Link to="/">HOW IT WORKS</Link> */}
-          <Link to="/contactus">CONTACT </Link>
+
+        {/* { menu } */}
+        <div className={showMedia ? "menu mobile-menu" : "menu"}>
+          <ul>
+            <div>
+              <li>
+                <Link to="/">HOME</Link>
+              </li>
+
+              <li>
+                <Link to="/bulk-order">BUY BULK</Link>
+              </li>
+
+              <li className="how">
+                <Link to="/how-it-works">HOW IT WORKS</Link>
+              </li>
+
+              <li>
+                <Link to="/contact-us">CONTACT</Link>
+              </li>
+            </div>
+            <li>
+              <Link to={cookies?.pfAuthToken ? "/dashboard" : "/login"}>
+                <span className="user">
+                  {user ? (
+                    <Avatar size="large">{user?.customerName[0]}</Avatar>
+                  ) : (
+                    <UserOutlined
+                      style={{ fontSize: "1.5rem", marginRight: "0.5rem" }}
+                    />
+                  )}
+                </span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
           <Link to="/login">
-            <span className="user">
-              <UserOutlined style={{ fontSize: "1.1rem" }} />
+            <span className="user2">
+              <UserOutlined style={{ fontSize: "1.5rem" }} />
             </span>
           </Link>
         </div>
 
-        <div className="navlogin-cart">
-          <div onClick={handleCartClick}>
-            <Badge count={cartCount} className="carticon">
-              <ShoppingCartOutlined />
-            </Badge>
-          </div>
-        </div>
-        <div>
-          <Link to="/login">
-            <span className="usermobile">
-              <UserOutlined classname="user-logo-mobile" />
-            </span>
-          </Link>
-        </div>
-      </div>
+   
+      </nav>
 
       <Modal
         visible={isCartOpen}
@@ -99,183 +163,28 @@ function NavbarCart() {
         footer={null}
         className="cart-modal"
         style={{
-          borderRadius: "8px",
-          top: "60px",
-          left: "31%",
-          width: "80%",
+          width: "10%",
         }}
       >
-        {/* <Fragment>
-          {cartItems.length === 0 ? (
-            <p>Cart is empty</p>
-          ) : (
-            cartItems.map((item) => (
-              <Fragment key={item.id}>
-                {item.card === "1" ? (
-                  <>
-                    <div style={{ display: "flex" }}>
-                      <img src={visa} alt="Visa" className="visacardtype-img" />
-                      <p>Visa</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div style={{ display: "flex" }}>
-                      <img
-                        src={mastercard}
-                        alt="MasterCard"
-                        className="cardtype-img"
-                      />
-                      <p>MasterCard</p>
-                    </div>
-                  </>
-                )}
-
-                <p style={{marginLeft:"60px",marginTop:"-15px"}}>${item.usdValue}</p>
-                <Divider />
-              </Fragment>
-            ))
-          )}
-        </Fragment> */}
-        {/* <Fragment>
-  {cartItems.length === 0 ? (
-    <p>Cart is empty</p>
-  ) : (
-    <>
-      {cartItems.reduce((uniqueItems, item) => {
-        const existingItem = uniqueItems.find(
-          (uniqueItem) => uniqueItem.usdValue === item.usdValue && uniqueItem.card === item.card
-        );
-
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          uniqueItems.push({ ...item, quantity: 1 });
-        }
-
-        return uniqueItems;
-      }, []).map((item) => {
-        const { usdValue, card, quantity } = item;
-        const multipliedValue = usdValue * quantity;
-
-        return (
-          <Fragment key={item.id}>
-            {card === "1" ? (
-              <>
-                <div style={{ display: "flex" }}>
-                  <img src={visa} alt="Visa" className="visacardtype-img" />
-                  <p>Visa</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div style={{ display: "flex" }}>
-                  <img
-                    src={mastercard}
-                    alt="MasterCard"
-                    className="cardtype-img"
-                  />
-                  <p>MasterCard</p>
-                </div>
-              </>
-            )}
-
-            <p style={{ marginLeft: "60px", marginTop: "-15px" }}>
-              ${usdValue} x {quantity} = ${multipliedValue}
-            </p>
-            <Divider />
-          </Fragment>
-        );
-      })}
-    </>
-  )}
-</Fragment> */}
-
-        <Fragment>
-          {cartItems.length === 0 ? (
-            <p>Cart is empty</p>
-          ) : (
-            <>
-              {cartItems
-                .reduce((uniqueItems, item) => {
-                  const existingItem = uniqueItems.find(
-                    (uniqueItem) =>
-                      uniqueItem.usdValue === item.usdValue &&
-                      uniqueItem.card === item.card
-                  );
-
-                  if (existingItem) {
-                    existingItem.quantity += 1;
-                  } else {
-                    uniqueItems.push({ ...item, quantity: 1 });
-                  }
-
-                  return uniqueItems;
-                }, [])
-                .map((item) => {
-                  const { usdValue, card, quantity } = item;
-                  const multipliedValue = usdValue * quantity;
-
-                  return (
-                    <Fragment key={item.id}>
-                      {card === "1" ? (
-                        <>
-                          <div style={{ display: "flex" }}>
-                            <img
-                              src={visa}
-                              alt="Visa"
-                              className="visacardtype-img"
-                            />
-                            <p>Visa</p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div style={{ display: "flex" }}>
-                            <img
-                              src={mastercard}
-                              alt="MasterCard"
-                              className="cardtype-img"
-                            />
-                            <p>MasterCard</p>
-                          </div>
-                        </>
-                      )}
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "baseline",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <p style={{ marginLeft: "60px", marginTop: "-15px" }}>
-                          ${usdValue} x {quantity} = ${multipliedValue}
-                        </p>
-                        <p style={{ marginTop: "-10px" }}>
-                          <DeleteOutlined
-                            onClick={() => handleRemoveItem(item.id)}
-                          />
-                        </p>
-                      </div>
-                      <Divider />
-                    </Fragment>
-                  );
-                })}
-            </>
-          )}
-        </Fragment>
+        <Cart />
 
         <div className="cart-modal-footer">
           <Button key="keepShopping" onClick={handleKeepShopping}>
             Keep Shopping
           </Button>
-          <Button key="checkout" type="primary" onClick={handleCheckout}>
-            Checkout ({cartItems.length})
+          <Button
+            key="checkout"
+            type="primary"
+            onClick={handleCheckout}
+            loading={isLoading}
+            disabled={isLoading}
+          >
+            Checkout ({cartCount})
           </Button>
         </div>
       </Modal>
-    </div>
+    </>
   );
-}
+};
 
 export default NavbarCart;

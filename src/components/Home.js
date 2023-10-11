@@ -1,122 +1,120 @@
-import { useState, useEffect } from "react"
-import { Select, Card, Image, Alert, Slider } from "antd"
-import { Link } from "react-router-dom"
-import visa from "../assets/Visa.png"
-import mastercard from "../assets/Mastercard.png"
-import ReactTypingEffect from "react-typing-effect"
-import "../styles/home.css"
-import axios from "axios"
-import Footer from "./Footer"
-
-const { Option } = Select
+import { useState, useEffect } from "react";
+import { Alert, Skeleton } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import mastercard from "../assets/masterhome.png";
+import "../styles/home.css";
+import axios from "axios";
+import Footer from "./Footer";
+import { Helmet } from "react-helmet";
+import { usdToBTC } from "../utils/helper";
 
 const Home = () => {
-  const [usdValue, setUSDValue] = useState("")
-  const [btcValue, setBTCValue] = useState("0")
-  const [selectedCard, setSelectedCard] = useState(null)
-  const [isValueValid, setIsValueValid] = useState(false)
-  const [selectedButton, setSelectedButton] = useState(1)
-  const [button, setButton] = useState(1)
-  const [loadAmount, setLoadAmount] = useState("")
+  const [usdValue, setUSDValue] = useState("");
+  const [btcValue, setBTCValue] = useState("0");
+  const [isValueValid, setIsValueValid] = useState(false);
+  const [selectedButton, setSelectedButton] = useState(1);
+  const [button, setButton] = useState(1);
+  const [loadAmount, setLoadAmount] = useState("");
   const [selectedProvider, setSelectedProvider] = useState("All");
   const [selectedPrice, setSelectedPrice] = useState("low");
+  const [alert, showAlert] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleButtonClick = (event, buttonId) => {
-    event.preventDefault()
-    setSelectedButton(buttonId)
-  }
+    event.preventDefault();
+    setSelectedButton(buttonId);
+  };
 
   const handleMainButtonClick = (event, buttonId) => {
-    event.preventDefault()
-    setButton(buttonId)
-  }
-
-  const handleCardSelect = (value) => {
-    setSelectedCard(value)
-  }
+    event.preventDefault();
+    setButton(buttonId);
+  };
 
   const handleBuyButtonClick = () => {
+    navigate("/preowned", {
+      state: { selectedProvider, selectedPrice },
+    });
+  };
+
+  const handleBuyButtonClickMain = () => {
     if (btcValue === "0.00000") {
-      setIsValueValid(true)
+      setIsValueValid(true);
     } else {
-      setIsValueValid(false)
+      setIsValueValid(false);
     }
-  }
+    usdValue
+      ? navigate(
+          `/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`
+        )
+      : showAlert(true);
+  };
 
-  const handleSliderChange = (value) => {
-    console.log("Selected Range:", value)
-    // You can work with the selected range value here.
-  }
   const handleProviderChange = (event) => {
-    setSelectedProvider(event.target.value)
-  }
+    setSelectedProvider(event.target.value);
+  };
 
-  // Handler for the price filter
   const handlePriceChange = (event) => {
-    setSelectedPrice(event.target.value)
-  }
-
+    setSelectedPrice(event.target.value);
+  };
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd"
-        )
-        const btcPrice = response.data.bitcoin.usd
-        setBTCValue((usdValue / btcPrice).toFixed(5))
+        const response = await axios.post("/api/rate-api");
+        const btcPrice = response.data.value;
+        setBTCValue(usdToBTC(usdValue, btcPrice));
       } catch (error) {
-        console.log("Error fetching data:", error)
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchData()
-
-    setIsValueValid(false)
-  }, [usdValue, loadAmount])
+    fetchData();
+  }, [usdValue, loadAmount]);
 
   const handleUSDSelect = (selectedValue) => {
-    const value = parseFloat(selectedValue) // Convert selectedValue to a number
-    setUSDValue(value)
-    setIsValueValid(false)
-    setLoadAmount(selectedValue)
-  }
+    const value = parseFloat(selectedValue);
+    setUSDValue(value);
+    setIsValueValid(false);
+    setLoadAmount(selectedValue);
+    selectedValue ? showAlert(false) : showAlert(true);
+  };
+  const pageTitle = "Prepaid Friends | Your Bitcoin Bridge to Global Spending";
+  const pageDescription =
+    "Prepaid Friends: Your Bitcoin bridge to global spending. Exchange BTC for prepaid cards and enjoy seamless transactions worldwide. Join now!";
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
       <div className="main-body">
         <div className="home" id="homee">
           <div>
-            {" "}
             <h1 className="home-heading">
-              Effortless Payments with{" "}
-              <span style={{ color: "#FDC886", fontWeight: "600" }}>BTC</span>
+              Your Bitcoin Bridge to Global Spending
+              {/* <span style={{ color: "#FDC886", fontWeight: "400", fontFamily:"Typold Extended Black" }}>BTC</span> */}
             </h1>
-          </div>
-          <div>
             <h1 className="home-heading-1">
-              Experience the Convenience of Prepaid Cards
+              Seamlessly Connect to a World of Possibilities with Dollar-Loaded
+              Prepaid Cards!
             </h1>
           </div>
-          {/* <div className="pushEffect">
-            <span style={{ animationDelay: "1s" }}>Visa</span>
-            <span style={{ animationDelay: "5s" }}>Mastercard</span>
-          </div>
-          <br />
-          <span style={{marginLeft:"40%"}}>Prepaid Card</span> */}
 
           <p className="subtitle">
-            Unlock the power of digital currencies with our cryptocurrency
+            {/* Unlock the power of digital currencies with our cryptocurrency
             prepaid cards. Simplify your online purchases and enjoy a seamless
             payment experience. Our user-friendly platform allows you to
             effortlessly calculate the BTC equivalent of your desired prepaid
             card amount. Discover the many advantages of using cryptocurrency
-            for your everyday transactions.
+            for your everyday transactions. */}
+            {/* Embark on a digital currency journey with our cryptocurrency prepaid
+            cards, transforming mundane transactions into seamless adventures. */}
           </p>
-          {/* <div className="learn-more-btn">
-            <Link to="/">
-              <button>How it Works</button>
-            </Link>
-          </div> */}
         </div>
         <div className="sider">
           <div className="box">
@@ -150,34 +148,7 @@ const Home = () => {
               {button === 1 && (
                 <div className="forms">
                   <div style={{ marginBottom: "20px" }}>
-                    <form>
-                      <div className="card-selector-container">
-                        <p className="choose-card">Select Card</p>
-                        <div className="selection-cards-visamastercard">
-                          <button
-                            className={`button ${
-                              selectedButton === 1 ? "selected" : ""
-                            }`}
-                            onClick={(event) => handleButtonClick(event, 1)}
-                          >
-                            <img src={visa} className="homepage-cards"></img>
-                          </button>
-                          <button
-                            className={`mastercard-button ${
-                              selectedButton === 2 ? "selected" : ""
-                            }`}
-                            onClick={(event) => handleButtonClick(event, 2)}
-                          >
-                            <div className="mastercard-image">
-                              <img
-                                src={mastercard}
-                                className="homepage-cards"
-                              ></img>
-                            </div>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+               
                   </div>
                   <div>
                     <form>
@@ -207,9 +178,6 @@ const Home = () => {
                         </div>
                         <div className="second-gray">
                           <div className="items">
-                            {/* <picture className="usdt-pic">
-                          <img src={dollar}></img>
-                        </picture> */}
                             <span className="dropdown-1">USD</span>
                           </div>
                         </div>
@@ -224,21 +192,22 @@ const Home = () => {
                         display: "inline",
                       }}
                     >
-                      {/* <picture className="bit-pic">
-                    <img src={bitcoin}></img>
-                  </picture> */}
-                      <span
-                        style={{
-                          margin: "0px",
-                          fontFamily: "Outfit, sans-serif",
-                        }}
-                      >
-                        ≈ {btcValue} BTC
-                      </span>
+                      {isLoading ? (
+                        <Skeleton.Button size="small" shape="square" active />
+                      ) : (
+                        <span
+                          style={{
+                            margin: "0px",
+                            fontFamily: "Outfit, sans-serif",
+                          }}
+                        >
+                          ≈ {btcValue} BTC
+                        </span>
+                      )}
                     </p>
 
                     <div>
-                      {btcValue === "0.00000" && (
+                      {alert && (
                         <Alert
                           style={{ marginTop: "15px", position: "relative" }}
                           message="Please select a valid amount"
@@ -248,27 +217,13 @@ const Home = () => {
                         />
                       )}
 
-                      {btcValue !== "0.00000" ? (
-                        <Link
-                          to={`/cart?usdValue=${usdValue}&btcValue=${btcValue}&selectedButton=${selectedButton}`}
-                        >
-                          <button
-                            className="buy-usdt"
-                            type="button"
-                            onClick={handleBuyButtonClick}
-                          >
-                            Buy Now
-                          </button>
-                        </Link>
-                      ) : (
-                        <button
-                          className="buy-usdt disabled"
-                          type="button"
-                          disabled
-                        >
-                          Buy Now
-                        </button>
-                      )}
+                      <button
+                        className="buy-usdt"
+                        type="button"
+                        onClick={handleBuyButtonClickMain}
+                      >
+                        Buy Now
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -277,10 +232,10 @@ const Home = () => {
                 <div className="forms">
                   <div style={{ margin: "15px 0px" }}>
                     <form>
-                      <div className="both-gray">
-                        <div className="first-gray">
-                          <div className="first-gray-1">
-                            <label className="pay">Select Provider</label>
+                      <div className="Both-gray">
+                        <div className="First-gray">
+                          <div className="First-gray-1">
+                            <label className="Pay">Select Provider</label>
                           </div>
                           <div>
                             <select
@@ -289,20 +244,20 @@ const Home = () => {
                               onChange={handleProviderChange}
                             >
                               <option value="All">All</option>
-                              <option value="Visa">Visa</option>
-                              <option value="MasterCard">MasterCard</option>
+                              <option value="visa">Visa</option>
+                              <option value="master">MasterCard</option>
                             </select>
                           </div>
                         </div>
                       </div>
                     </form>
                   </div>
-                  <div>
+                  <div style={{ margin: "15px 0px" }}>
                     <form>
-                      <div className="both-gray">
-                        <div className="first-gray">
-                          <div className="first-gray-1">
-                            <label className="pay">Price</label>
+                      <div className="Both-gray">
+                        <div className="First-gray">
+                          <div className="First-gray-1">
+                            <label className="Pay"> Sort Price</label>
                           </div>
                           <select
                             className="price-amount"
@@ -317,15 +272,13 @@ const Home = () => {
                     </form>
 
                     <div>
-                      <Link to="/preowned">
-                        <button
-                          className="buy-usdt"
-                          type="button"
-                          onClick={handleBuyButtonClick}
-                        >
-                          Buy Now
-                        </button>
-                      </Link>
+                      <button
+                        className="buy-usdt"
+                        type="button"
+                        onClick={handleBuyButtonClick}
+                      >
+                        Buy Now
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -336,6 +289,6 @@ const Home = () => {
       </div>
       <Footer />
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;

@@ -1,50 +1,94 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
-// Create the CartContext
 export const CartContext = createContext();
 
-// Create the CartProvider component
 export const CartProvider = ({ children }) => {
-  // Define the cart state  
-  const [cartCount, setCartCount] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [bulkCartItems, setBulkCartItems] = useState([]);
 
-  // Add item to the cart
+  const newCardsCount = cartItems?.reduce((accumulator, object) => {
+    return accumulator + object?.quantity || 1;
+  }, 0);
+
+  const cartCount = newCardsCount;
+
+  const cartItemLocal = JSON.parse(localStorage?.getItem("cart")) || [];
+
+  useEffect(() => {
+    if (cartItemLocal) setCartItems(cartItemLocal);
+  }, []);
+
   const addToCart = (item) => {
-    setCartCount(cartCount + 1);
-    setCartItems((prevItems) => [...prevItems, item]);
+    const existingCartItemIndex = cartItems.findIndex(
+      (cartItem) =>
+        cartItem.usdValue === item.usdValue &&
+        cartItem.type === item.type &&
+        item?.card === cartItem?.card
+    );
+    if (existingCartItemIndex !== -1) {
+      const updatedItems = [...cartItems];
+      if (updatedItems[existingCartItemIndex].quantity < 4) {
+        updatedItems[existingCartItemIndex].quantity += 1;
+        localStorage.setItem("cart", JSON.stringify(updatedItems));
+        setCartItems(updatedItems);
+      }
+    } else {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...cartItemLocal, { ...item, quantity: 1 }])
+      );
+      setCartItems((prevItems) => [...prevItems, { ...item, quantity: 1 }]);
+    }
+  };
+  const addToBulkCart = (item) => {
+    setBulkCartItems([{ ...item }]);
   };
 
-  // Remove item from the cart
   const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => {
-      const itemToRemove = prevItems.find((item) => item.id === itemId);
-  
-      if (itemToRemove) {
-        // Decrease the badge count by 1
-        setCartCount((prevCount) => prevCount - 1);
-  
-        return prevItems.filter((item) => item.id !== itemId);
-      }
-  
-      return prevItems;
-    });
+    const updatedCartItems = cartItems?.filter(
+      (cartItem) => cartItem?.id !== itemId
+    );
+    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+    setCartItems(updatedCartItems);
   };
-  
-  // Clear the cart
+  const removeBulkFromCart = (itemId) => {
+    const updatedCartItems = bulkCartItems?.filter(
+      (bulkCartItem) => bulkCartItem?.id !== itemId
+    );
+    setBulkCartItems(updatedCartItems);
+  };
+
+  const updateQuantity = (itemId, quantity) => {
+    const cartItemIndex = cartItems.findIndex(
+      (cartItem) => cartItem.id === itemId
+    );
+
+    if (cartItemIndex !== -1) {
+      const updatedItems = [...cartItems];
+      updatedItems[cartItemIndex].quantity = quantity;
+      setCartItems(updatedItems);
+      localStorage.setItem("cart", JSON.stringify(updatedItems));
+    }
+  };
+
   const clearCart = () => {
     setCartItems([]);
+    setBulkCartItems([]);
+    localStorage.clear("cart");
   };
 
-  // Provide the cart state and actions to the children components
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        bulkCartItems,
         addToCart,
+        addToBulkCart,
+        removeBulkFromCart,
         removeFromCart,
         clearCart,
         cartCount,
+        updateQuantity,
       }}
     >
       {children}

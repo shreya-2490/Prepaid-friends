@@ -1,0 +1,159 @@
+/* / / =====================Desktop Veiw=========================== / / */
+
+@media (min-width: 1024px) {
+  .outer-timeline {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 3rem;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .timeline {
+    width: 45%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-left: 3rem;
+  }
+
+  .timeline h2 {
+    color: #1b1b1bbf;
+  }
+
+  .timeline img {
+    width: 100%;
+  }
+
+  .questions {
+    width: 42%;
+    padding: 0;
+  }
+
+  .questions h2 {
+    padding-left: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    font-size:  1.9rem;
+  }
+
+  .questions span {
+    color: white;
+    border-radius: 1rem;
+    padding: 0 0.6rem;
+    background-color: rgb(252, 204, 143);
+  }
+  .accordion-title {
+    font-weight: 600;
+    padding: 1rem !important;
+    font-size: 0.9rem;
+  }
+  .accordian-para{
+    font-size: 0.9rem;
+    text-align: justify;
+  }
+}
+
+/* / / ******************* Tablet Screen ****************** / / */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .outer-timeline {
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .timeline {
+    width: 80%;
+    background-color: white;
+    padding: 4rem;
+    border-radius: 1rem;
+  }
+
+  .timeline h2 {
+    color: #1b1b1bbf;
+  }
+
+  .timeline img {
+    width: 100%;
+  }
+
+  .questions {
+    width: 70%;
+    padding: 0;
+  }
+
+  .questions h2 {
+    padding-left: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .questions span {
+    color: white;
+    border-radius: 1rem;
+    padding: 0 0.6rem;
+    background-color: rgb(252, 204, 143);
+  }
+  .accordion-title {
+    font-weight: 600;
+  }
+}
+
+/* / / ********************** Mobile Screen ******************* / / */
+
+@media (min-width: 10px) and (max-width: 640px) {
+  .outer-timeline {
+    width: 100%;
+    padding: 5rem 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    background-color: rgb(245, 242, 234);
+  }
+
+  .timeline {
+    width: 90%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+
+  .timeline h2 {
+    color: #1b1b1bbf;
+  }
+
+  .timeline img {
+    width: 100%;
+  }
+
+  .questions {
+    width: 90%;
+    padding: 0;
+  }
+
+  .questions h2 {
+    padding-left: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .questions span {
+    color: white;
+    border-radius: 1rem;
+    padding: 0 0.6rem;
+    background-color: rgb(252, 204, 143);
+  }
+  .accordion-title {
+    font-weight: 600;
+  }
+}

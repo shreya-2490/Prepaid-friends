@@ -1,68 +1,80 @@
 import React, { useState } from "react"
-import { Layout, Menu, Breadcrumb, Divider, Input, Space } from "antd"
+import { Divider, Space } from "antd"
 import NavbarCart from "./NavbarCart"
 import "../styles/dashboard.css"
-import mastercard from "../assets/Mastercardcartpage.png"
+import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom"
+import Reset from "./reset"
+import Ordertable from "./Ordertable"
+import { useAuth } from "../hooks/useAuth"
 
 const Dashboard = () => {
-  const onSearch = (value) => console.log(value)
-  const { Search } = Input
-  const [product, setProduct] = useState(false)
+  const nav = useNavigate()
+  const { logout } = useAuth()
+  const [cookies, setCookie, removeCookie] = useCookies(["pfAuthToken"])
+  const [product, setProduct] = useState(true)
+  const [reset, setReset] = useState(false)
+  const [activeMenuItem, setActiveMenuItem] = useState("products")
+
   const handleChangeproduct = () => {
     setProduct(true)
+    setReset(false)
+    setActiveMenuItem("products")
+  }
+  const handleChangePassword = () => {
+    setActiveMenuItem("password")
+    setReset(true)
+    setProduct(false)
   }
   return (
     <>
       <NavbarCart />
       <div className="product-div">
         <div className="listing-design">
-          <ul>
-            <li>Accounts</li>
+          <ul className="ul-list">
+            <li className="user-profile">User Profile</li>
             <Divider />
-            <li onClick={handleChangeproduct}>My Products</li>
+            <li
+              onClick={handleChangeproduct}
+              className={activeMenuItem === "products" ? "active" : ""}
+            >
+              My Products
+            </li>
             <Divider />
-            <li>Wishlists</li>
+            <li
+              onClick={handleChangePassword}
+              className={activeMenuItem === "password" ? "active" : ""}
+            >
+              Change Password
+            </li>
             <Divider />
-            <li>Limits</li>
-            <Divider />
-            <li>Settings</li>
-            <Divider />
-            <li>Sign Out</li>
-            <Divider />
+            <li
+              onClick={() => {
+                removeCookie("pfAuthToken", { path: "/" })
+                nav("/")
+                logout()
+              }}
+              className="signout-li"
+            >
+              Sign Out
+            </li>
           </ul>
         </div>
         <div className="searchbox-div">
           {product ? (
             <>
-              <div>
-                <h2>My Products</h2>
-                <img src={mastercard} className="product-image"></img>
-                <div style={{ marginTop: "30px" }}>
-                  {" "}
-                  <h6 style={{ fontWeight: "bold" }}>Prepaid MasterCard</h6>
-                  <p>$0.00</p>
-                </div>
-                <h6 style={{ fontWeight: "bold" }}>Used Product</h6>
+              <div className="ordertable">
+                <Ordertable />
               </div>
             </>
           ) : (
             ""
           )}
-          
-              </div>
-              <div style={{textAlign:"right"}}>
-            {" "}
-            <Space direction="vertical">
-              <Search
-                placeholder="Filter Products"
-                onSearch={onSearch}
-                style={{
-                  width: 200,
-                  borderRadius: "20px",
-                }}
-              />
-            </Space>
-          </div>
+          {reset ? <Reset /> : <></>}
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <Space direction="vertical"></Space>
+        </div>
       </div>
     </>
   )

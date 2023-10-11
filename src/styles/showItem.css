@@ -1,0 +1,230 @@
+body{
+    background-color: #F5F2EA;
+    font-family: "Outfit", sans-serif;
+}
+.order-heading{
+    margin: auto;
+    text-align: center;
+    padding: 1.6rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.detail-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .detail-table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  .detail-table tr {
+    /* background-color: #f8f8f8; */
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  .detail-table th,
+  .detail-table  td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  .detail-table  th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background-color: #F5F2EA;
+  }
+  .ant-row {
+    margin-left: auto !important;
+    margin-right: auto !important;
+   }
+
+  @media screen and (max-width: 600px) {
+    .detail-table  {
+      border: 0;
+    }
+  
+    .detail-table  caption {
+      font-size: 1.3em;
+    }
+    
+    .detail-table  thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    .detail-table  tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    .detail-table  td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    .detail-table  td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .detail-table  td:last-child {
+      border-bottom: 0;
+    }
+  }
+  
+  /* preowned card css */
+  .wrappercard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .selection-container {
+    text-align: center;
+  }
+ 
+  .title {
+    text-align: center;
+    margin-top: 55px;
+    color: #fff;
+    font-size: 25px;
+  }
+  
+  .card,
+  .back {
+    position: relative;
+    width: 296px;
+    height: 188px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+    background: linear-gradient(to bottom left, #f5f2ea 0%, #fdc886 51%);
+    background-position: center;
+    background-size: cover;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    overflow: hidden;
+    z-index: 1;
+    backface-visibility: hidden;
+  }
+  .map-img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+    z-index: -1;
+  }
+  .h1heading {
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+  
+  .h2heading {
+    font-size: 16px;
+  }
+  
+  .h3heading {
+    font-size: 11px;
+  }
+  
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .top,
+  .bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .holder{
+    display: unset !important;
+  }
+  
+  .top img {
+    width: 20px;
+  }
+  
+  .brand {
+    height: 20px;
+    mix-blend-mode: overlay;
+  }
+  .brand1 {
+    height: 20px;
+  }
+  
+  .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .infos--bottom {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .card-number {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .selection-price,
+  .selection-provider {
+    margin: 2rem 0.6rem 0;
+    width: 15%;
+  }
+  .ant-pagination {
+    text-align: center;
+    background-color: #F5F2EA;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .ant-row {
+    margin-left: 75px !important;
+    margin-right: 10px !important;
+   }
+   .ant-pagination-item-active {
+    border-color: #fdc886 !important;
+  }
+  .alert-btn button{
+    background-color: #fdc886;
+  }
+  .col-cards{
+    max-width: 100% !important;
+  }
+  @media (min-width: 10px) and (max-width: 640px) {
+    .selection-provider,
+    .selection-price {
+      margin: 2rem 0.6rem 0;
+      width: 30%;
+    }
+  }

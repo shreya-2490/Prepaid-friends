@@ -1,13 +1,17 @@
-import React from "react"
-import { Form, Input, Button } from "antd"
-import { UserOutlined, MailOutlined } from "@ant-design/icons"
-import "../styles/ContactUs.css"
-import NavbarCart from "./NavbarCart"
-import  phone from "../assets/Phone-img.png"
-import email from "../assets/Mail.png"
-import Footer from "./Footer"
-import globe from "../assets/globe 1.png"
+import React, { useState } from "react";
+import { Form, Input, Button, notification } from "antd";
+import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import "../styles/ContactUs.css";
+import NavbarCart from "./NavbarCart";
+import phone from "../assets/Phone-img.png";
+import email from "../assets/Mail.png";
+import Footer from "./Footer";
+import globe from "../assets/globe 1.png";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+
 const ContactUs = () => {
+  const [loading, setLoading] = useState(false);
   const layout = {
     labelCol: {
       span: 6,
@@ -15,25 +19,62 @@ const ContactUs = () => {
     wrapperCol: {
       span: 15,
     },
-  }
+  };
 
   const validateMessages = {
     required: "${label} is required!",
     types: {
       email: "${label} is not a valid email!",
     },
-  }
+  };
 
-  const onFinish = (values) => {
-    console.log(values)
-  }
+  const onFinish = async (values) => {
+    setLoading(true);
+
+    try {
+      const response = await axios.post("/api/contact-us-api", {
+        name: values.user.name,
+        email: values.user.email,
+        subject: values.user.subject,
+        comment: values.user.comment,
+      });
+
+      if (response.data.status === "success") {
+        notification.success({
+          message: "Success",
+          description: "Email sent successfully!",
+        });
+      } else {
+        notification.error({
+          message: "Error",
+          description: "Email not sent",
+        });
+      }
+    } catch (error) {
+      notification.error({
+        message: "Error",
+        description: "An error occurred. Please try again later.",
+      });
+      console.error("An error occurred:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const pageTitle = "Contact-Us";
+  const pageDescription =
+    "Contact Prepaid Friends for seamless prepaid card solutions, offering easy BTC to prepaid card exchanges. Reach out to our expert team today to explore secure and convenient options for managing your crypto with prepaid cards.";
 
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
       <NavbarCart />
       <div className="contactus">
         <div className="contactus-container">
-        <img src={globe} className="globe-img"></img>
+          <img src={globe} className="globe-img"></img>
         </div>
         <div className="bottom-contact-container">
           <div className="form-container">
@@ -80,20 +121,27 @@ const ContactUs = () => {
                   type="primary"
                   htmlType="submit"
                   className="contact-submit-btn"
+                  loading={loading}
                 >
-                  Submit
+                  {loading ? "Submitting..." : "Submit"}
                 </Button>
               </Form.Item>
             </Form>
           </div>
-          <div  className="images-sideform">
-            <div className="phone-image"><img src={phone}></img><p className="bold">+2347026290389</p><p>You can call us at anytime</p></div>
-            <div className="email-image"><img src={email}></img><p className="bold">contact@prepaidfriends.com</p><p>Send us a detailed message</p></div>
+          <div className="images-sideform">
+            <div className="phone-image">
+              <img src={phone}></img>
+              <p className="bold">+1-000-111-0000</p>
+            </div>
+            <div className="email-image">
+              <img src={email}></img>
+              <p className="bold">support@prepaidfriends.com</p>
+            </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
-  )
-}
-export default ContactUs
+  );
+};
+export default ContactUs;

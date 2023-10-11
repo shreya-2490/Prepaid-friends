@@ -1,42 +1,189 @@
+
+/***************************Laptop View**********************/
+@media (min-width: 1024px) {
+
 .footer {
   color: #1b1b1b;
-  background-color: #F5F2EA;
+  background-color: #fdc886;
   display: flex;
-  align-items: baseline;
-  font-size: 0.75rem;
-  position: fixed;
-  Width: 100%;
-  bottom: 0;
+  width: 100%;
+  display: flex;
+  height: 2.5rem;
+  /* padding-top: 0.8rem; */
+  font-size: 0.8rem;
+  align-items: center;
+}
 
+
+.footer-mobile {
+  display: none;
 }
-.prepaid-logo{
-  margin: 0.125rem;
-  padding: 0.625rem;
+
+.prepaid-logo img {
+  width: 50%;
 }
-.prepaid-logo img{
-  width:50%;
-}
-.arrowhead{
+
+.arrowhead {
   font-size: 2.5rem;
   color: white;
   position: relative;
-  bottom: 0.75rem;
-  margin: 0.625rem;
   border: none;
   background: none;
-  
 }
-.termscondition{
-  margin-left: 5%;
+
+.termscondition {
+  margin-left: 4rem;
+  text-decoration: underline;
+  color: #1b1b1b;
+
 }
-.divider-bet{
-  margin: 0.625rem;
+.termandprivacy a:hover{
+  color: #000 !important;
+  font-weight: 600;
 }
-.privacy{
-  margin-left: 1%;
+.copyright {
+  text-align: right;
+  width: 40%;
+  /* margin-top: 1rem; */
+  /* margin-left: 10rem; */
 }
-@media (max-width: 768px) {
-  .footer{
-    width: 145vh;
+
+.divider-bet {
+  margin: 0.5rem;
+}
+
+.privacy {
+  text-decoration: underline;
+  color: #1b1b1b;
+}
+.social-handles{
+  width: 35%;
+  text-align: right;
+  margin: 0 1rem;
+}
+.social-media{
+  font-size: 1rem;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+}
+
+
+
+/* ****************** Mobile ********************** */
+
+
+@media (max-width: 767px) {
+  .footer-mobile {
+    color: #1b1b1b;
+    background-color: #f5f2ea;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
   }
+
+  .copyright {
+    text-align: right;
+    width: auto;
+    margin: auto;
+    padding-bottom: 0.6rem;
+  }
+
+  .termscondition {
+    margin-left: 0%;
+    width: 100%;
+    text-decoration: underline;
+    color: #1b1b1b;
+
+  }
+  .termandprivacy {
+    display: flex;
+    margin: auto;
+    width: auto;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  .termandprivacy a:hover{
+    color: #000 !important;
+    font-weight: 600;
+  }
+  .privacy {
+    margin-left: 0.5rem;
+    color: #1b1b1b;
+  }
+  .divider-bet {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
+  .social-handles{
+    width: 100%;
+   text-align: center;
+  }
+  .social-media{
+    font-size: 1rem;
+    padding: 0.2rem;
+  }
+}
+
+
+/* **************** Tablet SCreen **************** */
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+
+  .footer-mobile {
+    color: #1b1b1b;
+    background-color: #f5f2ea;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
+
+  .copyright {
+    text-align: right;
+    width: auto;
+    margin: auto;
+    padding-bottom: 0.6rem;
+  }
+
+  .termscondition {
+    margin-left: 0%;
+    width: 100%;
+    text-decoration: underline;
+    color: #1b1b1b;
+
+  }
+  .termandprivacy {
+    display: flex;
+    margin: auto;
+    width: auto;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+  .termandprivacy a:hover{
+    color: #000 !important;
+    font-weight: 600;
+  }
+  .privacy {
+    margin-left: 0.5rem;
+    color: #1b1b1b;
+  }
+  .divider-bet {
+    display: none;
+  }
+  .footer {
+    display: none;
+  }
+  .social-handles{
+    width: 100%;
+   text-align: center;
+  }
+  .social-media{
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
 }
